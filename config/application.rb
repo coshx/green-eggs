@@ -1,5 +1,16 @@
 require File.expand_path('../boot', __FILE__)
 
+require 'uri'
+
+if ENV['MONGOLAB_URI']
+  mongo_uri = URI.parse(ENV['MONGOLAB_URI'])
+  ENV['MONGOID_HOST'] = mongo_uri.host
+  ENV['MONGOID_PORT'] = mongo_uri.port.to_s
+  ENV['MONGOID_USERNAME'] = mongo_uri.user
+  ENV['MONGOID_PASSWORD'] = mongo_uri.password
+  ENV['MONGOID_DATABASE'] = mongo_uri.path.gsub('/', '')
+end
+
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
