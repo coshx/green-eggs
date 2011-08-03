@@ -3,10 +3,12 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.0.rc5'
 
 gem 'haml'
+gem 'haml-rails'
 gem 'heroku'
 gem 'json'
 gem 'mongoid'
 gem 'bson_ext'
+gem 'therubyracer'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,6 +26,7 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'ruby-debug'
-
+group :development, :test do
+  # To use debugger
+  gem 'ruby-debug19'
+end
