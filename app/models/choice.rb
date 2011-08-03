@@ -1,6 +1,6 @@
 class Choice
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :priority, Integer
+  field :priority, :type => Integer
 
 end
