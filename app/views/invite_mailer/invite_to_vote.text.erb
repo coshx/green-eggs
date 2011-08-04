@@ -1,0 +1,13 @@
+Hi there,
+
+<%= @ballot.poll.owner_email %> has invited you to vote on <%= @ballot.poll.name %>
+
+Here's the custom URL for your ballot:
+
+<%= vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_id => @ballot.id) %>
+
+Please keep it a secret!
+
+Cheers,
+GreenEggs
+http://greeneg.gs

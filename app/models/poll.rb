@@ -2,9 +2,12 @@ class Poll
   include Mongoid::Document
   include Mongoid::Timestamps
   field :name, :type => String
+  field :owner_email, :type => String
   key :name
 
   validate :check_for_collision, :on => :create
+  validates_presence_of :name
+  validates_presence_of :owner_email
  
   embeds_many :ballots
 

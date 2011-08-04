@@ -44,11 +44,13 @@ class BallotsController < ApplicationController
   def create
     @poll = Poll.find(params[:poll_id])
     emails = params[:emails].split(/\s*,\s*/).uniq
+    debugger
     emails.each do |e|
       b = @poll.ballots.create(email: e)
       b.choices.create(:original => "")
+      InviteMailer.invite_to_vote_email(b).deliver
     end
-    redirect_to @poll 
+    redirect_to @poll, :notice => "Successfully invited #{emails.join(",")}"
   end
 
   # PUT /ballots/1
