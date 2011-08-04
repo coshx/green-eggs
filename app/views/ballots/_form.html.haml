@@ -1,0 +1,10 @@
+= form_for @ballot do |f|
+  -if @ballot.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ballot.errors.count, "error")} prohibited this ballot from being saved:"
+      %ul
+        - @ballot.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

@@ -1,4 +1,6 @@
 GreenEggs::Application.routes.draw do
+  resources :ballots
+
   resources :polls
 
   # The priority is based upon order of creation:
@@ -51,6 +53,8 @@ GreenEggs::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'polls#index'
+
+  get 'polls/:poll_id/invite_voters' => 'ballots#new', :as => :invite_voters
 
   # See how all your routes lay out with "rake routes"
 
