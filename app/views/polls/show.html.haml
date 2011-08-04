@@ -17,4 +17,4 @@
   %ul
     - @poll.ballots.each do |ballot|
       %li
-        = ballot.email
+        = link_to ballot.email, vote_on_ballot_path(:ballot_id => ballot.id, :poll_id => @poll.id)

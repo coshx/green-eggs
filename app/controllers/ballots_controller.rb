@@ -13,7 +13,8 @@ class BallotsController < ApplicationController
   # GET /ballots/1
   # GET /ballots/1.json
   def show
-    @ballot = Ballot.find(params[:id])
+    @poll = Poll.find(params[:poll_id])
+    @ballot = @poll.ballots.find(params[:ballot_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -52,11 +53,12 @@ class BallotsController < ApplicationController
   # PUT /ballots/1
   # PUT /ballots/1.json
   def update
-    @ballot = Ballot.find(params[:id])
+    @poll = Poll.find(params[:poll_id])
+    @ballot = @poll.ballots.find(params[:ballot_id])
 
     respond_to do |format|
       if @ballot.update_attributes(params[:ballot])
-        format.html { redirect_to @ballot, notice: 'Ballot was successfully updated.' }
+        format.html { redirect_to vote_on_ballot_path(:ballot_id => @ballot.id, :poll_id => @poll.id), notice: 'Ballot was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
