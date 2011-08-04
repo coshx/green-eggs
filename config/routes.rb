@@ -1,4 +1,6 @@
 GreenEggs::Application.routes.draw do
+  resources :tags
+
   resources :ballots
 
   resources :polls

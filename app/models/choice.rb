@@ -1,8 +1,9 @@
 class Choice
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :original, :type => String
   field :priority, :type => Integer
+  
+  has_one :tag
 
   embedded_in :ballot
 end
