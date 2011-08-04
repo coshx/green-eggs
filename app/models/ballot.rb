@@ -3,5 +3,6 @@ class Ballot
   include Mongoid::Timestamps
   
   field :email, :type => String
-  field :secret_key, :type => String
+
+  embedded_in :poll
 end

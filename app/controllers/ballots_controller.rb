@@ -24,11 +24,12 @@ class BallotsController < ApplicationController
   # GET /ballots/new
   # GET /ballots/new.json
   def new
-    @ballot = Ballot.new
+    #@ballot = Ballot.new
+    #@ballot = Poll.find(params[:poll_id]).ballots.create
+    @poll = Poll.find(params[:poll_id])
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @ballot }
     end
   end
 
@@ -40,17 +41,12 @@ class BallotsController < ApplicationController
   # POST /ballots
   # POST /ballots.json
   def create
-    @ballot = Ballot.new(params[:ballot])
-
-    respond_to do |format|
-      if @ballot.save
-        format.html { redirect_to @ballot, notice: 'Ballot was successfully created.' }
-        format.json { render json: @ballot, status: :created, location: @ballot }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @ballot.errors, status: :unprocessable_entity }
-      end
+    @poll = Poll.find(params[:poll_id])
+    emails = params[:emails].split(/\s*,\s*/).uniq
+    emails.each do |e|
+      @poll.ballots.create(email: e)
     end
+    redirect_to @poll 
   end
 
   # PUT /ballots/1

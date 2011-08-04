@@ -6,6 +6,8 @@ class Poll
 
   validate :check_for_collision, :on => :create
  
+  embeds_many :ballots
+
   # validate uniqueness of key 
   def check_for_collision
     canonical_id = name.identify

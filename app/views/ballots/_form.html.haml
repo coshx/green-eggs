@@ -1,10 +1,8 @@
-= form_for @ballot do |f|
-  -if @ballot.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@ballot.errors.count, "error")} prohibited this ballot from being saved:"
-      %ul
-        - @ballot.errors.full_messages.each do |msg|
-          %li= msg
+= form_tag "/ballots" do
+  
+  .fields
+    = text_area_tag 'emails', nil, :size => "50x5" 
+    = hidden_field_tag 'poll_id', @poll.id
 
   .actions
-    = f.submit 'Save'
+    = submit_tag 'Send invites'
