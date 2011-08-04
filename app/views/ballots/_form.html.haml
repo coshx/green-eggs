@@ -4,5 +4,8 @@
     = text_area_tag 'emails', nil, :size => "50x5" 
     = hidden_field_tag 'poll_id', @poll.id
 
+  %p
+    Enter the email addresses of people whose opinion you are interested in, comma-separated.  Each voter you invite will receive a special link to a personal ballot.
+
   .actions
     = submit_tag 'Send invites'
