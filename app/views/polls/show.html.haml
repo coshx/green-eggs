@@ -3,18 +3,3 @@
 %p
   %b Name:
   = @poll.name
-
-%p
-  = link_to 'Invite voters', invite_voters_path(:poll_id => @poll.id) 
-
-%p
-
-= link_to 'Edit', edit_poll_path(@poll)
-\|
-= link_to 'Back', polls_path
-
-%p
-  %ul
-    - @poll.ballots.each do |ballot|
-      %li
-        = link_to ballot.email, vote_on_ballot_path(:ballot_id => ballot.id, :poll_id => @poll.id)

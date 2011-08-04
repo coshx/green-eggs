@@ -27,10 +27,13 @@ class BallotsController < ApplicationController
   def new
     #@ballot = Ballot.new
     #@ballot = Poll.find(params[:poll_id]).ballots.create
-    @poll = Poll.find(params[:poll_id])
-
-    respond_to do |format|
-      format.html # new.html.erb
+    @poll = Poll.find(params[:id])
+    if @poll.owner_key != params[:owner_key]
+      render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key]
+    else
+      respond_to do |format|
+        format.html # new.html.erb
+      end
     end
   end
 
@@ -47,7 +50,6 @@ class BallotsController < ApplicationController
     emails.each do |e|
       b = @poll.ballots.create(email: e)
       b.choices.create(:original => "")
-      InviteMailer.invite_to_vote(b).deliver
     end
     redirect_to @poll, :notice => "Successfully invited #{emails.join(",")}"
   end

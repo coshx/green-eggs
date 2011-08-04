@@ -24,3 +24,5 @@
     = submit_tag 'Cast your vote'
     (you can return to this page to change your vote for as long as this poll is open)
 
+%p
+  = link_to "See poll results", poll_results_path(:id => @poll.id, :ballot_id => @ballot.id)
