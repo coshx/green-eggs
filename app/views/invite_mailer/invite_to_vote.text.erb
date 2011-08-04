@@ -4,7 +4,7 @@ Hi there,
 
 Here's the custom URL for your ballot:
 
-<%= vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_id => @ballot.id) %>
+<%= vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_id => @ballot.id, :only_path => false) %>
 
 Please keep it a secret!
 
