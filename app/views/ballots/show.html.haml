@@ -17,6 +17,10 @@
     = hidden_field_tag 'poll_id', @poll.id
     = hidden_field_tag 'ballot_id', @ballot.id
     %input#choices_array{:type => 'hidden' , :name => 'choices_attributes[]'} 
+  %p
+    Enter as many choices as you want, in order of preference.
+
   .actions
-    = submit_tag 'Vote'
+    = submit_tag 'Cast your vote'
+    (you can return to this page to change your vote for as long as this poll is open)
 
