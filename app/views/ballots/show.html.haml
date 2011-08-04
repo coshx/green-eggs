@@ -6,11 +6,11 @@
     %b
       = @poll.name
 
-= form_for @ballot, :url => update_ballot_path do
+= form_for @ballot, :url => update_ballot_path do |f|
   .fields
     %ol#choices
       %li
-        = text_field_tag 'choice_1'
+        = text_field_tag "choice_1"
    
     = hidden_field_tag 'poll_id', @poll.id
     = hidden_field_tag 'ballot_id', @ballot.id
@@ -18,6 +18,3 @@
   .actions
     = submit_tag 'Vote'
 
-= link_to 'Edit', edit_ballot_path(@ballot)
-\|
-= link_to 'Back', ballots_path

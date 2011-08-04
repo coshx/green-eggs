@@ -45,7 +45,8 @@ class BallotsController < ApplicationController
     @poll = Poll.find(params[:poll_id])
     emails = params[:emails].split(/\s*,\s*/).uniq
     emails.each do |e|
-      @poll.ballots.create(email: e)
+      b = @poll.ballots.create(email: e)
+      b.choices.create(:original => "")
     end
     redirect_to @poll 
   end
@@ -55,7 +56,6 @@ class BallotsController < ApplicationController
   def update
     @poll = Poll.find(params[:poll_id])
     @ballot = @poll.ballots.find(params[:ballot_id])
-
     respond_to do |format|
       if @ballot.update_attributes(params[:ballot])
         format.html { redirect_to vote_on_ballot_path(:ballot_id => @ballot.id, :poll_id => @poll.id), notice: 'Ballot was successfully updated.' }
