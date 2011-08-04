@@ -11,14 +11,12 @@
     %ol#choices
       %li
         = text_field_tag "choice_1"
-   
+    %a#add_choice{ :href => '#' }
+      Add Choice
+
     = hidden_field_tag 'poll_id', @poll.id
     = hidden_field_tag 'ballot_id', @ballot.id
- 
-  %p
-    Enter as many choices as you want, in order of preference.  
-   
+    %input#choices_array{:type => 'hidden' , :name => 'choices_attributes[]'} 
   .actions
-    = submit_tag 'Cast your vote'
-    (you can return to this page to change your vote for as long is this poll is open)
+    = submit_tag 'Vote'
 
