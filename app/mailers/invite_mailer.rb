@@ -1,5 +1,5 @@
 class InviteMailer < ActionMailer::Base
-  default from: "noreply@greeneg.gs"
+  default from: "GreenEggs <bot@greeneg.gs>"
 
   def invite_to_vote(ballot)
     @ballot = ballot
