@@ -11,13 +11,14 @@
     %ol#sortable
       = form.semantic_fields_for :choices do |choice|
         = choice.input :original
-  .fields
-    %a#add_choice{ :href => '#' }
-      Add Choice
     = hidden_field_tag 'poll_id', @poll.id
     = hidden_field_tag 'ballot_id', @ballot.id
   %p
-    Enter as many choices as you want, in order of preference.
+    Vote for as many choices as you want, in order of preference
+  %p
+    Hit 'Enter' in the last choice to create a new choice
+  %p
+    Tip: you can sort your choices by dragging and dropping the rectangles
 
   .actions
     = submit_tag 'Cast your vote'

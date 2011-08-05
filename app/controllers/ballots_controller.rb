@@ -61,7 +61,7 @@ class BallotsController < ApplicationController
     @ballot = @poll.ballots.find(params[:ballot_id])
     respond_to do |format|
       if @ballot.update_attributes(params[:ballot])
-        format.html { redirect_to vote_on_ballot_path(:ballot_id => @ballot.id, :poll_id => @poll.id), notice: 'Ballot was successfully updated.' }
+        format.html { redirect_to poll_results_path(:ballot_id => @ballot.id, :id => @poll.id), notice: 'Your vote was successfully recorded' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
