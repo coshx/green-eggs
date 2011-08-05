@@ -12,12 +12,6 @@
       = form.semantic_fields_for :choices do |choice|
         = choice.input :original
   .fields
-<<<<<<< HEAD
-    %ol#choices
-      %li 
-        = text_field_tag "choice_1"
-=======
->>>>>>> 7db4f699a0618e5124f8deae5c2332f818792a48
     %a#add_choice{ :href => '#' }
       Add Choice
     = hidden_field_tag 'poll_id', @poll.id
