@@ -9,6 +9,7 @@ gem 'json'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'therubyracer'
+gem 'formtastic'
 
 # Gems used only for assets and not required
 # in production environments by default.

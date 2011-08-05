@@ -6,17 +6,17 @@
     %b
       = @poll.name
 
-= form_for @ballot, :url => update_ballot_path do |f|
+= semantic_form_for @ballot, :url => update_ballot_path do |form|
   .fields
-    %ol#choices
-      %li
-        = text_field_tag "choice_1"
+    %ol
+      = form.semantic_fields_for :choices do |choice|
+        = choice.input :original
+  .fields
     %a#add_choice{ :href => '#' }
       Add Choice
 
     = hidden_field_tag 'poll_id', @poll.id
     = hidden_field_tag 'ballot_id', @ballot.id
-    %input#choices_array{:type => 'hidden' , :name => 'choices_attributes[]'} 
   %p
     Enter as many choices as you want, in order of preference.
 
