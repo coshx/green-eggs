@@ -22,6 +22,12 @@ class Ballot
     super(attributes)
   end
 
+  def sort_by_priority
+    reordered_choices = self.choices.sort {|x,y| x.priority <=> y.priority }
+    self.choices.clear
+    reordered_choices.each { |choice| self.choices.create(choice.attributes) } 
+  end
+  
   protected
 
   def destroy_blank_choices
@@ -31,12 +37,6 @@ class Ballot
   
   def ensure_one_choice
      self.choices.create if self.choices.size == 0
-  end
-
-  def sort_by_priority
-    reordered_choices = self.choices.sort {|x,y| x.priority <=> y.priority }
-    self.choices.clear
-    reordered_choices.each { |choice| self.choices.create(choice.attributes) } 
   end
 
   def mark_as_cast
