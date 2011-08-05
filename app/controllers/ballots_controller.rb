@@ -49,7 +49,7 @@ class BallotsController < ApplicationController
     emails = params[:emails].split(/\s*,\s*/).uniq
     emails.each do |e|
       b = @poll.ballots.create(email: e)
-      b.choices.create(:original => "")
+      b.choices.create
     end
     redirect_to @poll, :notice => "Successfully invited #{emails.join(",")}"
   end
