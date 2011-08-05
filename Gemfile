@@ -10,6 +10,7 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
+gem 'wordnik'
 
 # Gems used only for assets and not required
 # in production environments by default.
