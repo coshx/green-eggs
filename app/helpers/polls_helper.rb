@@ -33,10 +33,10 @@ module PollsHelper
           extra_results[slug] ||= {}
           extra_results[slug][:original] ||= original       
           extra_results[slug][:tally] ||= 0.0 
-          extra_results[slug][:tally] += ((tally / 2.0)*(1.0 / related.size))
+          extra_results[slug][:tally] += ((tally * 0.25)*(1.0 / related.size))
         end
         if !related.empty?
-           tally = tally / 2.0
+           tally = tally * 0.75
         end
         extra_results[r[0]] ||= {}
         extra_results[r[0]][:original] ||= original
