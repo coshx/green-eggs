@@ -11,13 +11,28 @@
 %p
   #{@poll.ballots.cast.count} ballots cast, with #{@poll.ballots.outstanding.count} outstanding
 
+%p
   - results = calculate_results(@poll)
+  
+  %b
+    Preferential results
 
   %ol
     - results.each do |r|
       %li
         #{r[:original]} (#{"%.1f" % (r[:tally]*100)}%)
 
+
+%p
+  - results = calculate_results(@poll, true)
+  
+  %b
+    Preferential results, with synonyms
+
+  %ol
+    - results.each do |r|
+      %li
+        #{r[:original]} (#{"%.1f" % (r[:tally]*100)}%)
 %p
   = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_id => @ballot.id)
 
