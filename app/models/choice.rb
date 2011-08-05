@@ -3,7 +3,20 @@ class Choice
   include Mongoid::Timestamps
   field :priority, :type => Integer
   
-  has_one :tag
+  field :original, :type => String
+  field :slug, :type => String
+
+  after_update :create_slug
 
   embedded_in :ballot
+
+  private
+ 
+  def create_slug
+    if self.original
+      self.slug = self.original.downcase.gsub(/[^a-z0-9]+/, ' ').strip.gsub(' ', '-')
+    end
+  end
+
+
 end

@@ -35,16 +35,17 @@ class PollsController < ApplicationController
   # GET /polls/1/edit
   def edit
     @poll = Poll.find(params[:id])
+    render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key] 
   end
 
   # POST /polls
   # POST /polls.json
   def create
     @poll = Poll.new(params[:poll])
-
+    
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to @poll, notice: 'Poll was successfully created.' }
+        format.html { redirect_to poll_admin_path(:id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), notice: 'Poll was successfully created.' }
         format.json { render json: @poll, status: :created, location: @poll }
       else
         format.html { render action: "new" }
