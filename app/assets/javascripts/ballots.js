@@ -12,10 +12,11 @@ jQuery(document).ready(function(){
 
 
 	jQuery("input[value='Cast your vote']").bind("click",function(){
-    // append the priority hidden fields before submitting
+     // append the priority hidden fields before submitting
    	 var num = jQuery('form ol li').size();
-    	for (i = 0; i < num; i++) {
-      		jQuery("ol li:eq("+i+")").append('<input type="hidden" name="ballot[choices_attributes]['+i+'][priority]" id="ballot_choices_attributes_'+i+'_priority" value="'+i+'">');
-   	 }
-	});
+     for (var i = 0; i < num; i++) {
+       var choice_num = jQuery("ol li:eq("+i+")").attr("id").match(/\d+/)[0];
+       jQuery("ol li:eq("+i+")").append('<input type="hidden" name="ballot[choices_attributes]['+choice_num+'][priority]" id="ballot_choices_attributes_'+choice_num+'_priority" value="'+i+'">');
+     }
+  });
 });
