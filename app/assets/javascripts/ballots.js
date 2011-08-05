@@ -1,21 +1,16 @@
 jQuery(document).ready(function(){
 	jQuery("a#add_choice").bind("click",function(){
-		jQuery('<li><input type="text" name="choice_1" id="choice_1"></li>').appendTo("ol#choices");
-
-    	var num = jQuery('form li.string.optional').size();
-    	jQuery('<li id="ballot_choices_attributes_'+num+'original_input" class="string optional"><label for="ballot_choices_attributes_'+num+'_original">Original</label><input type="text" name="ballot[choices_attributes]['+num+'][original]" id="ballot_choices_attributes_'+num+'_original"></li>').appendTo("form.formtastic.ballot div.fields > ol");
-
-	});
-	
-	jQuery("input[value='Vote']").bind("click",function(){
-		var choicesArray = "";
-		jQuery("ol#choices input").each(function(i,element){
-			choicesArray += element.value;
-			choicesArray += ",";
-		});
-		
-		choicesArray = choicesArray.slice(0,-1);
-		jQuery("input#choices_array").val(choicesArray);
+    var num = jQuery('form ol li').size();
+    jQuery('<li id="ballot_choices_attributes_'+num+'original_input" class="string optional"><label for="ballot_choices_attributes_'+num+'_original">Original</label><input type="text" name="ballot[choices_attributes]['+num+'][original]" id="ballot_choices_attributes_'+num+'_original"></li>').appendTo("form.formtastic.ballot div.fields > ol");
 	    });
 
-    });
+	jQuery("input[value='Cast your vote']").bind("click",function(){
+    // append the priority hidden fields before submitting
+    var num = jQuery('form ol li').size();
+    for (i = 0; i < num; i++) {
+      jQuery("ol li:eq("+i+")").append('<input type="hidden" name="ballot[choices_attributes]['+i+'][priority]" id="ballot_choices_attributes_'+i+'_priority" value="'+i+'">');
+    }
+  
+	});
+
+});
