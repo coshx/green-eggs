@@ -1,8 +1,15 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %h2
+    Results
+
+%p
+  %b Poll name:
   = @poll.name
+
+%p
+  #{@poll.ballots.cast.count} ballots cast, with #{@poll.ballots.outstanding.count} outstanding
 
   - results = calculate_results(@poll)
 
@@ -10,3 +17,7 @@
     - results.each do |r|
       %li
         #{r[:original]} (#{"%.1f" % (r[:tally]*100)}%)
+
+%p
+  = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_id => @ballot.id)
+

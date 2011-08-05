@@ -14,6 +14,7 @@ class PollsController < ApplicationController
   # GET /polls/1.json
   def show
     @poll = Poll.find(params[:id])
+    @ballot = @poll.ballots.find(params[:ballot_id]) 
 
     respond_to do |format|
       format.html # show.html.erb

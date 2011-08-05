@@ -14,7 +14,7 @@ class Choice
  
   def create_slug
     if self.original
-      self.slug = self.original.downcase.gsub(/[^a-z0-9]+/, ' ').strip.gsub(' ', '-')
+      self.slug = self.original.downcase.gsub(/[^a-z0-9]+/, '')
     end
   end
 
