@@ -54,6 +54,7 @@ GEM
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
       i18n (~> 0.4)
+    googlecharts (1.6.7)
     haml (3.1.2)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   bson_ext
   coffee-rails (~> 3.1.0.rc)
   formtastic
+  googlecharts
   haml
   haml-rails
   heroku

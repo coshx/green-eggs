@@ -22,7 +22,7 @@
       %li
         #{r[:original]} (#{"%.1f" % (r[:tally]*100)}%)
 
-
+  = image_tag Gchart.pie(:data => results.collect{|a| a[:tally]}, :labels => results.collect{|a| a[:original]})
 %p
   - results = calculate_results(@poll, true)
   
