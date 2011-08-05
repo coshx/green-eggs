@@ -8,7 +8,7 @@
 
 = semantic_form_for @ballot, :url => update_ballot_path do |form|
   .fields
-    %ol
+    %ol#sortable
       = form.semantic_fields_for :choices do |choice|
         = choice.input :original
   .fields
