@@ -5,3 +5,19 @@
  *= require_self
  *= require_tree . 
 */
+
+body {
+  background-color: #a1c3ce;
+  font-size: 12px;
+  margin: 30px 30px 30px 30px;
+  font-family: 'Delius Swash Caps', cursive;
+}
+
+logo{
+  z-index:2;
+}
+
+text_area{
+  z-index:1;
+}
+
