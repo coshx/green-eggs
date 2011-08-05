@@ -5,3 +5,10 @@
 form.formtastic.ballot li > label {
   display: none;
 }
+
+ol#sortable li {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid gray;
+  width: 224px;
+}
