@@ -1,8 +1,14 @@
 jQuery(document).ready(function(){
 	jQuery("a#add_choice").bind("click",function(){
 		jQuery('<li><input type="text" name="choice_1" id="choice_1"></li>').appendTo("ol#choices");
-	    });
+		jQuery("#choice_1").sortable({
+			revert: true
+ 		});
+	
+		jQuery("li").disableSelection();
 
+	});
+	
 	jQuery("input[value='Vote']").bind("click",function(){
 		var choicesArray = "";
 		jQuery("ol#choices input").each(function(i,element){
@@ -13,4 +19,6 @@ jQuery(document).ready(function(){
 		choicesArray = choicesArray.slice(0,-1);
 		jQuery("input#choices_array").val(choicesArray);
 	    });
+
+	jQuery("input#choice_1").draggable();
     });
