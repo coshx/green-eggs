@@ -6,7 +6,7 @@ class Choice
   field :original, :type => String
   field :slug, :type => String
 
-  after_update :create_slug
+  before_save :create_slug
 
   embedded_in :ballot
 

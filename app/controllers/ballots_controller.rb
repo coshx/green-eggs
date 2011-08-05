@@ -51,7 +51,7 @@ class BallotsController < ApplicationController
       b = @poll.ballots.create(email: e)
       b.choices.create
     end
-    redirect_to @poll, :notice => "Successfully invited #{emails.join(",")}"
+    redirect_to poll_admin_path(:id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), :notice => "Successfully invited #{emails.join(",")}"
   end
 
   # PUT /ballots/1

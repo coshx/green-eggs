@@ -3,3 +3,10 @@
 %p
   %b Name:
   = @poll.name
+
+  - results = calculate_results(@poll)
+
+  %ol
+    - results.each do |r|
+      %li
+        #{r[:original]} (#{"%.1f" % (r[:tally]*100)}%)

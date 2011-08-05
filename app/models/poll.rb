@@ -30,6 +30,6 @@ class Poll
     if polls.count > 0
       errors.add(:base, "Name too similar to that of an existing poll")
     end
-  end  
+  end 
   
 end
