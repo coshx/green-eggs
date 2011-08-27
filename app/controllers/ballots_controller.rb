@@ -25,8 +25,6 @@ class BallotsController < ApplicationController
   # GET /ballots/new
   # GET /ballots/new.json
   def new
-    #@ballot = Ballot.new
-    #@ballot = Poll.find(params[:poll_id]).ballots.create
     @poll = Poll.find(params[:id])
     if @poll.owner_key != params[:owner_key]
       render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key]
@@ -46,7 +44,7 @@ class BallotsController < ApplicationController
   # POST /ballots.json
   def create
     @poll = Poll.find(params[:poll_id])
-    emails = params[:emails].split(/\s*,\s*/).uniq
+    emails = params[:emails].split(/\s*,\s*/).reject { |s| s.strip.empty? }.uniq
     emails.each do |e|
       b = @poll.ballots.create(email: e)
       b.choices.create
