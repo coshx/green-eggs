@@ -23,7 +23,7 @@ module PollsHelper
         original = r[1][:original]
         tally = r[1][:tally]
         response = Wordnik.word.get_related_words(original, :useCanonical => 'true')
-        if response && !response.empty?
+        if response && !response.empty? && response[0] && !response[0].empty?
           related = response[0]["words"]
         else
           related = []
