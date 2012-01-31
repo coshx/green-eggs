@@ -32,21 +32,6 @@
 %p
   - results = calculate_results(@poll, true)
   
-  %table#synonyms-results
-    %caption
-      Preferential results, with synonyms
-    %thead
-      %tr
-        %td
-        %th{:scope => 'col'} Value
-    %tbody
-      - results.each do |r|
-        %tr
-          %th{:scope => 'row'} #{r[:original]} 
-          %td #{"%.1f" % (r[:tally]*100)}
-  
-  = render :partial => "pie_chart", :locals => {:data => results.collect{|a| [a[:original], a[:tally]]}, :name => "synonyms"}
-
 %p
   = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_id => @ballot.id)
 
