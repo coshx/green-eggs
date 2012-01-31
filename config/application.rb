@@ -57,5 +57,7 @@ module GreenEggs
       g.orm             :mongoid 
       g.template_engine :haml
     end
+
+     config.mongoid.preload_models = true
   end
 end
