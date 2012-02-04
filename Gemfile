@@ -34,4 +34,12 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'capybara-webkit'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+  gem 'guard-bundler'
+  gem 'guard-migrate'
+  gem 'guard-rake'
+  gem 'libnotify'
 end
