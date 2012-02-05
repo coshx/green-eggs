@@ -14,13 +14,13 @@ class Poll
   embeds_many :ballots
 
   set_callback(:create, :after) do |poll|
-    OwnerMailer.poll_created(poll).deliver
+    OwnerMailer.send_admin_link(poll).deliver
   end
 
   protected
 
   def generate_owner_key
-    self.owner_key = SecureRandom.urlsafe_base64(24)
+    self.owner_key = SecureRandom.urlsafe_base64(4)
   end
 
   # validate uniqueness of key 
