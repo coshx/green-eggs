@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Ballot do
-  let(:ballot) { Factory(:poll_with_ballot).ballots.first }
+  let(:poll_with_ballot) { Factory(:poll_with_ballot) }
+  let(:ballot) { poll_with_ballot.ballots.first }
 
   describe "cast status" do
     context "brand new ballot" do

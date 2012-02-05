@@ -23,7 +23,6 @@
         %th{:scope => 'col'} Value
     %tbody
       - results.each do |r|
-      - binding.pry
         %tr
           %th{:scope => 'row'} #{r[:original]} 
           %td #{"%.1f" % (r[:tally]*100)}
