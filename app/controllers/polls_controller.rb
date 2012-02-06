@@ -1,4 +1,6 @@
 class PollsController < ApplicationController
+  before_filter :check_admin_key, :only => [:edit, :update, :destroy]
+
   # GET /polls
   def index
     @polls = Poll.all
@@ -17,8 +19,6 @@ class PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
-    @poll = Poll.find(params[:id])
-    render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key] 
   end
 
   # POST /polls
@@ -33,7 +33,6 @@ class PollsController < ApplicationController
 
   # PUT /polls/1
   def update
-    @poll = Poll.find(params[:id])
     if @poll.update_attributes(params[:poll])
       redirect_to @poll, notice: 'Poll was successfully updated.'
     else
@@ -43,9 +42,14 @@ class PollsController < ApplicationController
 
   # DELETE /polls/1
   def destroy
-    @poll = Poll.find(params[:id])
     @poll.destroy
 
     redirect_to polls_url
+  end
+    
+  private
+  def check_admin_key
+    @poll = Poll.find(params[:id])
+    render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key] 
   end
 end

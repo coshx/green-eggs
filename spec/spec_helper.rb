@@ -16,8 +16,11 @@ RSpec.configure do |config|
   # Clean up the database
   require 'database_cleaner'
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.orm = "mongoid"
+    begin
+      DatabaseCleaner.strategy = :truncation
+    rescue NameError
+      raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+    end
   end
 
   config.before(:each) do

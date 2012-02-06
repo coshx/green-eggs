@@ -1,6 +1,6 @@
 module PollsHelper
 
-  def calculate_results(poll, related=false)
+  def calculate_results(poll)
     results = {}
  
     poll.ballots.each do |b|
