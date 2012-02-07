@@ -17,7 +17,7 @@ class Poll
     OwnerMailer.send_admin_link(poll).deliver
   end
 
-  protected
+  private
 
   def generate_owner_key
     self.owner_key = SecureRandom.urlsafe_base64(4)

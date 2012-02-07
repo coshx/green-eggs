@@ -1,4 +1,7 @@
 class BallotsController < ApplicationController
+  before_filter :load_poll_and_ballot, :only => [:show, :edit, :update]
+  before_filter :check_admin_key_and_load_poll, :only => [:new, :create]
+
   # GET /ballots
   def index
     @ballots = Ballot.all
@@ -6,26 +9,18 @@ class BallotsController < ApplicationController
 
   # GET /ballots/1
   def show
-    @poll = Poll.find(params[:poll_id])
-    @ballot = @poll.ballots.find(params[:ballot_id])
   end
 
   # GET /ballots/new
   def new
-    @poll = Poll.find(params[:id])
-    if @poll.owner_key != params[:owner_key]
-      render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key]
-    end
   end
 
   # GET /ballots/1/edit
   def edit
-    @ballot = Ballot.find(params[:id])
   end
 
   # POST /ballots
   def create
-    @poll = Poll.find(params[:poll_id])
     emails = params[:emails].split(/\s*,\s*/).reject { |s| s.strip.empty? }.uniq
     emails.each do |e|
       b = @poll.ballots.create(email: e)
@@ -36,18 +31,15 @@ class BallotsController < ApplicationController
 
   # PUT /ballots/1
   def update
-    @poll = Poll.find(params[:poll_id])
-    @ballot = @poll.ballots.find(params[:ballot_id])
     if @ballot.update_attributes(params[:ballot])
       redirect_to poll_results_path(:ballot_id => @ballot.id, :id => @poll.id), notice: 'Your vote was successfully recorded'
     end
   end
 
-  # DELETE /ballots/1
-  def destroy
-    @ballot = Ballot.find(params[:id])
-    @ballot.destroy
-
-    format.html { redirect_to ballots_url }
+  private
+  def load_poll_and_ballot
+    @poll = Poll.find(params[:poll_id])
+    @ballot = @poll.ballots.find(:key => params[:ballot_key])
+    render :file => File.join(Rails.root, "public", "404"), :status => 404 if !@ballot.present?
   end
 end

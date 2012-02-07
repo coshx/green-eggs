@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter :check_admin_key, :only => [:edit, :update, :destroy]
+  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy]
 
   # GET /polls
   def index
@@ -43,13 +43,7 @@ class PollsController < ApplicationController
   # DELETE /polls/1
   def destroy
     @poll.destroy
-
     redirect_to polls_url
   end
-    
-  private
-  def check_admin_key
-    @poll = Poll.find(params[:id])
-    render :file => File.join(Rails.root, "public", "404.html"), :status => 404 if @poll.owner_key != params[:owner_key] 
-  end
+
 end

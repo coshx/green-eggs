@@ -56,8 +56,8 @@ GreenEggs::Application.routes.draw do
 
   get '/:id/:owner_key/invite_voters' => 'ballots#new', :as => :invite_voters
   post 'ballots/update' => 'ballots#update', :as => :update_ballot
-  get '/:poll_id/:ballot_id' => 'ballots#show', :as => :vote_on_ballot
-  get '/:id/:ballot_id/results' => 'polls#show', :as => :poll_results
+  get '/:poll_id/:ballot_key' => 'ballots#show', :as => :vote_on_ballot
+  get '/:id/:bellot_key/results' => 'polls#show', :as => :poll_results
   get '/:id/:owner_key/admin' => 'polls#edit', :as => :poll_admin
 
   # See how all your routes lay out with "rake routes"
