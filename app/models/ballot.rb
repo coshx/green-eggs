@@ -8,7 +8,7 @@ class Ballot
   embeds_many :choices
   embedded_in :poll
   accepts_nested_attributes_for :choices
-  after_update [:destroy_blank_choices, :ensure_one_choice, :sort_by_priority]
+  after_update :destroy_blank_choices, :ensure_one_choice, :sort_by_priority
   before_update :mark_as_cast
   
   set_callback(:create, :after) do |ballot|
