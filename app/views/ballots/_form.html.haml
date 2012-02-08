@@ -1,4 +1,4 @@
-= form_tag "/ballots" do
+= form_tag create_ballot_path(:poll_id => @poll.id, :owner_key => @poll.owner_key) do
   
   .fields
     = text_area_tag 'emails', nil, :size => "50x5" 

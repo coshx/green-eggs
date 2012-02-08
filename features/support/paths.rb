@@ -4,6 +4,8 @@ module NavigationHelpers
 
     when /^the index page$/
       '/'
+    when /^the poll admin page$/
+      poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
 
     else
       begin
