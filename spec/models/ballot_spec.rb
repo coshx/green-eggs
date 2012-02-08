@@ -48,4 +48,16 @@ describe Ballot do
     InviteMailer.should_receive(:invite_to_vote).with(new_ballot).and_return(OpenStruct.new(:deliver => true))
     Factory(:poll).ballots << new_ballot
   end
+
+  describe "key" do
+    it "is uri-safe" do
+      # two keys will be created: 1 for the poll owner and 1 for the ballot
+      SecureRandom.should_receive(:urlsafe_base64).twice.with(4).and_return("T1hF2t")
+      ballot # reference to instantiate
+    end
+
+    it "has > 32 bits of entropy" do
+      ballot.key.length.should >= 6 # 64^6 > 2^32
+    end
+  end
 end
