@@ -1,5 +1,6 @@
 class PollsController < ApplicationController
   before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy]
+  before_filter :load_poll_and_ballot, :only => [:show]
 
   # GET /polls
   def index
@@ -8,8 +9,6 @@ class PollsController < ApplicationController
 
   # GET /polls/1
   def show
-    @poll = Poll.find(params[:id])
-    @ballot = @poll.ballots.find(params[:ballot_id]) 
   end
 
   # GET /polls/new

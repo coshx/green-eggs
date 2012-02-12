@@ -12,7 +12,7 @@
       = form.semantic_fields_for :choices do |choice|
         = choice.input :original
     = hidden_field_tag 'poll_id', @poll.id
-    = hidden_field_tag 'ballot_id', @ballot.id
+    = hidden_field_tag 'ballot_key', @ballot.key
   %p
     Vote for as many choices as you want, in order of preference
   %p
@@ -25,4 +25,4 @@
     (you can return to this page to change your vote for as long as this poll is open)
 
 %p
-  = link_to "See poll results", poll_results_path(:id => @poll.id, :ballot_id => @ballot.id)
+  = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key)

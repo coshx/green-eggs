@@ -30,5 +30,5 @@
   = render :partial => "pie_chart", :locals => {:data => results.collect{|a| [a[1][:original], a[1][:tally]]}, :name => "standard"}
 
 %p
-  = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_id => @ballot.id)
+  = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
 

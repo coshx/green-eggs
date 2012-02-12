@@ -11,3 +11,5 @@ Feature: User creates poll
     And I press "Save"
     Then I should see "Poll was successfully created"
     And "dixie@example.com" should receive an email with an admin link
+    And when I follow the admin link
+    Then I should see "Manage your poll"
