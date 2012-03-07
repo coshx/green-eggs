@@ -35,11 +35,4 @@ class BallotsController < ApplicationController
       redirect_to poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id), notice: 'Your vote was successfully recorded'
     end
   end
-
-  private
-  def load_poll_and_ballot
-    @poll = Poll.find(params[:poll_id])
-    @ballot = @poll.ballots.where(:key => params[:ballot_key]).limit(1).first
-    render :file => File.join(Rails.root, "public", "404"), :status => 404 if !@ballot.present?
-  end
 end

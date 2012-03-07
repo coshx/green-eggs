@@ -5,7 +5,8 @@ end
 
 Factory.define :poll_with_ballot, :parent => :poll do |p|
   p.after_create do |poll|
-    poll.ballots << Factory.build(:ballot)
+    ballot = Factory.build(:ballot)
+    poll.ballots << ballot
   end
 end
 
