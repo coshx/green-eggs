@@ -26,7 +26,6 @@ group :development, :test do
   gem "pry", "~> 0.9.7"
   gem "pry-nav", "~> 0.0.4"
   gem 'capybara'
-  gem 'cucumber-rails'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
@@ -42,4 +41,8 @@ group :development, :test do
   gem 'guard-migrate'
   gem 'guard-rake'
   gem 'libnotify'
+end
+
+group :test do
+  gem 'cucumber-rails'
 end
