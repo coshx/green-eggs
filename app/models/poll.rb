@@ -26,7 +26,7 @@ class Poll
       overall_tallies = {}
       ballots.each do |b|
         valid_choices = b.choices.reject {|c| eliminated_slugs[c.slug]}
-        continue if valid_choices.empty?
+        next if valid_choices.empty?
         first_choice = valid_choices.first
         first_choice_tallies[first_choice.slug] ||= 0
         first_choice_tallies[first_choice.slug] += 1

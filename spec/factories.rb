@@ -15,20 +15,18 @@ Factory.define :ballot do |b|
 end
 
 Factory.define :choice do |c|
-  c.original "CHINESE!!!"
-  c.priority 0
+  c.sequence(:original) {|i| "unique_choice_#{i}"}
 end
 
 Factory.define :first_choice, :parent => :choice do |c|
+  c.priority 0
 end
 
 Factory.define :second_choice, :parent => :choice do |c|
-  c.original "General TSO"
   c.priority 1
 end
 
 Factory.define :third_choice, :parent => :choice do |c|
-  c.original "Chicken"
   c.priority 2
 end
 
