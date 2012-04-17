@@ -40,7 +40,7 @@ describe Poll do
 
     context "there are no ballots" do
       it "returns no results" do
-        poll.calculate_results.should == []
+        poll.calculate_results[:winners].should == []
       end
     end
 
@@ -49,14 +49,14 @@ describe Poll do
 
       context "the ballot has no choices" do
         it "returns no results" do
-          poll.calculate_results.should == []
+          poll.calculate_results[:winners].should == []
         end
       end
 
       context "the ballot has one choice" do
         it "returns the only choice" do
           ballot.choices << Factory.build(:choice, :original => "eggs")
-          poll.calculate_results.should == [{slug: "eggs", original: "eggs"}]
+          poll.calculate_results[:winners].should == [{slug: "eggs", original: "eggs"}]
         end
       end
 
@@ -66,7 +66,7 @@ describe Poll do
                      Factory.build(:choice, :original => "waffles"),
                      Factory.build(:choice, :original => "toast")]
           ballot.choices << choices
-          poll.calculate_results.should == choices.map {|c| {:slug => c.slug, :original => c.original}}
+          poll.calculate_results[:winners].should == choices.map {|c| {:slug => c.slug, :original => c.original}}
         end
       end
     end
@@ -83,7 +83,7 @@ describe Poll do
                      Factory.build(:choice, :original => "fries"),
                      Factory.build(:choice, :original => "shake")]
           ballots.each {|b| b.choices << choices}
-          poll.calculate_results.should == choices.map {|c| {:slug => c.slug, :original => c.original}}
+          poll.calculate_results[:winners].should == choices.map {|c| {:slug => c.slug, :original => c.original}}
         end
       end
 
@@ -92,7 +92,7 @@ describe Poll do
           ballots.each do |b|
             3.times {b.choices << Factory.build(:choice)}
           end
-          poll.calculate_results.should == []
+          poll.calculate_results[:winners].should == []
         end
       end
 
@@ -107,7 +107,7 @@ describe Poll do
           ["apple", "blackcurrant", "cranberry"].each do |fruit|
             ballots[2].choices << Factory.build(:choice, :original => fruit)
           end
-          poll.calculate_results.should == [{:slug => "apple", :original => "apple"}]
+          poll.calculate_results[:winners].should == [{:slug => "apple", :original => "apple"}]
         end
       end
 
@@ -122,7 +122,7 @@ describe Poll do
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
             ballots[2].choices << Factory.build(:choice, :original => fruit)
           end
-          poll.calculate_results.should == [{:slug => "apple", :original => "apple"}]
+          poll.calculate_results[:winners].should == [{:slug => "apple", :original => "apple"}]
         end
       end
 
@@ -137,7 +137,7 @@ describe Poll do
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
             ballots[2].choices << Factory.build(:choice, :original => fruit)
           end
-          poll.calculate_results.should == [{:slug => "blueberry", :original => "blueberry"}]
+          poll.calculate_results[:winners].should == [{:slug => "blueberry", :original => "blueberry"}]
         end
       end
 
@@ -152,7 +152,7 @@ describe Poll do
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
             ballots[2].choices << Factory.build(:choice, :original => fruit)
           end
-          poll.calculate_results.should == [{:slug => "cranberry", :original => "cranberry"}, {:slug => "apple", :original => "apple"}]
+          poll.calculate_results[:winners].should == [{:slug => "cranberry", :original => "cranberry"}, {:slug => "apple", :original => "apple"}]
         end
       end
 
@@ -172,7 +172,7 @@ describe Poll do
           ["anotherfruit", "banana", "cranberry"].each do |fruit|
             ballots[3].choices << Factory.build(:choice, :original => fruit)
           end
-          poll.calculate_results.should == []
+          poll.calculate_results[:winners].should == []
         end
       end
     end

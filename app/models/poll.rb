@@ -21,7 +21,11 @@ class Poll
     eliminated_slugs = {}
     slugs_ever_seen = {}
     results = []
+    round = 0
+    log = ""
     while true
+      round += 1
+      log += "Beginning round ##{round}\n"
       first_choice_tallies = {}
       overall_tallies = {}
       ballots.each do |b|
@@ -41,19 +45,29 @@ class Poll
       if choices_with_most_first_choice_votes.count == 1
         # found winner
         winner = choices_with_most_first_choice_votes.first
+        log += "#{winner[0]} has most 1st-choice votes (#{most_first_choice_votes}), wins #{(results.count + 1).ordinalize} place\n"
         results << winner
         eliminated_slugs[winner[0]] = true
       else
+        log += "#{choices_with_most_first_choice_votes.keys.join(",")} tie for 1st-choice votes (#{most_first_choice_votes} each); no winner this round\n"
         # no winner yet
         fewest_votes_overall = overall_tallies.values.min
         choices_with_fewest_votes_overall = overall_tallies.select {|k,v| v == fewest_votes_overall}
         choices_with_fewest_votes_overall.each {|c| eliminated_slugs[c[0]] = true}
+        if choices_with_fewest_votes_overall.count == 1
+          log += "#{choices_with_fewest_votes_overall.first.key} has fewest votes overall (#{fewest_votes_overall}), eliminated\n"
+        else
+          log += "#{choices_with_fewest_votes_overall.keys.join(",")} tie for fewest votes overall (#{fewest_votes_overall}), eliminated\n"
+        end
       end
+
+      log += "\n"
       # has every choice either won or been eliminated?
       break if slugs_ever_seen.count == eliminated_slugs.count
     end
-    # return hashes of {:slug, :display_name} in winning order
-    results.map {|r| {:slug => r[0], :original => slugs_ever_seen[r[0]]}}
+    log += "Done."
+    # return results hashes of {:slug, :display_name} in winning order, along with log
+    {:winners => results.map {|r| {:slug => r[0], :original => slugs_ever_seen[r[0]]}}, :log => log}
   end
 
   private
