@@ -17,7 +17,7 @@ class Poll
     OwnerMailer.send_admin_link(poll).deliver
   end
 
-  def calculate_results
+  def calculate_irv
     eliminated_slugs = {}
     slugs_ever_seen = {}
     results = []
@@ -73,6 +73,26 @@ class Poll
     log += "Done."
     # return results hashes of {:slug, :display_name} in winning order, along with log
     {:winners => results.map {|r| {:slug => r[0], :original => slugs_ever_seen[r[0]]}}, :log => log}
+  end
+
+  def calculate_borda
+
+    results = {}
+
+    ballots.each do |b|
+      num_choices = b.choices.size
+      ballot_handicap = num_choices.to_f / (1..num_choices).sum
+      b.choices.each do |c|
+        if c.slug
+          results[c.slug] ||= {}
+          results[c.slug][:original] ||= c.original
+          results[c.slug][:tally] ||= 0.0
+          results[c.slug][:tally] += (((num_choices - c.priority) / num_choices.to_f) * ballot_handicap) / ballots.count
+        end
+      end
+    end
+
+    results
   end
 
   private

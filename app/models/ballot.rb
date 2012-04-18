@@ -1,7 +1,7 @@
 class Ballot
   include Mongoid::Document
   include Mongoid::Timestamps
-  
+
   field :email, :type => String
   field :cast, :type => Boolean, :default => false
   field :key, :type => String
@@ -15,7 +15,7 @@ class Ballot
   before_update :mark_as_cast
   validates_presence_of :key
   validates_uniqueness_of :key
-  
+
   set_callback(:create, :after) do |ballot|
     InviteMailer.invite_to_vote(ballot).deliver
   end
@@ -32,14 +32,14 @@ class Ballot
     self.choices.clear
     reordered_choices.each { |choice| self.choices.create(choice.attributes) } 
   end
-  
+
   private
 
   def destroy_blank_choices
-     self.cast = true 
+     self.cast = true
      self.choices.where(:original => "").destroy_all
   end
-  
+
   def ensure_one_choice
      self.choices.create if self.choices.size == 0
   end
