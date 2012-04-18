@@ -28,28 +28,33 @@ class Poll
       log += "Beginning round ##{round}\n"
       first_choice_tallies = {}
       overall_tallies = {}
+      num_valid_ballots = 0
       ballots.each do |b|
         valid_choices = b.choices.reject {|c| eliminated_slugs[c.slug]}
         next if valid_choices.empty?
         first_choice = valid_choices.first
         first_choice_tallies[first_choice.slug] ||= 0
         first_choice_tallies[first_choice.slug] += 1
+        num_valid_ballots += 1 if valid_choices.present?
         valid_choices.each do |c|
           overall_tallies[c.slug] ||= 0
           overall_tallies[c.slug] += 1
           slugs_ever_seen[c.slug] = c.original
         end
       end
+      break if first_choice_tallies.empty?
       most_first_choice_votes = first_choice_tallies.values.max
       choices_with_most_first_choice_votes = first_choice_tallies.select { |k,v| v == most_first_choice_votes }
-      if choices_with_most_first_choice_votes.count == 1
-        # found winner
+      pct = first_choice_tallies[choices_with_most_first_choice_votes.first[0]].to_f / num_valid_ballots
+      if pct > 0.50
+        # found a winner
         winner = choices_with_most_first_choice_votes.first
-        log += "#{winner[0]} has most 1st-choice votes (#{most_first_choice_votes}), wins #{(results.count + 1).ordinalize} place\n"
+        # TODO include percentage in log message etc
+        log += "#{winner[0]} has > 50% of 1st-choice votes (#{most_first_choice_votes}/#{num_valid_ballots}=#{(pct*100).to_i}%), wins #{(results.count + 1).ordinalize} place\n"
         results << winner
         eliminated_slugs[winner[0]] = true
       else
-        log += "#{choices_with_most_first_choice_votes.keys.join(",")} tie for 1st-choice votes (#{most_first_choice_votes} each); no winner this round\n"
+        log += "#{(pct*100).to_i}}% of 1st-choice votes for #{choices_with_most_first_choice_votes.keys.join(",")}; no winner this round\n"
         # no winner yet
         fewest_votes_overall = overall_tallies.values.min
         choices_with_fewest_votes_overall = overall_tallies.select {|k,v| v == fewest_votes_overall}
