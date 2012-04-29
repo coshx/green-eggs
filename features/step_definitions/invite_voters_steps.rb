@@ -1,5 +1,5 @@
 Given /^I have created a poll$/ do
-  @poll = Factory(:poll)
+  @poll = FactoryGirl.create(:poll)
 end
 
 Then /^"([^"]*)" should receive an email with a ballot link$/ do |email|

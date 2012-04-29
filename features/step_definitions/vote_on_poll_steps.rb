@@ -1,5 +1,5 @@
 Given /^I have a ballot for a poll$/ do
-  poll = Factory(:poll_with_ballot)
+  poll = FactoryGirl.create(:poll_with_ballot)
   @ballot = poll.ballots.first
   @ballot.save
 end

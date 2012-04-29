@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PollsController do
- let(:poll) { Factory(:poll) } 
+ let(:poll) { FactoryGirl.create(:poll) } 
 
   [[:get, :edit],[:put, :update],[:delete, :destroy]].each do |method, action|
     describe "#{method.upcase} #{action}" do

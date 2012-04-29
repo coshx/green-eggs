@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe BallotsController do
-  let(:poll) { Factory(:poll_with_ballot) }
+  let(:poll) { FactoryGirl.create(:poll_with_ballot) }
   let(:ballot) { poll.ballots.first }
 
   [[:get, :edit],[:put, :update],[:get, :show]].each do |method, action|
