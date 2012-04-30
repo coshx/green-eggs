@@ -7,8 +7,7 @@ FactoryGirl.define do
 
   factory :poll_with_ballot, :parent => :poll do
     after_create do |poll|
-      ballot = FactoryGirl.build(:ballot)
-      poll.ballots << ballot
+      poll.ballots.create(:email => "dixie@example.com")
     end
   end
 

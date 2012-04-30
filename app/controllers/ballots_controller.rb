@@ -9,6 +9,8 @@ class BallotsController < ApplicationController
 
   # GET /ballots/1
   def show
+    # add a blank choice
+    @ballot.choices.build
   end
 
   # GET /ballots/new
@@ -23,8 +25,7 @@ class BallotsController < ApplicationController
   def create
     emails = params[:emails].split(/\s*,\s*/).reject { |s| s.strip.empty? }.uniq
     emails.each do |e|
-      b = @poll.ballots.create(email: e)
-      b.choices.create
+      @poll.ballots.create(email: e)
     end
     redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), :notice => "Successfully invited #{emails.join(",")}"
   end

@@ -11,7 +11,7 @@
 %p
   #{@poll.ballots.cast.count} ballots cast, with #{@poll.ballots.outstanding.count} outstanding
 
-%p#irv-results
+%div#irv-results
 
   %table
     %caption
@@ -30,7 +30,7 @@
   #log
     = results[:log].gsub("\n", "<br \>").html_safe
 
-%p#borda-results
+%div#borda-results
   - results = @poll.calculate_borda
 
   %table#borda-results
@@ -43,10 +43,10 @@
     %tbody
       - results.each do |r|
         %tr
-          %th{:scope => 'row'} #{r[1][:original]} 
-          %td #{"%.1f" % (r[1][:tally]*100)}
+          %th{:scope => 'row'} #{r[:original]}
+          %td #{"%.1f" % (r[:tally]*100)}
 
-  = render :partial => "pie_chart", :locals => {:data => results.collect{|a| [a[1][:original], a[1][:tally]]}, :name => "borda"}
+  = render :partial => "pie_chart", :locals => {:data => results.collect{|a| [a[:original], a[:tally]]}, :name => "borda"}
 
 
 %p

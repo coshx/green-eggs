@@ -55,17 +55,16 @@ describe Poll do
 
       context "the ballot has one choice" do
         it "returns the only choice" do
-          ballot.choices << FactoryGirl.build(:choice, :original => "eggs")
+          ballot.choices.create(:original => "eggs")
           poll.calculate_irv[:winners].should == [{slug: "eggs", original: "eggs"}]
         end
       end
 
       context "the ballot has many choices" do
         it "returns the choices in order" do
-          choices = [FactoryGirl.build(:choice, :original => "eggs"),
-                     FactoryGirl.build(:choice, :original => "waffles"),
-                     FactoryGirl.build(:choice, :original => "toast")]
-          ballot.choices << choices
+          choices = [ballot.choices.create(:original => "eggs"),
+                     ballot.choices.create(:original => "waffles"),
+                     ballot.choices.create(:original => "toast")]
           poll.calculate_irv[:winners].should == choices.map {|c| {:slug => c.slug, :original => c.original}}
         end
       end
@@ -79,9 +78,9 @@ describe Poll do
 
       context "the ballots are all the same" do
         it "returns the choices in order" do
-          choices = [FactoryGirl.build(:choice, :original => "burger"),
-                     FactoryGirl.build(:choice, :original => "fries"),
-                     FactoryGirl.build(:choice, :original => "shake")]
+          choices = [ballot.choices.create(:original => "burger"),
+                     ballot.choices.create(:original => "fries"),
+                     ballot.choices.create(:original => "shake")]
           ballots.each {|b| b.choices << choices}
           poll.calculate_irv[:winners].should == choices.map {|c| {:slug => c.slug, :original => c.original}}
         end
@@ -90,7 +89,7 @@ describe Poll do
       context "the ballots share no common choices" do
         it "returns no results" do
           ballots.each do |b|
-            3.times {b.choices << FactoryGirl.build(:choice)}
+            3.times {|i| b.choices.create(:original => "#{b.id}_#{i}")}
           end
           poll.calculate_irv[:winners].should == []
         end
@@ -99,13 +98,13 @@ describe Poll do
       context "the ballots share 2 common 1st choices (only)" do
         it "returns the common choice" do
           ["apple", "blueberry", "cherry"].each do |fruit|
-            ballots[0].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[0].choices << ballot.choices.create(:original => fruit)
           end
           ["apple", "blackberry", "clementine"].each do |fruit|
-            ballots[1].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[1].choices << ballot.choices.create(:original => fruit)
           end
           ["apple", "blackcurrant", "cranberry"].each do |fruit|
-            ballots[2].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[2].choices << ballot.choices.create(:original => fruit)
           end
           poll.calculate_irv[:winners].should == [{:slug => "apple", :original => "apple"}]
         end
@@ -114,13 +113,13 @@ describe Poll do
       context "the ballots share a 1st choice and 3rd choice in common (only)" do
         it "returns the common choice" do
           ["apple", "blueberry", "cherry"].each do |fruit|
-            ballots[0].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[0].choices << ballot.choices.create(:original => fruit)
           end
           ["clementine", "blackberry", "apple"].each do |fruit|
-            ballots[1].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[1].choices << ballot.choices.create(:original => fruit)
           end
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
-            ballots[2].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[2].choices << ballot.choices.create(:original => fruit)
           end
           poll.calculate_irv[:winners].should == [{:slug => "apple", :original => "apple"}]
         end
@@ -129,13 +128,13 @@ describe Poll do
       context "the ballots share a 2nd choice and 3rd choice in common (only)" do
         it "returns the common choice" do
           ["apple", "blueberry", "cherry"].each do |fruit|
-            ballots[0].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[0].choices << ballot.choices.create(:original => fruit)
           end
           ["clementine", "blackberry", "blueberry"].each do |fruit|
-            ballots[1].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[1].choices << ballot.choices.create(:original => fruit)
           end
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
-            ballots[2].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[2].choices << ballot.choices.create(:original => fruit)
           end
           poll.calculate_irv[:winners].should == [{:slug => "blueberry", :original => "blueberry"}]
         end
@@ -144,13 +143,13 @@ describe Poll do
       context "3 ballots share a 1st choice and 3rd choice in common and another 1st choice and 3rd choice in common" do
         it "returns the 1st choice of the ballot with both a common 1st and 3rd choice, followed that ballot's 3rd choice (which is the first choice of another ballot)" do
           ["apple", "blueberry", "cherry"].each do |fruit|
-            ballots[0].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[0].choices << ballot.choices.create(:original => fruit)
           end
           ["cranberry", "blackberry", "apple"].each do |fruit|
-            ballots[1].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[1].choices << ballot.choices.create(:original => fruit)
           end
           ["apricot", "blackcurrant", "cranberry"].each do |fruit|
-            ballots[2].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[2].choices << ballot.choices.create(:original => fruit)
           end
           poll.calculate_irv[:winners].should == [{:slug => "cranberry", :original => "cranberry"}, {:slug => "apple", :original => "apple"}]
         end
@@ -161,16 +160,16 @@ describe Poll do
           poll.ballots << FactoryGirl.build(:ballot)
           ballots = poll.ballots
           ["apple", "blueberry", "cherry"].each do |fruit|
-            ballots[0].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[0].choices << ballot.choices.create(:original => fruit)
           end
           ["cranberry", "blackberry", "avocado"].each do |fruit|
-            ballots[1].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[1].choices << ballot.choices.create(:original => fruit)
           end
           ["apricot", "blackcurrant", "apple"].each do |fruit|
-            ballots[2].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[2].choices << ballot.choices.create(:original => fruit)
           end
           ["anotherfruit", "banana", "cranberry"].each do |fruit|
-            ballots[3].choices << FactoryGirl.build(:choice, :original => fruit)
+            ballots[3].choices << ballot.choices.create(:original => fruit)
           end
           poll.calculate_irv[:winners].should == []
         end

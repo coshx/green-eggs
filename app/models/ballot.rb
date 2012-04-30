@@ -10,8 +10,8 @@ class Ballot
   embeds_many :choices
   embedded_in :poll
   accepts_nested_attributes_for :choices
-  before_validation :generate_key
-  after_update :destroy_blank_choices, :ensure_one_choice, :sort_by_priority
+  after_build :generate_key
+  after_update :destroy_blank_choices, :sort_by_priority
   before_update :mark_as_cast
   validates_presence_of :key
   validates_uniqueness_of :key
@@ -36,12 +36,7 @@ class Ballot
   private
 
   def destroy_blank_choices
-     self.cast = true
      self.choices.where(:original => "").destroy_all
-  end
-
-  def ensure_one_choice
-     self.choices.create if self.choices.size == 0
   end
 
   def mark_as_cast
@@ -55,4 +50,5 @@ class Ballot
     end while self.poll.ballots.where(:key => new_key).count > 0
     self.key = new_key
   end
+
 end

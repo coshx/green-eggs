@@ -25,13 +25,13 @@ describe Ballot do
     choice_b = FactoryGirl.build(:third_choice)
     choice_c = FactoryGirl.build(:second_choice)
     ballot.choices << [choice_a, choice_b, choice_c]
-    ballot.save
+    ballot.save!
     ballot.choices.should == [choice_a, choice_c, choice_b]
 
     ballot.choices.find(choice_a.id).priority = 2
     ballot.choices.find(choice_b.id).priority = 0
     ballot.save
-    
+
     ballot.choices.should == [choice_b, choice_c, choice_a]
   end
 
@@ -39,14 +39,15 @@ describe Ballot do
     blank_choice = FactoryGirl.build(:blank_choice)
     ballot.choices << blank_choice
     ballot.save
- 
+
     ballot.choices.should_not include(blank_choice)
   end
 
-  it "invites voter when created" do 
-    new_ballot = FactoryGirl.build(:ballot)
+  it "invites voter when created" do
+    poll = FactoryGirl.create(:poll)
+    new_ballot = poll.ballots.new(:email => "samson@example.com")
     InviteMailer.should_receive(:invite_to_vote).with(new_ballot).and_return(OpenStruct.new(:deliver => true))
-    FactoryGirl.create(:poll).ballots << new_ballot
+    new_ballot.save!
   end
 
   describe "key" do

@@ -91,8 +91,7 @@ class Poll
         end
       end
     end
-
-    results
+   results.map {|k,v| v}.sort {|x,y| y[:tally] <=> x[:tally]}
   end
 
   private
@@ -108,6 +107,6 @@ class Poll
     if polls.count > 0
       errors.add(:base, "Name too similar to that of an existing poll")
     end
-  end 
-  
+  end
+
 end
