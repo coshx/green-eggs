@@ -49,12 +49,11 @@ class Poll
       if pct > 0.50
         # found a winner
         winner = choices_with_most_first_choice_votes.first
-        # TODO include percentage in log message etc
         log += "#{winner[0]} has > 50% of 1st-choice votes (#{most_first_choice_votes}/#{num_valid_ballots}=#{(pct*100).to_i}%), wins #{(results.count + 1).ordinalize} place\n"
         results << winner
         eliminated_slugs[winner[0]] = true
       else
-        log += "#{(pct*100).to_i}}% of 1st-choice votes for #{choices_with_most_first_choice_votes.keys.join(",")}; no winner this round\n"
+        log += "#{(pct*100).to_i}% of 1st-choice votes for #{choices_with_most_first_choice_votes.keys.join(",")}; no winner this round\n"
         # no winner yet
         fewest_votes_overall = overall_tallies.values.min
         choices_with_fewest_votes_overall = overall_tallies.select {|k,v| v == fewest_votes_overall}
@@ -100,7 +99,7 @@ class Poll
     self.owner_key = SecureRandom.urlsafe_base64(4)
   end
 
-  # validate uniqueness of key 
+  # validate uniqueness of key
   def check_for_collision
     canonical_id = name.identify
     polls = Poll.all(:conditions => {:id => canonical_id})
