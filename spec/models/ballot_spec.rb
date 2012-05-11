@@ -61,4 +61,13 @@ describe Ballot do
       ballot.key.length.should >= 6 # 64^6 > 2^32
     end
   end
+
+  describe "after_update" do
+    subject { FactoryGirl.build_stubbed :ballot, :poll => FactoryGirl.build_stubbed(:poll) }
+
+    it "publishes to firehose" do
+      Firehose::Producer.should_receive(:new).and_return mock('publisher').tap { |p| p.stub_chain :publish, :to }
+      subject.run_callbacks :update
+    end
+  end
 end
