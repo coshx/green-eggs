@@ -6,4 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui-plugins
+//= require firehose
 //= require_tree .

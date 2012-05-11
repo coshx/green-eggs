@@ -12,6 +12,7 @@ class Ballot
   accepts_nested_attributes_for :choices
   after_build :generate_key
   after_update :destroy_blank_choices, :sort_by_priority
+  after_update :notify_firehose
   before_update :mark_as_cast
   validates_presence_of :key
   validates_uniqueness_of :key
@@ -37,6 +38,13 @@ class Ballot
 
   def destroy_blank_choices
      self.choices.where(:original => "").destroy_all
+  end
+
+  def notify_firehose
+    Firehose::Producer.new(FirehoseServer.uri).publish(to_json).to "/polls/#{poll.id}"
+  rescue => ex
+    # allow this to fail, its not vital
+    Rails.logger.warn "Error in Ballot#notify_firehose: #{ex.message}"
   end
 
   def mark_as_cast
