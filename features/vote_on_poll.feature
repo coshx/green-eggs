@@ -7,7 +7,8 @@ Feature: Vote on poll
   Scenario: Vote for a single choice
     Given I have a ballot for a poll
     And I am on my ballot page
-    And I fill in my 1st choice with "tuna fish"
+    And I create the choice "tuna fish"
+    And I drag the choice to my #1 slot
     And I press "Cast your vote"
     Then I should see "Results"
     And I should see "tuna fish"

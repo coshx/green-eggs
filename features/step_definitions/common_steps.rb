@@ -1,3 +1,14 @@
+module WithinHelpers
+  def with_scope(locator)
+    locator ? within(*selector_for(locator)) { yield } : yield
+  end
+end
+World(WithinHelpers)
+
+When /^(.*) within (.*[^:])$/ do |step_name, parent|
+  with_scope(parent) { step step_name }
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end

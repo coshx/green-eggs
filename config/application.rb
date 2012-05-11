@@ -54,7 +54,7 @@ module GreenEggs
     config.assets.enabled = true
 
     config.generators do |g|
-      g.orm             :mongoid 
+      g.orm             :mongoid
       g.template_engine :haml
     end
 

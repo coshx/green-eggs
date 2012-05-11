@@ -6,9 +6,40 @@ form.formtastic.ballot li > label {
   display: none;
 }
 
-ol#sortable li {
+ul#choices li {
   margin: 5px;
   padding: 5px;
   border: 1px solid gray;
   width: 224px;
+}
+
+div#container {
+  width: 800px;
+  overflow: hidden;
+}
+
+div#choices {
+  float: left;
+  display: block;
+}
+
+div#ballot {
+  float: right;
+  display: block;
+}
+
+li.choice {
+  width: 224px;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid gray;
+}
+
+li.slot {
+  width: 224px;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid gray;
 }
