@@ -40,7 +40,6 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-migrate'
   gem 'guard-rake'
-  gem 'libnotify'
 end
 
 group :test do
