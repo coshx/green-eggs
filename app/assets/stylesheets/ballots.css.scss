@@ -10,6 +10,7 @@ ul#choices li {
   margin: 5px;
   padding: 5px;
   border: 1px solid gray;
+  height: 50px;
   width: 224px;
 }
 
@@ -26,14 +27,6 @@ div#choices {
 div#ballot {
   float: right;
   display: block;
-}
-
-li.choice {
-  width: 224px;
-  height: 50px;
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid gray;
 }
 
 li.slot {

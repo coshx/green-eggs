@@ -25,6 +25,8 @@ module HtmlSelectorsHelpers
 
     when "the choices column"
       "div#choices ul"
+    when "my ballot"
+      "div#ballot ol"
 
     # This allows you to provide a quoted selector as the scope
     # for "within" steps as was previously the default for the

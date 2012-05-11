@@ -18,6 +18,10 @@ Given /^I drag the choice to my \#(\d+) slot$/ do |num|
   page.find("ul#choices li:last-child").drag_to(page.find("ol#slots > li[#{num}]"))
 end
 
+Given /^I drag "([^"]*)" to my \#(\d+) slot$/ do |choice, num|
+  page.find(:xpath, "//ul[@id='choices']//li[contains(., '#{choice}')]").drag_to(page.find("ol#slots > li[#{num}]"))
+end
+
 Given /^the (\d+)(?:rd|st|nd|th) voter votes for "([^"]*)"$/ do |ord, choices|
   @ballot = @poll.ballots[ord.to_i-1]
   visit vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_key => @ballot.key)
