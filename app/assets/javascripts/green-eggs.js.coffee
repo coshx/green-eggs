@@ -60,6 +60,7 @@ GreenEggs.setDroppable = (selector) ->
 
 GreenEggs.prepareBallotForm = ->
   $.each($("ol#slots li:not(.empty)"), (index, slot) ->
+    $(slot).append("<input class='choice' type='hidden'>") if $(slot).find("input.choice").length == 0
     choice = $(slot).find("input.choice")
     choice.attr("id", "ballot_choices_attributes_#{index}_original")
     choice.attr("name", "ballot[choices_attributes][#{index}][original]")
