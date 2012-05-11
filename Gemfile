@@ -11,6 +11,9 @@ gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
 
+# real-time updating
+gem 'firehose', :git => 'git://github.com/rahearn/firehose.git', :branch => 'topic/rails-engine'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
