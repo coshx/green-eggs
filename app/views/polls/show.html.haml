@@ -1,5 +1,5 @@
 :javascript
-  poll_uri = '//localhost:7474/polls/#{@poll.id}';
+  poll_uri = '#{FirehoseServer.uri}/polls/#{@poll.id}';
 
 %p#notice= notice
 
