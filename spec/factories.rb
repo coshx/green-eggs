@@ -11,6 +11,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :poll_with_invitation_key, :parent => :poll do
+    before_create do |poll|
+      poll.generate_invitation_key
+    end
+  end
+
   factory :ballot do
     email "sonia@example.com"
   end

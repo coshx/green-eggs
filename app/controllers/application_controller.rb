@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def load_poll_and_ballot
     @poll = Poll.find(params[:poll_id])
-    if @poll.invitation_key == params[:ballot_key]
+    if @poll.invitation_key && @poll.invitation_key == params[:ballot_key]
       @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
     else
       @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
