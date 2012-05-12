@@ -4,6 +4,7 @@ class Poll
   field :name, :type => String
   field :owner_email, :type => String
   field :owner_key, :type => String
+  field :invitation_key, :type => String
   key :name
 
   before_create :generate_owner_key
@@ -91,6 +92,10 @@ class Poll
       end
     end
    results.map {|k,v| v}.sort {|x,y| y[:tally] <=> x[:tally]}
+  end
+
+  def generate_invitation_key
+    self.invitation_key = SecureRandom.urlsafe_base64(4)
   end
 
   private

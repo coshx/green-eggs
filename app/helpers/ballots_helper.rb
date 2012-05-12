@@ -12,4 +12,12 @@ module BallotsHelper
     choices.to_a.shuffle
   end
 
+  def group_invitation_url(poll)
+    if @poll.invitation_key
+      vote_on_ballot_url(@poll.id, @poll.invitation_key)
+    else
+      'disabled'
+    end
+  end
+
 end

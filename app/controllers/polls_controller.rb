@@ -32,10 +32,25 @@ class PollsController < ApplicationController
 
   # PUT /polls/1
   def update
-    if @poll.update_attributes(params[:poll])
-      redirect_to @poll, notice: 'Poll was successfully updated.'
-    else
-      render action: "edit"
+    respond_to do |format|
+      format.html do
+        if @poll.update_attributes(params[:poll])
+          redirect_to @poll, notice: 'Poll was successfully updated.'
+        else
+          render action: "edit"
+        end
+      end
+
+      format.json do
+        if params["use_invitation_key"] == "true"
+          @poll.generate_invitation_key
+        else
+          @poll.invitation_key = nil
+        end
+
+        @poll.save!
+        render :json => { invitation_key: @poll.invitation_key }
+      end
     end
   end
 

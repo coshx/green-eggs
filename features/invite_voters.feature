@@ -1,6 +1,6 @@
 Feature: Poll admin invites voters
   As a poll admin
-  I want to invite a voters
+  I want to invite voters
   So they have a chance to express their preferences
 
   Scenario: Poll admin invites a single voter
