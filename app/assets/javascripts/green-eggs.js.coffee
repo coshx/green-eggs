@@ -2,14 +2,12 @@ window.GreenEggs ||=  {}
 
 jQuery(document).ready ->
   GreenEggs.addChoice = ->
-    choice = jQuery("<li id=\"ballot_choices_attributes_0_original_input\" class=\"string optional\"><input type=\"text\" name=\"ballot[choices_attributes][0][original]\" id=\"ballot_choices_attributes_0_original\" class='choice'></li>")
+    choice = jQuery("<li><input type='text' class='choice'></li>")
     choice.appendTo "ul#choices"
     GreenEggs.setDraggable(choice)
     jQuery("ul#choices input[type='text']").last().focus()
 
   jQuery("ol.sortable").sortable()
-  jQuery("a#add_choice").bind "click", ->
-    GreenEggs.addChoice()
 
   GreenEggs.setDraggable = (selector) ->
     $(selector).draggable revert: ( event, ui ) ->
@@ -43,10 +41,10 @@ GreenEggs.setDroppable = (selector) ->
       slot = $(this)
       choice = $(ui.draggable)
       slot.html(choice.html())
-      slot.attr("data-choice-slug", choice.attr("data-choice-slug"))
-      slot.attr("data-choice-original", choice.attr("data-choice-original"))
-      if choice.find("input")
-         slot.find("input").val(choice.find("input").val())
+      if choice.find("input").length > 0
+         slot.attr("data-choice-original", choice.find("input").val())
+      else
+         slot.attr("data-choice-original", choice.attr("data-choice-original"))
       choice.remove()
       slot.removeClass("empty")
       if $("ol#slots li.empty").length == 0
@@ -62,13 +60,10 @@ GreenEggs.prepareBallotForm = ->
   $.each($("ol#slots li:not(.empty)"), (index, slot) ->
     $(slot).append("<input class='choice' type='hidden'>") if $(slot).find("input.choice").length == 0
     choice = $(slot).find("input.choice")
-    choice.attr("id", "ballot_choices_attributes_#{index}_original")
     choice.attr("name", "ballot[choices_attributes][#{index}][original]")
-    choice.attr("value", $(slot).attr("data-choice-original")) if $(slot).attr("data-choice-original")
-    choice.attr("value", $(choice).attr("data-choice-original")) if $(choice).attr("data-choice-original")
+    choice.attr("value", $(slot).attr("data-choice-original"))
     $(slot).append("<input class='priority' type='hidden'>") if $(slot).find("input.priority").length == 0
     priority = $(slot).find("input.priority")
     priority.attr("name", "ballot[choices_attributes][#{index}][priority]")
-    priority.attr("id", "ballot_choices_attributes_#{index}_priority")
     priority.attr("value", index)
   )

@@ -11,7 +11,7 @@ Given /^there are (\d+) ballots for a poll$/ do |num|
 end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
-  fill_in("ballot_choices_attributes_0_original", :with => value)
+  find("ul#choices li:last-child input").set(value)
 end
 
 Given /^I drag the choice to my \#(\d+) slot$/ do |num|

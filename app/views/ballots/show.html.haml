@@ -19,10 +19,8 @@
         = hidden_field_tag 'ballot_key', @ballot.key
         %ol#slots.sortable
           - @ballot.reload.choices.each do |choice|
-            %li.slot{"data-choice-slug" => choice.slug}
+            %li.slot{"data-choice-slug" => choice.slug, "data-choice-original" => choice.original}
               = choice.original
-              %input.choice{:type => :hidden, "data-choice-slug" => choice.slug, "data-choice-original" => choice.original}
-              %input.priority{:type => :hidden}
           %li.slot.active.empty -empty-
           - (2 - @ballot.choices.count).times do
             %li.slot.inactive.empty -empty-
