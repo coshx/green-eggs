@@ -40,3 +40,22 @@ Feature: Vote on poll
     Then I should see "Broccoli" within my ballot
     And I should see "Zucchini" within my ballot
     And I should see "Brussel sprouts" within my ballot
+
+  @javascript
+  Scenario: Choose some existing choices and some new choices
+    Given there are 2 ballots for a poll
+    And the 1st voter voted for "Noe Valley, Lower Haight, Outer Richmond"
+    And I am the 2nd voter
+    When I am on my ballot page
+    And I drag "Lower Haight" to my #1 slot
+    And I create the choice "Mission"
+    And I drag the choice to my #2 slot
+    And I create the choice "SOMA"
+    And I drag the choice to my #3 slot
+    And I drag "Noe Valley" to my #4 slot
+    When I press "Cast your vote"
+    And I follow "Return to My Ballot"
+    Then I should see "Lower Haight" within my ballot
+    And I should see "Mission" within my ballot
+    And I should see "SOMA" within my ballot
+    And I should see "Noe Valley" within my ballot
