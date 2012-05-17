@@ -2,8 +2,10 @@ module BallotsHelper
 
   def existing_choices_not_on_ballot(poll, current_ballot)
     choices = {}
-    poll.ballots.each do |ballot|
-      ballot.choices.each do |choice|
+    sets_of_choices = poll.ballots.clone
+    sets_of_choices << poll
+    sets_of_choices.each do |set|
+      set.choices.each do |choice|
         if current_ballot.choices.select {|c| c.slug == choice.slug}.empty? && choice.original.present?
           choices[choice.slug] = choice.original if choice.original.present?
         end

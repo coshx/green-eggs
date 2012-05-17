@@ -8,11 +8,15 @@ class Poll
   key :name
 
   before_create :generate_owner_key
+  after_update :destroy_blank_choices
+  after_update :save_choices
   validate :check_for_collision, :on => :create
   validates_presence_of :name
   validates_presence_of :owner_email
 
   embeds_many :ballots
+  embeds_many :choices
+  accepts_nested_attributes_for :choices
 
   set_callback(:create, :after) do |poll|
     OwnerMailer.send_admin_link(poll).deliver
@@ -113,4 +117,11 @@ class Poll
     end
   end
 
+  def destroy_blank_choices
+    self.choices.where(:original => "").destroy_all
+  end
+
+  def save_choices
+    self.choices.each {|c| c.save}
+  end
 end

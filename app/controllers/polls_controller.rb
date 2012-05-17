@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy]
+  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices]
   before_filter :load_poll_and_ballot, :only => [:show]
 
   # GET /polls
@@ -35,7 +35,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       format.html do
         if @poll.update_attributes(params[:poll])
-          redirect_to @poll, notice: 'Poll was successfully updated.'
+          redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key), notice: 'Poll was successfully updated.'
         else
           render action: "edit"
         end
@@ -52,6 +52,11 @@ class PollsController < ApplicationController
         render :json => { invitation_key: @poll.invitation_key }
       end
     end
+  end
+
+  # GET /:poll_id/admin/choices
+  def choices
+    @poll.choices.build
   end
 
   # DELETE /polls/1

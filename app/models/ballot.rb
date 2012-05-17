@@ -37,7 +37,7 @@ class Ballot
   private
 
   def destroy_blank_choices
-     self.choices.where(:original => "").destroy_all
+    self.choices.where(:original => "").destroy_all
   end
 
   def notify_firehose

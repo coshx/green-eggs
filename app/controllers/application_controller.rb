@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_admin_key_and_load_poll
-    @poll = Poll.find(params[:poll_id])
+    @poll = Poll.find(params[:poll_id] || params[:id])
     render :file => File.join(Rails.root, "public", "404"), :status => 404 if @poll.owner_key != params[:owner_key]
   end
 

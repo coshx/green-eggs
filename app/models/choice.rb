@@ -9,6 +9,7 @@ class Choice
   before_save :create_slug
 
   embedded_in :ballot
+  embedded_in :poll
 
   private
 
