@@ -2,10 +2,15 @@ window.GreenEggs ||=  {}
 
 jQuery(document).ready ->
   GreenEggs.addChoice = ->
-    choice = jQuery("<li><input type='text' class='choice'></li>")
+    choice = jQuery("<li class='choice'><input type='text'></li>")
     choice.appendTo "ul#choices"
     GreenEggs.setDraggable(choice)
     jQuery("ul#choices input[type='text']").last().focus()
+
+  GreenEggs.addSlot = ->
+    newSlot = $("<li class='slot inactive empty'>-empty-</li>")
+    newSlot.appendTo("ol#slots")
+    GreenEggs.setSlotDroppable(newSlot)
 
   jQuery("ol.sortable").sortable()
 
@@ -34,6 +39,8 @@ jQuery(document).ready ->
       choice.addClass("choice")
       choice.appendTo(choicesList)
       GreenEggs.setDraggable(choice)
+      if $("ol.slots").length < 3
+        GreenEggs.addSlot()
   )
 
   jQuery("ul#choices input[type='text']").live "keypress", (e) ->
@@ -58,15 +65,14 @@ GreenEggs.setSlotDroppable = (selector) ->
       slot.html(choice.html())
       if choice.find("input").length > 0
          slot.attr("data-choice-original", choice.find("input").val())
+         slot.find("input").val(choice.find("input").val())
       else
          slot.attr("data-choice-original", choice.attr("data-choice-original"))
       choice.remove()
       slot.removeClass("empty")
       GreenEggs.setDraggable(slot)
       if $("ol#slots li.empty").length == 0
-        newSlot = $("<li class='slot inactive empty'>-empty-</li>")
-        newSlot.appendTo("ol#slots")
-        GreenEggs.setSlotDroppable(newSlot)
+        GreenEggs.addSlot()
       if $("#choices input:text[value='']").length == 0
         GreenEggs.addChoice()
       false

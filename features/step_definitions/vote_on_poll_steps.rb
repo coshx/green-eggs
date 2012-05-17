@@ -12,6 +12,25 @@ end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
   find("ul#choices li:last-child input").set(value)
+  step %{there should be a choice "#{value}" within the choices column}
+end
+
+Given /^there should be a choice "([^"]*)"$/ do |value|
+  # TODO find existing choices, too
+  choices = all("li")
+  choices.select {|c| c.all("input").present? && c.find("input").value == value}.count.should == 1
+end
+
+Then /^there should not be a choice "([^"]*)"$/ do |value|
+  # TODO find existing choices, too
+  choices = all("li")
+  choices.select {|c| c.all("input").present? && c.find("input").value == value}.count.should == 0
+end
+
+When /^I drag "([^"]*)" from my ballot to the choices column$/ do |value|
+  choices = all("ol#slots li")
+  choice = choices.select {|c| c.all("input").present? && c.find("input").value == value}[0]
+  choice.drag_to(page.find("ul#choices"))
 end
 
 Given /^I drag the choice to my \#(\d+) slot$/ do |num|
@@ -52,4 +71,21 @@ end
 
 Given /^I am the (\d+)(?:rd|st|nd|th) voter$/ do |ord|
   @ballot = @poll.ballots[ord.to_i-1]
+end
+
+Then /^there should be only a blank choice$/ do
+  choices = all(:xpath, "//ul[@id='choices']/li")
+  choices.count.should == 1
+  choice = choices.first
+  choice.find("input").value.should == ""
+end
+
+Then /^there should be (\d+) empty slot(?:s|)$/ do |num|
+  slots = all(:xpath, "//ol[@id='slots']/li[contains(@class, 'empty')]")
+  slots.count.should == num.to_i
+end
+
+Then /^there should be (\d+) non\-empty slot(?:s|)$/ do |num|
+  slots = all(:xpath, "//ol[@id='slots']/li[not(contains(@class, 'empty'))]")
+  slots.count.should == num.to_i
 end
