@@ -95,3 +95,5 @@ Feature: Vote on poll
     When I drag "90 Minute" from my ballot to the choices column
     Then there should be a choice "90 Minute" within the choices column
     And there should not be a choice "90 Minute" within my ballot
+    And there should be 3 empty slots within my ballot
+    And there should be 0 non-empty slots within my ballot

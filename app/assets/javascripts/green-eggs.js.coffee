@@ -48,6 +48,9 @@ jQuery(document).ready ->
       GreenEggs.addChoice()
       false
 
+  $(document).on "keyup", "li input[type='text']", (e) ->
+    $(this).attr("value", $(this).val())
+
   jQuery("input[value='Cast your vote']").bind "click", ->
     GreenEggs.prepareBallotForm()
     $("form.ballot").submit()

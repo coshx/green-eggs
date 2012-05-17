@@ -17,19 +17,16 @@ end
 
 Given /^there should be a choice "([^"]*)"$/ do |value|
   # TODO find existing choices, too
-  choices = all("li")
-  choices.select {|c| c.all("input").present? && c.find("input").value == value}.count.should == 1
+  all("li input[value='#{value}']").count.should == 1
 end
 
 Then /^there should not be a choice "([^"]*)"$/ do |value|
   # TODO find existing choices, too
-  choices = all("li")
-  choices.select {|c| c.all("input").present? && c.find("input").value == value}.count.should == 0
+  all("li input[value='#{value}']").count.should == 0
 end
 
 When /^I drag "([^"]*)" from my ballot to the choices column$/ do |value|
-  choices = all("ol#slots li")
-  choice = choices.select {|c| c.all("input").present? && c.find("input").value == value}[0]
+  choice = find(:xpath, "//ol[@id='slots']/li[input[@value='#{value}']]")
   choice.drag_to(page.find("ul#choices"))
 end
 
