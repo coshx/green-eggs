@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     @poll = Poll.find(params[:poll_id])
     if @poll.invitation_key && @poll.invitation_key == params[:ballot_key]
       @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
+      redirect_to vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
     else
       @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
       render :file => File.join(Rails.root, "public", "404"), :status => 404 if !@ballot.present?
