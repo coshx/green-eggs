@@ -13,7 +13,7 @@ gem 'formtastic'
 gem 'ruby_flipper'
 
 # real-time updating
-gem 'firehose', :git => 'git://github.com/rahearn/firehose.git', :branch => 'topic/rails-engine'
+gem 'firehose'
 
 # Gems used only for assets and not required
 # in production environments by default.

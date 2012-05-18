@@ -1,17 +1,3 @@
-GIT
-  remote: git://github.com/rahearn/firehose.git
-  revision: 0362449965bdcf1527b9cd142b1881f35df5b1ff
-  branch: topic/rails-engine
-  specs:
-    firehose (0.1.0)
-      em-hiredis
-      em-http-request (~> 1.0.0)
-      eventmachine (>= 1.0.0.beta)
-      faraday
-      thin
-      thor
-      websocket-rack
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -107,6 +93,14 @@ GEM
     faraday (0.8.0)
       multipart-post (~> 1.1)
     ffi (1.0.11)
+    firehose (0.1.1)
+      em-hiredis
+      em-http-request (~> 1.0.0)
+      eventmachine (>= 1.0.0.beta)
+      faraday
+      thin
+      thor
+      websocket-rack
     formtastic (2.2.0)
       actionpack (>= 3.0)
     gherkin (2.9.3)
@@ -281,7 +275,7 @@ DEPENDENCIES
   database_cleaner
   email_spec
   factory_girl
-  firehose!
+  firehose
   formtastic
   guard
   guard-bundler
