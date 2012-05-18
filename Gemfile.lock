@@ -223,6 +223,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.9.0)
+    ruby_flipper (0.0.3)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.8)
@@ -301,6 +302,7 @@ DEPENDENCIES
   rails (~> 3.2.3)
   rspec
   rspec-rails
+  ruby_flipper
   sass-rails
   therubyracer
   uglifier

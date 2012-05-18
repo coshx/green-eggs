@@ -1,5 +1,6 @@
-:javascript
-  poll_uri = '#{FirehoseServer.uri}/polls/#{@poll.id}';
+- feature_active? :real_time do
+  :javascript
+    poll_uri = '#{FirehoseServer.uri}/polls/#{@poll.id}';
 
 %p#notice= notice
 

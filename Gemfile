@@ -10,6 +10,7 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
+gem 'ruby_flipper'
 
 # real-time updating
 gem 'firehose', :git => 'git://github.com/rahearn/firehose.git', :branch => 'topic/rails-engine'
