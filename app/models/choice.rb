@@ -11,8 +11,6 @@ class Choice
   embedded_in :ballot
   embedded_in :poll
 
-  private
-
   def create_slug
     if self.original
       self.slug = self.original.downcase.gsub(/[^a-z0-9]+/, '')

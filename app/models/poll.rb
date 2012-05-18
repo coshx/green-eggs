@@ -9,7 +9,7 @@ class Poll
 
   before_create :generate_owner_key
   after_update :destroy_blank_choices
-  after_update :save_choices
+  before_save :create_choice_slugs
   validate :check_for_collision, :on => :create
   validates_presence_of :name
   validates_presence_of :owner_email
@@ -121,7 +121,7 @@ class Poll
     self.choices.where(:original => "").destroy_all
   end
 
-  def save_choices
-    self.choices.each {|c| c.save}
+  def create_choice_slugs
+    self.choices.each {|c| c.create_slug}
   end
 end

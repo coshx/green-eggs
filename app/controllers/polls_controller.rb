@@ -56,7 +56,6 @@ class PollsController < ApplicationController
 
   # GET /:poll_id/admin/choices
   def choices
-    @poll.choices.build
   end
 
   # DELETE /polls/1
