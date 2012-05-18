@@ -65,7 +65,7 @@ class Poll
         choices_with_fewest_votes_overall = overall_tallies.select {|k,v| v == fewest_votes_overall}
         choices_with_fewest_votes_overall.each {|c| eliminated_slugs[c[0]] = true}
         if choices_with_fewest_votes_overall.count == 1
-          log += "#{choices_with_fewest_votes_overall.first.key} has fewest votes overall (#{fewest_votes_overall}), eliminated\n"
+          log += "#{choices_with_fewest_votes_overall.first[0]} has fewest votes overall (#{fewest_votes_overall}), eliminated\n"
         else
           log += "#{choices_with_fewest_votes_overall.keys.join(",")} tie for fewest votes overall (#{fewest_votes_overall}), eliminated\n"
         end
