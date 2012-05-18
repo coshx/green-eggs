@@ -7,7 +7,7 @@
       = @poll.name
 
   #container
-    #choices
+    #choices{"data-allow-user-choices" => @poll.allow_user_choices.to_s}
       %form{:action => "#"}
         %ul#choices
           - existing_choices_not_on_ballot(@poll, @ballot).each do |slug, original|

@@ -5,6 +5,7 @@ class Poll
   field :owner_email, :type => String
   field :owner_key, :type => String
   field :invitation_key, :type => String
+  field :allow_user_choices, :type => Boolean, :default => true
   key :name
 
   before_create :generate_owner_key

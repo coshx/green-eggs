@@ -2,6 +2,7 @@ window.GreenEggs ||=  {}
 
 jQuery(document).ready ->
   GreenEggs.addChoice = ->
+    return false unless $("div#choices").attr("data-allow-user-choices") == "true"
     choice = jQuery("<li class='choice'><input type='text'></li>")
     choice.appendTo "ul#choices"
     GreenEggs.setDraggable(choice)
@@ -27,11 +28,11 @@ jQuery(document).ready ->
   GreenEggs.setSlotDroppable("div#ballot li.slot")
 
   GreenEggs.setDraggable("ol#slots li")
-  $("ul#choices").droppable (
+  $("div#container").droppable (
     accept: "li.slot:not(.empty)",
     drop: (event, ui) ->
       return false if !$(ui.draggable).hasClass("ui-draggable")
-      choicesList = $(this)
+      choicesList = $("ul#choices")
       choice = $(ui.draggable)
       choice.removeClass("slot")
       choice.attr("style", "")

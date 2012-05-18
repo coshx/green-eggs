@@ -4,13 +4,9 @@ Feature: Admin pre-seeds choices
   So voters don't have to think of their own
 
   @javascript
-  Scenario: Create poll and seed choices
-    Given I am on the index page
-    And I follow "Create a new poll"
-    And I enter "Where should we go for drinks?" for "poll_name"
-    And I enter "wolfie@example.com" for "poll_owner_email"
-    And I press "Save"
-    Then I should see "Poll was successfully created"
+  Scenario: Seed choices for my poll
+    Given I have created a poll
+    And I am on the poll admin page
     When I follow "Pre-seed choices"
     And I add the choice "Granny smith"
     And I add the choice "Macintosh"

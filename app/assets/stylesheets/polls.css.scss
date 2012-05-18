@@ -2,3 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+li#poll_allow_user_choices_input label {
+  width: auto ;
+}
+
+ul.no-bullets, ol.no-bullets {
+  list-style-type: none;
+}

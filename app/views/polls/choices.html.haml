@@ -9,4 +9,7 @@
         = form.semantic_fields_for :choices do |choice|
           = choice.input :original, :label => false
 
+      %ul.no-bullets
+        = form.input :allow_user_choices, :label => "Allow users to create their own choices", :as => :boolean
+
     = submit_tag "Save"
