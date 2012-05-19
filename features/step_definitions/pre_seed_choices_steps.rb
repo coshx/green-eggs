@@ -1,4 +1,5 @@
 When /^I add the choice "([^"]*)"$/ do |choice|
+ page.should have_css("li") # fix js race condition
  num = all("li").count
  fill_in("poll_choices_attributes_#{num-1}_original", :with => choice)
  # simulate the voter pressing the "Enter" key
