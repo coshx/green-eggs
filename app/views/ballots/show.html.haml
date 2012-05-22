@@ -14,6 +14,7 @@
         %script{:type => "text/javascript"}
           $(function() {
           GreenEggs.choicesController.set(content, #{@choices.to_json.html_safe});
+          GreenEggs.choicesController.addChoice();
           });
 
     #ballot
