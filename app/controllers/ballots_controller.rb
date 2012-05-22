@@ -1,4 +1,5 @@
 class BallotsController < ApplicationController
+  include BallotsHelper
   before_filter :load_poll_and_ballot, :only => [:show, :edit, :update]
   before_filter :check_admin_key_and_load_poll, :only => [:new, :create]
 
@@ -9,6 +10,7 @@ class BallotsController < ApplicationController
 
   # GET /ballots/1
   def show
+    @choices = existing_choices_not_on_ballot(@poll, @ballot)
   end
 
   # GET /ballots/new

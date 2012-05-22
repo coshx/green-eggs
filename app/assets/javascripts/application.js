@@ -9,4 +9,6 @@
 //= require jquery-ui
 //= require jquery-ui-plugins
 //= require firehose
+//= require ember
+//= require ember/green_eggs
 //= require_tree .

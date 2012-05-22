@@ -9,9 +9,12 @@
   #container
     #choices{"data-allow-user-choices" => @poll.allow_user_choices.to_s}
       %form{:action => "#"}
-        %ul#choices
-          - existing_choices_not_on_ballot(@poll, @ballot).each do |slug, original|
-            %li.choice{"data-choice-slug" => slug, "data-choice-original" => original}= original
+        %script{:type => "text/x-handlebars"}
+          {{ view GreenEggs.ListChoicesView }}
+        %script{:type => "text/javascript"}
+          $(function() {
+          GreenEggs.choicesController.set(content, #{@choices.to_json.html_safe});
+          });
 
     #ballot
       = semantic_form_for @ballot, :url => update_ballot_path do |form|
