@@ -11,23 +11,14 @@
       %form{:action => "#"}
         %script{:type => "text/x-handlebars"}
           {{ view GreenEggs.ListChoicesView }}
-        %script{:type => "text/javascript"}
-          $(function() {
-          GreenEggs.choicesController.set(content, #{@choices.to_json.html_safe});
-          GreenEggs.choicesController.addChoice();
-          });
 
     #ballot
       = semantic_form_for @ballot, :url => update_ballot_path do |form|
         = hidden_field_tag 'poll_id', @poll.id
         = hidden_field_tag 'ballot_key', @ballot.key
-        %ol#slots.sortable
-          - @ballot.reload.choices.each do |choice|
-            %li.slot{"data-choice-slug" => choice.slug, "data-choice-original" => choice.original}
-              = choice.original
-          %li.slot.active.empty -empty-
-          - (2 - @ballot.choices.count).times do
-            %li.slot.inactive.empty -empty-
+        %script{:type => "text/x-handlebars"}
+          {{ view GreenEggs.ListSlotsView }}
+        %script{:type => "text/javascript"}
   %div
     %p
       Vote for as many choices as you want, in order of preference
@@ -42,3 +33,9 @@
 
 %p
   = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
+
+%script{:type => "text/javascript"}
+  $(function() {
+  GreenEggs.choicesController.loadAll(#{@choices.to_json.html_safe});
+  GreenEggs.slotsController.loadAll(#{@ballot.choices.to_json.html_safe});
+  });
