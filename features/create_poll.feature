@@ -8,6 +8,7 @@ Feature: User creates poll
     And I follow "Create a new poll"
     And I enter "Which games for casino night?" for "poll_name"
     And I enter "dixie@example.com" for "poll_owner_email"
+    And I enter "A poll to determine the list of games for casino night" for "poll_description"
     And I press "Save"
     Then I should see "Poll was successfully created"
     And "dixie@example.com" should receive an email with an admin link

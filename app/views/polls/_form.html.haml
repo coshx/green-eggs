@@ -11,6 +11,11 @@
     = f.text_field :name
   .field
     = f.label 'Your email address'
-    = f.text_field :owner_email
+    = f.text_field :owner_email 
+  %p
+    Description for the poll:
+  .fields
+    = f.text_area :description, :size => "50x5"
+
   .actions
     = f.submit 'Save'

@@ -3,6 +3,7 @@ class Ballot
   include Mongoid::Timestamps
 
   field :email, :type => String
+  field :invitationMessage, :type => String
   field :cast, :type => Boolean, :default => false
   field :key, :type => String
   index :key

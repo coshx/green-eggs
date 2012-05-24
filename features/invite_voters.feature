@@ -8,9 +8,9 @@ Feature: Poll admin invites voters
     And I am on the poll admin page
     And I follow "Invite voters"
     And I enter "diamond@example.com" for "emails"
-    And I enter "Sample description" for "description"
+    And I enter "Please vote for casino games!" for "invitationMsg"
     And I press "Send invites"
     Then I should see "Successfully invited diamond@example.com"
-    And "diamond@example.com" should receive an email with a ballot link and the description
+    And "diamond@example.com" should receive an email with a ballot link, poll description, and the invitation message
     When I follow the ballot link
     Then I should see "Voting on: What to order for Friday lunch?"
