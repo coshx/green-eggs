@@ -1,10 +1,15 @@
 Hi there,
 
-<%= @ballot.poll.owner_email %> has invited you to vote on <%= @ballot.poll.name %>
+<%= @poll.owner_email %> has invited you to vote on <%= @poll.name %>
+
+Description of the poll:
+<%= @poll.description %>
 
 Here's the custom voting link for your ballot:
 
-<%= vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_key => @ballot.key, :only_path => false) %>
+<%= vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key, :only_path => false) %>
+
+
 
 Please keep it a secret!
 
