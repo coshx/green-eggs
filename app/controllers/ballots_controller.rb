@@ -24,7 +24,7 @@ class BallotsController < ApplicationController
     emails = params[:emails].split(/\s*,\s*/).reject { |s| s.strip.empty? }.uniq
     invitationMsg = params[:invitationMsg]
     emails.each do |e|
-      @poll.ballots.create(email: e, invitationmessage: invitationMsg)
+      @poll.ballots.create(email: e, invitationMessage: invitationMsg)
     end
     redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), :notice => "Successfully invited #{emails.join(",")}"
   end
