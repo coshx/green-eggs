@@ -33,8 +33,8 @@
 %p
   = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
 
-%script{:type => "text/javascript"}
+:javascript
   $(function() {
-  GreenEggs.choicesController.loadAll(#{@choices.to_json.html_safe});
-  GreenEggs.slotsController.loadAll(#{@ballot.choices.to_json.html_safe});
+  GreenEggs.choicesController.loadAll(#{@choices.to_json});
+  GreenEggs.slotsController.loadAll(#{@ballot.choices.to_json});
   });

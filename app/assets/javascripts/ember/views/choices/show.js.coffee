@@ -3,12 +3,10 @@ GreenEggs.ShowChoiceView = Ember.View.extend(
   classNames: ["choice"]
   tagName: "li"
 
-  eventManager: Ember.Object.create(
-    keyPress: (event, view) ->
-      if event.target is $("ul#choices input[type='text']").last()[0] and event.keyCode is 13
-        GreenEggs.choicesController.addChoice()
-        false
-  )
+  keyPress: (event, view) ->
+    if event.target is $("ul#choices input[type='text']").last()[0] and event.keyCode is 13
+      GreenEggs.choicesController.addChoice()
+      false
 
   didInsertElement: ->
     @_super()

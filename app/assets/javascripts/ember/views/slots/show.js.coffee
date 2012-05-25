@@ -3,4 +3,7 @@ GreenEggs.ShowSlotView = Ember.View.extend(
   classNames: ["slot"]
   tagName: "li"
 
+  didInsertElement: ->
+    @_super()
+    @get("parentView").sort()
 )
