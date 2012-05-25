@@ -27,7 +27,8 @@
       Tip: you can sort your choices by dragging and dropping the rectangles
 
     .actions
-      = submit_tag 'Cast your vote'
+      %script{:type => "text/x-handlebars"}
+        <button {{action "vote" on="click" target="GreenEggs.slotsController"}}>Cast your vote</button>
       (you can return to this page to change your vote for as long as this poll is open)
 
 %p
@@ -37,4 +38,6 @@
   $(function() {
   GreenEggs.choicesController.loadAll(#{@choices.to_json});
   GreenEggs.slotsController.loadAll(#{@ballot.choices.to_json});
+  GreenEggs.slotsController.pollId = "#{@poll.id}";
+  GreenEggs.slotsController.ballotKey = "#{@ballot.key}";
   });
