@@ -11,7 +11,7 @@ Given /^there are (\d+) ballots for a poll$/ do |num|
 end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
-  find("ul#choices li:last-child input").set(value)
+  find("ul.choices li:last-child input").set(value)
   step %{there should be a choice "#{value}" within the choices column}
 end
 
@@ -26,16 +26,16 @@ Then /^there should not be a choice "([^"]*)"$/ do |value|
 end
 
 When /^I drag "([^"]*)" from my ballot to the choices column$/ do |value|
-  choice = find(:xpath, "//ol[@id='slots']/li[input[@value='#{value}']]")
-  choice.drag_to(page.find("ul#choices"))
+  choice = find(:xpath, "//ol[contains(@class, 'slots')/li[input[@value='#{value}']]")
+  choice.drag_to(page.find("ul.choices"))
 end
 
 Given /^I drag the choice to my \#(\d+) slot$/ do |num|
-  page.find("ul#choices li:last-child").drag_to(page.find("ol#slots > li[#{num}]"))
+  page.find("ul.choices li:last-child").drag_to(page.find("ol.slots > li[#{num}]"))
 end
 
 Given /^I drag "([^"]*)" to my \#(\d+) slot$/ do |choice, num|
-  page.find(:xpath, "//ul[@id='choices']//li[contains(., '#{choice}')]").drag_to(page.find("ol#slots > li[#{num}]"))
+  page.find(:xpath, "//ul[contains(@class, 'choices')]//li[contains(., '#{choice}')]").drag_to(page.find("ol#slots > li[#{num}]"))
 end
 
 Given /^the (\d+)(?:rd|st|nd|th) voter votes for "([^"]*)"$/ do |ord, choices|
@@ -71,18 +71,18 @@ Given /^I am the (\d+)(?:rd|st|nd|th) voter$/ do |ord|
 end
 
 Then /^there should be only a blank choice$/ do
-  choices = all(:xpath, "//ul[@id='choices']/li")
+  choices = all(:xpath, "//ul[contains(@class, 'choices')]/li")
   choices.count.should == 1
   choice = choices.first
   choice.find("input").value.should == ""
 end
 
 Then /^there should be (\d+) empty slot(?:s|)$/ do |num|
-  slots = all(:xpath, "//ol[@id='slots']/li[contains(@class, 'empty')]")
+  slots = all(:xpath, "//ol[contains(@class, 'slots')]//li[contains(., 'empty')]")
   slots.count.should == num.to_i
 end
 
 Then /^there should be (\d+) non\-empty slot(?:s|)$/ do |num|
-  slots = all(:xpath, "//ol[@id='slots']/li[not(contains(@class, 'empty'))]")
+  slots = all(:xpath, "//ol[contains(@class, 'slots')']/li[not(contains(@class, 'empty'))]")
   slots.count.should == num.to_i
 end
