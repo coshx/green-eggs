@@ -2,7 +2,6 @@ GreenEggs.ShowChoiceView = Ember.View.extend(
   templateName: "ember/templates/choices/show"
   classNames: ["choice"]
   tagName: "li"
-  attributeBindings: ['value']
 
   keyPress: (event, view) ->
     if event.target is $("ul.choices input[type='text']").last()[0] and event.keyCode is 13

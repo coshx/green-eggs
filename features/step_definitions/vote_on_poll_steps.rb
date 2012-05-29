@@ -12,12 +12,12 @@ end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
   all("ul.choices li").last.find("input").set(value)
-  step %{I wait for 5 minutes}
   step %{there should be a choice "#{value}" within the choices column}
 end
 
 Given /^there should be a choice "([^"]*)"$/ do |value|
   # TODO find existing choices, too
+  binding.pry
   all("li input[value='#{value}']").count.should == 1
 end
 
