@@ -11,7 +11,8 @@ Given /^there are (\d+) ballots for a poll$/ do |num|
 end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
-  find("ul.choices li:last-child input").set(value)
+  all("ul.choices li").last.find("input").set(value)
+  step %{I wait for 5 minutes}
   step %{there should be a choice "#{value}" within the choices column}
 end
 
@@ -83,6 +84,6 @@ Then /^there should be (\d+) empty slot(?:s|)$/ do |num|
 end
 
 Then /^there should be (\d+) non\-empty slot(?:s|)$/ do |num|
-  slots = all(:xpath, "//ol[contains(@class, 'slots')']/li[not(contains(@class, 'empty'))]")
+  slots = all(:xpath, "//ol[contains(@class, 'slots')]//li[not(contains(., 'empty'))]")
   slots.count.should == num.to_i
 end
