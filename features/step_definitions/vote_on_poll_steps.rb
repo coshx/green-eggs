@@ -94,4 +94,5 @@ end
 When /^I cast my vote$/ do
   step %{I press "Cast your vote"}
   wait_until { URI.parse(current_url).path == path_to("the poll results") } 
+  step %{I should see "Return to My Ballot"}
 end
