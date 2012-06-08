@@ -33,8 +33,11 @@ class BallotsController < ApplicationController
 
   # PUT /ballots/1
   def update
-    if params[:choices]
+    if params[:voting] == "true"
       @ballot.choices.delete_all
+    end
+
+    if params[:choices]
       params[:choices].each_with_index do |original, index|
         @ballot.choices.create(:original => original, :priority => index)
       end

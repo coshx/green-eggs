@@ -28,17 +28,17 @@ end
 When /^(?:|I )check "([^"]*)"$/ do |checkbox|
   check(checkbox)
 end
+
 When /^(?:|I )uncheck "([^"]*)"$/ do |checkbox|
   uncheck(checkbox)
 end
 
-
 Then /^(?:|I )should see "([^"]*)"$/ do |text|
-  if page.respond_to? :should
-    page.should have_content(text)
-  else
-    assert page.has_content?(text)
-  end
+  page.should have_content(text)
+end
+
+Then /^(?:|I )should not see "([^"]*)"$/ do |text|
+  page.should_not have_content(text)
 end
 
 Then /^show me the page$/ do

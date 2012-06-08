@@ -32,9 +32,11 @@ GreenEggs.slotsController = Ember.ArrayController.create(
     )
     choices = (choice.original for choice in choices)
     postData = {}
+    # how can I make this come through as an empty array?
     postData.choices = choices
     postData.ballot_key = @ballotKey
     postData.poll_id = @pollId
+    postData.voting = true
     $.ajax(
       url: "/ballots/update"
       type: "POST"

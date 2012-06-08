@@ -97,3 +97,13 @@ Feature: Vote on poll
     And there should not be a choice "90 Minute" within my ballot
     And there should be 3 empty slots within my ballot
     And there should be 0 non-empty slots within my ballot
+    When I create the choice "Blind Pig"
+    And I drag the choice to my #1 slot
+    When I cast my vote
+    Then I should not see "90 Minute"
+    And I should see "Blind Pig"
+    And I follow "Return to My Ballot"
+    And there should be a choice "Blind Pig" within my ballot
+    When I drag "Blind Pig" from my ballot to the choices column
+    And I cast my vote
+    Then I should not see "Blind Pig"

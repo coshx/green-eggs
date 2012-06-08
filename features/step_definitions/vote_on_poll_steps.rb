@@ -1,3 +1,8 @@
+def find_choice(value)
+  choices = all("li").select {|c| (c.all("input").present? && c.find("input").value == value) || c.text.match(value)}
+  choices.first
+end
+
 Given /^I have a ballot for a poll$/ do
   @poll = FactoryGirl.create(:poll)
   @ballot = @poll.ballots.create
@@ -16,17 +21,15 @@ Given /^I create the choice "([^"]*)"$/ do |value|
 end
 
 Given /^there should be a choice "([^"]*)"$/ do |value|
-  # TODO find existing choices, too
-  all("li input").select {|c| c.value == value}.count.should == 1
+  find_choice(value).should be_present
 end
 
 Then /^there should not be a choice "([^"]*)"$/ do |value|
-  # TODO find existing choices, too
-  all("li input").select {|c| c.value == value}.count.should == 0
+  find_choice(value).should_not be_present
 end
 
 When /^I drag "([^"]*)" from my ballot to the choices column$/ do |value|
-  choice = all(:xpath, "//ol[contains(@class, 'slots')]//li").select {|c| c.find("input").value == value}.first
+  choice = find_choice(value)
   choice.drag_to(page.find("ul.choices"))
 end
 
@@ -35,7 +38,7 @@ Given /^I drag the choice to my \#(\d+) slot$/ do |num|
 end
 
 Given /^I drag "([^"]*)" to my \#(\d+) slot$/ do |choice, num|
-  page.find(:xpath, "//ul[contains(@class, 'choices')]//li[contains(., '#{choice}')]").drag_to(find(:xpath, "//ol[contains(@class, 'slots')]//li[#{num}]"))
+  find_choice(choice).drag_to(find(:xpath, "//ol[contains(@class, 'slots')]//li[#{num}]"))
 end
 
 Given /^the (\d+)(?:rd|st|nd|th) voter votes for "([^"]*)"$/ do |ord, choices|
