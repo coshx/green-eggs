@@ -28,7 +28,7 @@
 
     .actions
       %script{:type => "text/x-handlebars"}
-        <button {{action "vote" on="click" target="GreenEggs.slotsController"}}>Cast your vote</button>
+        {{ view GreenEggs.VoteButtonView }}
       (you can return to this page to change your vote for as long as this poll is open)
 
 %p
