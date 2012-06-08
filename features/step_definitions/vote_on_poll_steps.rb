@@ -16,6 +16,7 @@ Given /^there are (\d+) ballots for a poll$/ do |num|
 end
 
 Given /^I create the choice "([^"]*)"$/ do |value|
+  wait_until { all("ul.choices li").present? }
   all("ul.choices li").last.find("input").set(value)
   step %{there should be a choice "#{value}" within the choices column}
 end
