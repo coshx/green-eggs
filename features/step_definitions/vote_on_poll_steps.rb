@@ -45,7 +45,7 @@ Given /^the (\d+)(?:rd|st|nd|th) voter votes for "([^"]*)"$/ do |ord, choices|
     step %{I create the choice "#{choice}"}
     step %{I drag the choice to my ##{index+1} slot}
   end
-  step %{I press "Cast your vote"}
+  step %{I cast my vote}
 end
 
 Given /^the (\d+)(?:rd|st|nd|th) voter voted for "([^"]*)"$/ do |ord, choices|
@@ -85,4 +85,9 @@ end
 Then /^there should be (\d+) non\-empty slot(?:s|)$/ do |num|
   slots = all(:xpath, "//ol[contains(@class, 'slots')]//li[not(contains(., 'empty'))]")
   slots.count.should == num.to_i
+end
+
+When /^I cast my vote$/ do
+  step %{I press "Cast your vote"}
+  wait_until { URI.parse(current_url).path == path_to("the poll results") } 
 end

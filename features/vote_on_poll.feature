@@ -14,7 +14,7 @@ Feature: Vote on poll
     And I drag the choice to my #1 slot
     And there should be 2 empty slots within my ballot
     And there should be 1 non-empty slot within my ballot
-    And I press "Cast your vote"
+    And I cast my vote
     Then I should see "Results"
     And I should see "tuna fish"
     When I follow "Return to My Ballot"
@@ -44,7 +44,7 @@ Feature: Vote on poll
     Then there should be only a blank choice within the choices column
     And there should be 1 empty slot within my ballot
     And there should be 3 non-empty slot within my ballot
-    And I press "Cast your vote"
+    And I cast my vote
     And "Broccoli" should be the 1st borda result
     And "Zucchini" should be the 2nd borda result
     And "Brussel sprouts" should be the 3rd borda result
@@ -70,7 +70,7 @@ Feature: Vote on poll
     And I drag "Noe Valley" to my #4 slot
     And there should be 1 empty slot within my ballot
     And there should be 4 non-empty slot within my ballot
-    When I press "Cast your vote"
+    When I cast my vote
     And I follow "Return to My Ballot"
     Then I should see "Lower Haight" within my ballot
     And I should see "Mission" within my ballot
