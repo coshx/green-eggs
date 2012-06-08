@@ -15,7 +15,8 @@ GreenEggs.ShowSlotView = Ember.View.extend(
       accept: ".choice"
       drop: (event, ui) ->
         choiceView = ui.draggable
-        choice = GreenEggs.Choice.create(original: choiceView.find("input").val())
+        oldChoice = Ember.View.views[ui.draggable.attr("id")].get("bindingContext")
+        choice = GreenEggs.Choice.create(original: oldChoice.get("original"), slug: oldChoice.get("slug"))
         GreenEggs.choicesController.removeChoice(Ember.View.views[ui.draggable.attr("id")].get("bindingContext"))
         self.get("bindingContext").set("choice", choice)
         GreenEggs.slotsController.maybeAddSlot()

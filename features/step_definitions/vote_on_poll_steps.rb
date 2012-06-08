@@ -17,26 +17,25 @@ end
 
 Given /^there should be a choice "([^"]*)"$/ do |value|
   # TODO find existing choices, too
-  binding.pry
-  all("li input[value='#{value}']").count.should == 1
+  all("li input").select {|c| c.value == value}.count.should == 1
 end
 
 Then /^there should not be a choice "([^"]*)"$/ do |value|
   # TODO find existing choices, too
-  all("li input[value='#{value}']").count.should == 0
+  all("li input").select {|c| c.value == value}.count.should == 0
 end
 
 When /^I drag "([^"]*)" from my ballot to the choices column$/ do |value|
-  choice = find(:xpath, "//ol[contains(@class, 'slots')/li[input[@value='#{value}']]")
+  choice = all(:xpath, "//ol[contains(@class, 'slots')]//li").select {|c| c.find("input").value == value}.first
   choice.drag_to(page.find("ul.choices"))
 end
 
 Given /^I drag the choice to my \#(\d+) slot$/ do |num|
-  page.find("ul.choices li:last-child").drag_to(page.find("ol.slots > li[#{num}]"))
+  all("ul.choices li").last.drag_to(find(:xpath, "//ol[contains(@class, 'slots')]//li[#{num}]"))
 end
 
 Given /^I drag "([^"]*)" to my \#(\d+) slot$/ do |choice, num|
-  page.find(:xpath, "//ul[contains(@class, 'choices')]//li[contains(., '#{choice}')]").drag_to(page.find("ol#slots > li[#{num}]"))
+  page.find(:xpath, "//ul[contains(@class, 'choices')]//li[contains(., '#{choice}')]").drag_to(find(:xpath, "//ol[contains(@class, 'slots')]//li[#{num}]"))
 end
 
 Given /^the (\d+)(?:rd|st|nd|th) voter votes for "([^"]*)"$/ do |ord, choices|
