@@ -9,6 +9,10 @@ GreenEggs.slotsController = Ember.ArrayController.create(
   addSlot: ->
     @pushObject GreenEggs.Slot.create()
 
+  removeSlot: (slot) ->
+    @removeAt(@content.indexOf(slot))
+    @maybeAddSlot()
+
   contentDidChange: (->
     @_super()
     @maybeAddSlot()
