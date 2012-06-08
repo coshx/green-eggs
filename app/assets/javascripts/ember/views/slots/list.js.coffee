@@ -24,7 +24,7 @@ GreenEggs.ListSlotsView = Ember.View.extend(
           # can't actually remove slot until sorting is done
           toRemove = 1
       stop: (event, ui) ->
-        if toRemove = 1
+        if toRemove == 1
           slotView = ui.item
           slot = Ember.View.views[ui.item.attr("id")].get("bindingContext")
           slotView.remove()
