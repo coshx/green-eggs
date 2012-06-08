@@ -9,21 +9,15 @@
   #container
     #choices{"data-allow-user-choices" => @poll.allow_user_choices.to_s}
       %form{:action => "#"}
-        %ul#choices
-          - existing_choices_not_on_ballot(@poll, @ballot).each do |slug, original|
-            %li.choice{"data-choice-slug" => slug, "data-choice-original" => original}= original
+        %script{:type => "text/x-handlebars"}
+          {{ view GreenEggs.ListChoicesView }}
 
     #ballot
       = semantic_form_for @ballot, :url => update_ballot_path do |form|
         = hidden_field_tag 'poll_id', @poll.id
         = hidden_field_tag 'ballot_key', @ballot.key
-        %ol#slots.sortable
-          - @ballot.reload.choices.each do |choice|
-            %li.slot{"data-choice-slug" => choice.slug, "data-choice-original" => choice.original}
-              = choice.original
-          %li.slot.active.empty -empty-
-          - (2 - @ballot.choices.count).times do
-            %li.slot.inactive.empty -empty-
+        %script{:type => "text/x-handlebars"}
+          {{ view GreenEggs.ListSlotsView }}
   %div
     %p
       Vote for as many choices as you want, in order of preference
@@ -33,8 +27,17 @@
       Tip: you can sort your choices by dragging and dropping the rectangles
 
     .actions
-      = submit_tag 'Cast your vote'
+      %script{:type => "text/x-handlebars"}
+        <button {{action "vote" on="click" target="GreenEggs.slotsController"}}>Cast your vote</button>
       (you can return to this page to change your vote for as long as this poll is open)
 
 %p
   = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
+
+:javascript
+  $(function() {
+  GreenEggs.choicesController.loadAll(#{@choices.to_json});
+  GreenEggs.slotsController.loadAll(#{@ballot.choices.to_json});
+  GreenEggs.slotsController.pollId = "#{@poll.id}";
+  GreenEggs.slotsController.ballotKey = "#{@ballot.key}";
+  });

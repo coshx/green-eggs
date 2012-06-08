@@ -11,7 +11,7 @@ module BallotsHelper
         end
       end
     end
-    choices.to_a.shuffle
+    choices.map {|k,v| {:slug => k, :original => v}}.shuffle
   end
 
   def group_invitation_url(poll)

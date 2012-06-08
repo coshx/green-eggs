@@ -1,0 +1,5 @@
+{{#if choice.slug}}
+  {{choice.original}}
+{{else}}
+  {{view Ember.TextField valueBinding="choice.original"}}
+{{/if}}

@@ -11,6 +11,7 @@ gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
 gem 'ruby_flipper'
+gem 'ember-rails'
 
 # real-time updating
 gem 'firehose'
