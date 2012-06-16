@@ -13,6 +13,9 @@ gem 'formtastic'
 gem 'ruby_flipper'
 gem 'ember-rails'
 
+# generate polls from github issues
+gem "github_api"
+
 # real-time updating
 gem 'firehose'
 
@@ -49,4 +52,6 @@ end
 
 group :test do
   gem 'cucumber-rails'
+  gem 'vcr'
+  gem 'fakeweb'
 end

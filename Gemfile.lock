@@ -96,6 +96,7 @@ GEM
       multi_json (~> 1.0)
     factory_girl (3.2.0)
       activesupport (>= 3.0.0)
+    fakeweb (1.3.0)
     faraday (0.8.0)
       multipart-post (~> 1.1)
     ffi (1.0.11)
@@ -111,6 +112,12 @@ GEM
       actionpack (>= 3.0)
     gherkin (2.9.3)
       json (>= 1.4.6)
+    github_api (0.5.3)
+      faraday (~> 0.8.0)
+      hashie (~> 1.2.0)
+      multi_json (~> 1.3)
+      nokogiri (~> 1.5.2)
+      oauth2 (~> 0.7)
     guard (1.0.1)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
@@ -136,6 +143,7 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hashie (1.2.0)
     heroku (2.25.0)
       launchy (>= 0.3.2)
       netrc (~> 0.7.1)
@@ -144,6 +152,7 @@ GEM
     hike (1.2.1)
     hiredis (0.4.5)
     http_parser.rb (0.5.3)
+    httpauth (0.1)
     i18n (0.6.0)
     journey (1.0.3)
     jquery-rails (2.0.2)
@@ -175,6 +184,11 @@ GEM
     multipart-post (1.1.5)
     netrc (0.7.1)
     nokogiri (1.5.2)
+    oauth2 (0.7.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      multi_json (~> 1.0)
+      rack (~> 1.4)
     polyglot (0.3.3)
     pry (0.9.7.4)
       coderay (~> 0.9.8)
@@ -261,6 +275,7 @@ GEM
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
+    vcr (2.2.2)
     websocket-rack (0.4.0)
       em-websocket (~> 0.3.6)
       eventmachine (~> 1.0.0.beta.4)
@@ -282,8 +297,10 @@ DEPENDENCIES
   email_spec
   ember-rails
   factory_girl
+  fakeweb
   firehose
   formtastic
+  github_api
   guard
   guard-bundler
   guard-cucumber
@@ -307,3 +324,4 @@ DEPENDENCIES
   sass-rails
   therubyracer
   uglifier
+  vcr

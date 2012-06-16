@@ -49,4 +49,21 @@ Given /^I wait for (\d+) minutes$/ do |mins|
   sleep(mins.to_i * 60)
 end
 
+Then /^I should see a field "([^"]*)"$/ do |value|
+  all("input").find {|i| i.value == value}.should be_present
+end
 
+
+Then /^the "([^"]*)" checkbox(?: within (.*))? should be checked$/ do |label, parent|
+  with_scope(parent) do
+    field_checked = find_field(label)['checked']
+    field_checked.should be_true
+  end
+end
+
+Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label, parent|
+  with_scope(parent) do
+    field_checked = find_field(label)['checked']
+    field_checked.should be_false
+  end
+end

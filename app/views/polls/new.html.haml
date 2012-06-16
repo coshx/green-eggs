@@ -1,3 +1,6 @@
-%h1 New poll
+- if params[:from_github_issues]
+  %h1 New poll from GitHub Issues
+- else
+  %h1 New poll
 
 = render 'form'

@@ -5,6 +5,7 @@ class Choice
 
   field :original, :type => String
   field :slug, :type => String
+  field :link, :type => String
 
   before_save :create_slug
 

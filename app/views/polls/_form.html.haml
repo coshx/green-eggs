@@ -6,16 +6,22 @@
         - @poll.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label 'Poll name'
-    = f.text_field :name
+  - unless params[:from_github_issues]
+    .field
+      = f.label 'Poll name'
+      = f.text_field :name
   .field
     = f.label 'Your email address'
-    = f.text_field :owner_email 
-  %p
-    Description for the poll:
-  .fields
-    = f.text_area :description, :size => "50x5"
+    = f.text_field :owner_email
+  - if params[:from_github_issues]
+    .field
+      = label_tag 'Repository URL'
+      = text_field_tag :repository_url, nil, :size => "30"
+  - else
+    %p
+      Description for the poll:
+    .fields
+      = f.text_area :description, :size => "50x5"
 
   .actions
     = f.submit 'Save'

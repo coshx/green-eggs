@@ -104,6 +104,13 @@ class Poll
     self.invitation_key = SecureRandom.urlsafe_base64(4)
   end
 
+  def self.generate_unique_name(name)
+    return name if !self.where("_id" => name.identify).exists?
+    i = 0
+    i += 1 while self.where("_id" => (name+" #{i}").identify).exists?
+    name+" #{i}"
+  end
+
   private
 
   def generate_owner_key

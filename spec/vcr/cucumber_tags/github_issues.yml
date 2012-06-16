@@ -1,0 +1,88 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/coshx/green-eggs/issues
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      accept-encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      accept:
+      - ! '*/*'
+      user-agent:
+      - Ruby
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "c2VydmVy":
+      - !binary |-
+        bmdpbngvMS4wLjEz
+      !binary "ZGF0ZQ==":
+      - !binary |-
+        U2F0LCAxNiBKdW4gMjAxMiAwMDoxNDo0MSBHTVQ=
+      !binary "Y29udGVudC10eXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "dHJhbnNmZXItZW5jb2Rpbmc=":
+      - !binary |-
+        Y2h1bmtlZA==
+      !binary "Y29ubmVjdGlvbg==":
+      - !binary |-
+        Y2xvc2U=
+      !binary "c3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "eC1yYXRlbGltaXQtbGltaXQ=":
+      - !binary |-
+        NTAwMA==
+      !binary "dmFyeQ==":
+      - !binary |-
+        QWNjZXB0
+      !binary "ZXRhZw==":
+      - !binary |-
+        Ijk1OWI2N2ZjNGI3NmM4ZmIzYmQ2YmFjY2JmOTBlNWM3Ig==
+      !binary "bGFzdC1tb2RpZmllZA==":
+      - !binary |-
+        V2VkLCAxMyBKdW4gMjAxMiAxOTo1MTowMiBHTVQ=
+      !binary "eC1yYXRlbGltaXQtcmVtYWluaW5n":
+      - !binary |-
+        NDk3Mg==
+      !binary "Y2FjaGUtY29udHJvbA==":
+      - !binary |-
+        cHVibGljLCBtYXgtYWdlPTYw
+      !binary "Y29udGVudC1lbmNvZGluZw==":
+      - !binary |-
+        Z3ppcA==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        H4sIAAAAAAAAA+2WUW+bMBDHv4qFNPUlAWxCIEjT3ibtbQ972jpVNhxg1djM
+        Nm2jqt9955C0qbo1WqZtL3tBmDPn4+5+9+fLfVQr46C54j6q9KTUInKee4iq
+        yIygo0WkuADlouoLbjXKWLSkDGhao22yCpe996OrkoSPMu6k7ycR12ZILIzG
+        JbVx/V3SWQC9hK5zyewvaYH7yQI60XwIxx0ePHxFvw7wnPtImU5qtAnPpQcl
+        cHdn+Q333F7JBg2UtWKdFzRf5bloS8HrrIU2K8tiXbSbdIMv7Lc/D9VBjYfH
+        B2e7eOeNySmX75q3jx/MVmUMMb/mA5exBp9w58C7oyy8Ye/lwDtweHM47fh+
+        SVdpPOruVDJDRlxylIfw+flqU7DiYRENUoHzRmMe5xoK02wxPR/ILdeeeEME
+        EC4UhFszemk0V2pLpK7V1KCJNOBqK3cWYiwanLdTHZaO3PagyQdSWyxZ2Dsa
+        pWLyHrfBHR9GBQtyGX1UwB0QBwpqPLEHsvtusjUTUfIamt0zgWFWhC7LcMiF
+        sRLry9XFZXRpL0OzzWfM3RixlNJlWi6z9BMtqoxVefr5VJ5+0nTSuQlcssbX
+        R2zyKwvfcI0tfx81sm2vdt0xp27kvu6PH/R+UE9rzPY0NpiI14PEhhpAe+Qm
+        xQ6fBhEaer1AVg7OHrE5QuYFLEdxh4LTnLG0QI/YZ7LT8FhvL70KEPGmeVZK
+        LHeoloseFmeRHjhP2ZlJ35MuptDde8rD4keEd9dmfEF32aTrNaMl22S0ZWJT
+        8JXISwS8FW26LsLw+FW6T7n8l3TvcxAKzRjLS/YK2T9jhW0+0U3FaJVvfpOV
+        1Z9jZQ4yK6p8HYJ8YoU9sbI6l5UQ98wKzbKMvsbKIDVxvZlUQ7TxxzPSAeDU
+        0tcuDEwclUTgxSDOZ3L01xXzP08u+RWeRmtuJCrhLI6h6hawPRoygkGFQw00
+        FzcofgpFsNmSG4MCEBRtS2quyawIYS3tzuaCno1gez46Uk+ozQMZwLnwJxCf
+        YDetaPab7IaJ/Yd0bj9gDkH+UOcQ4/N0LsT9yC49yW5I/b5MIenWEbElgP9i
+        CjXmO8dDQ/PbCgAA
+    http_version: !binary |-
+      MS4x
+  recorded_at: Sat, 16 Jun 2012 00:14:46 GMT
+recorded_with: VCR 2.2.2
