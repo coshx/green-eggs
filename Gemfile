@@ -33,11 +33,17 @@ group :development, :test do
   # fancy debugger
   gem "pry", "~> 0.9.7"
   gem "pry-nav", "~> 0.0.4"
-  gem 'capybara'
+end
+
+group :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
   gem 'mongoid-rspec', :require => false
+  gem 'cucumber-rails'
+  gem 'vcr'
+  gem 'fakeweb'
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'capybara-webkit'
@@ -48,10 +54,4 @@ group :development, :test do
   gem 'guard-bundler'
   gem 'guard-migrate'
   gem 'guard-rake'
-end
-
-group :test do
-  gem 'cucumber-rails'
-  gem 'vcr'
-  gem 'fakeweb'
 end

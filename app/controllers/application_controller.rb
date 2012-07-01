@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_poll_and_ballot
-    @poll = Poll.find(params[:poll_id])
+    @poll = Poll.find(params[:poll_id] || params[:id])
     if @poll.invitation_key && @poll.invitation_key == params[:ballot_key]
       @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
       redirect_to vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
