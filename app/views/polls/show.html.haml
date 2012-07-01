@@ -12,8 +12,7 @@
   %b Poll name:
   = @poll.name
 
-%p
-  #{@poll.ballots.cast.count} ballots cast, with #{@poll.ballots.outstanding.count} outstanding
+%p= ballots_cast_message(@poll)
 
 %div#irv-results
 
