@@ -70,4 +70,26 @@ describe Ballot do
       subject.run_callbacks :update
     end
   end
+
+  describe "sending reminder emails" do
+    subject { FactoryGirl.build(:ballot, :poll => FactoryGirl.build_stubbed(:poll)) }
+
+    it "sends a reminder email when it has a valid email" do
+      subject.send_reminder_email
+      unread_emails_for(subject.email).count.should == 1
+    end
+
+    it "doesn't send a reminder email when it's an anonymous ballot" do
+      subject.email = "anonymous@greeneg.gs"
+      subject.send_reminder_email
+      unread_emails_for(subject.email).count.should == 0
+    end
+
+    it "doesn't send a reminder email when it's already been cast" do
+      subject.cast = true
+      subject.send_reminder_email
+      unread_emails_for(subject.email).count.should == 0
+    end
+
+  end
 end

@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices]
+  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices, :remind_voters]
   before_filter :load_poll_and_ballot, :only => [:show]
 
   # GET /polls
@@ -82,6 +82,19 @@ class PollsController < ApplicationController
   # GET /github
   def from_gh_issues
     redirect_to new_poll_url(:from_github_issues => true)
+  end
+
+  # POST /:poll_id/admin/remind_voters
+  def remind_voters
+    if @poll.last_reminder_sent_at.present? && (Time.now - @poll.last_reminder_sent_at < 1.hour)
+      flash[:error] = "You can only send reminder emails every hour.  The last one was sent at #{@poll.last_reminder_sent_at}"
+    else
+      @poll.ballots.each {|b| b.send_reminder_email}
+      @poll.last_reminder_sent_at = Time.now
+      @poll.save
+      flash[:notice] = "Successfully sent reminder email(s)"
+    end
+    redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
   end
 
   private

@@ -19,7 +19,7 @@ class Ballot
   validates_uniqueness_of :key
 
   set_callback(:create, :after) do |ballot|
-    InviteMailer.invite_to_vote(ballot).deliver
+    InviteMailer.invite_to_vote(ballot).deliver if email_valid?
   end
 
   scope :outstanding, :where => {:cast => false}
@@ -32,7 +32,17 @@ class Ballot
   def sort_by_priority
     reordered_choices = self.choices.sort {|x,y| x.priority <=> y.priority }
     self.choices.clear
-    reordered_choices.each { |choice| self.choices.create(choice.attributes) } 
+    reordered_choices.each { |choice| self.choices.create(choice.attributes) }
+  end
+
+  def send_reminder_email
+    if !cast && email_valid?
+      ReminderMailer.send_reminder(self).deliver
+    end
+  end
+
+  def email_valid?
+    email.present? && !email.match(/@greeneg\.gs$/) && email.match(/.+\@.+/)
   end
 
   private

@@ -27,4 +27,6 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.include(EmailSpec::Helpers)
+  config.include(EmailSpec::Matchers)
 end

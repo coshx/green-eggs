@@ -7,6 +7,7 @@ class Poll
   field :owner_key, :type => String
   field :invitation_key, :type => String
   field :allow_user_choices, :type => Boolean, :default => true
+  field :last_reminder_sent_at, :type => DateTime
   key :name
 
   before_create :generate_owner_key

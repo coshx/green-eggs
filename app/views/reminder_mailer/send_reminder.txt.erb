@@ -1,0 +1,18 @@
+Hi again,
+
+<%= @poll.owner_email %> would like to remind you to vote on <%= @poll.name %>
+
+Invitation message from the poll creator:
+<%= @ballot.invitationMessage %>
+
+Description of the poll:
+<%= @poll.description %>
+
+In case you lost track of your unique voting link, here it is:
+
+<%= vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key, :only_path => false) %>
+
+
+Cheers,
+GreenEggs
+http://greeneg.gs

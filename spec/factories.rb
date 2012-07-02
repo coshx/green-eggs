@@ -1,5 +1,7 @@
 FactoryGirl.define do
 
+  sequence(:email) {|i| "test_user_#{i}@example.com"}
+
   factory :poll do
     name "What to order for Friday lunch?"
     owner_email "stewie@example.com"
@@ -7,7 +9,7 @@ FactoryGirl.define do
 
   factory :poll_with_ballot, :parent => :poll do
     after(:create) do |poll|
-      poll.ballots.create(:email => "dixie@example.com")
+      poll.ballots.create(:email => generate(:email) )
     end
   end
 
@@ -18,7 +20,7 @@ FactoryGirl.define do
   end
 
   factory :ballot do
-    email "sonia@example.com"
+    email { generate(:email) }
   end
 
   factory :choice do
