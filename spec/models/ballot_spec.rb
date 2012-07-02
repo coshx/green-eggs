@@ -75,6 +75,7 @@ describe Ballot do
     subject { FactoryGirl.build(:ballot, :poll => FactoryGirl.build_stubbed(:poll)) }
 
     it "sends a reminder email when it has a valid email" do
+      subject.send(:generate_key) # wtf?
       subject.send_reminder_email
       unread_emails_for(subject.email).count.should == 1
     end
