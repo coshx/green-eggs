@@ -39,7 +39,21 @@ describe BallotsController do
         num_ballots = group_poll.ballots.count
         get :show, :id => group_poll.id, :ballot_key => group_poll.invitation_key
         group_poll.reload.ballots.count.should == num_ballots + 1
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => group_poll.ballots.last.key)
+        assigns(:ballot).should == group_poll.ballots.last
+        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => assigns(:ballot).key)
+      end
+
+      it "should set a cookie and redirect to existing ballot later" do
+        num_ballots = group_poll.ballots.count
+        get :show, :id => group_poll.id, :ballot_key => group_poll.invitation_key
+        group_poll.reload.ballots.count.should == num_ballots + 1
+        new_ballot = assigns(:ballot)
+        new_ballot.should == group_poll.ballots.last
+        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
+        get :show, :id => group_poll.id, :ballot_key => group_poll.invitation_key
+        group_poll.reload.ballots.count.should == num_ballots + 1
+        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
+
       end
     end
   end

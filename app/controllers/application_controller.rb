@@ -15,7 +15,12 @@ class ApplicationController < ActionController::Base
   def load_poll_and_ballot
     @poll = Poll.find(params[:poll_id] || params[:id])
     if @poll.invitation_key && @poll.invitation_key == params[:ballot_key]
-      @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
+      if cookies["#{@poll.id}-ballot-key"].present?
+        @ballot = @poll.ballots.where(:key => cookies["#{@poll.id}-ballot-key"]).first
+      else
+        @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
+        cookies["#{@poll.id}-ballot-key"] = {:value => @ballot.key, :expires => 10.years.from_now}
+      end
       redirect_to vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
     else
       @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
