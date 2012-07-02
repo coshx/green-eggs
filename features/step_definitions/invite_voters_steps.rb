@@ -17,9 +17,8 @@ Then /^I follow the ballot link$/ do
 end
 
 Then /^I should see the group invitation link$/ do
-  key = @poll.reload.invitation_key
-  key.should_not be_nil
-  page.find_field("group_invitation_link").value.should match(key)
+  wait_until { @poll.reload.invitation_key.present? }
+  page.find_field("group_invitation_link").value.should match(@poll.invitation_key)
 end
 
 When /^I follow the group invitation link$/ do
