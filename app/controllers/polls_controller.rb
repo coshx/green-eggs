@@ -31,7 +31,7 @@ class PollsController < ApplicationController
       user = matched[0]
       repo = matched[1]
       github = Github.new(:user => user, :repo => repo)
-      issues = github.issues.list_repo # ignores closed issues by default
+      issues = github.issues.list_repo(user, repo) # ignores closed issues by default
       params["poll"]["name"] = Poll.generate_unique_name("What are the most important open issues for #{user}/#{repo} ?")
       params["poll"]["description"] = params[:repository_url]
       params["poll"]["allow_user_choices"] = false

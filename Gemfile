@@ -6,12 +6,12 @@ gem 'haml'
 gem 'haml-rails'
 gem 'heroku'
 gem 'json'
-gem 'mongoid'
+gem 'mongoid', '~> 2.4.11'
 gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
 gem 'ruby_flipper'
-gem 'ember-rails'
+gem 'ember-rails', '0.5.0'
 
 # generate polls from github issues
 gem "github_api"
@@ -31,13 +31,13 @@ gem 'jquery-rails'
 
 group :development, :test do
   # fancy debugger
-  gem "pry", "~> 0.9.7"
-  gem "pry-nav", "~> 0.0.4"
+  gem "pry"
+  gem "pry-nav"
+  gem 'rspec-rails'
 end
 
 group :test do
   gem 'rspec'
-  gem 'rspec-rails'
   gem 'factory_girl'
   gem 'mongoid-rspec', :require => false
   gem 'cucumber-rails'
