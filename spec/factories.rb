@@ -8,13 +8,13 @@ FactoryGirl.define do
   end
 
   factory :poll_with_ballot, :parent => :poll do
-    after(:create) do |poll|
-      poll.ballots.create(:email => generate(:email) )
+    after_create do |poll|
+      poll.ballots.create(:email => FactoryGirl.generate(:email))
     end
   end
 
   factory :poll_with_invitation_key, :parent => :poll do
-    before(:create) do |poll|
+    before_create do |poll|
       poll.generate_invitation_key
     end
   end
