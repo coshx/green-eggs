@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
   end
 
   def load_poll_and_ballot
-    @poll = Poll.find(params[:poll_id] || params[:id])
-    if @poll.invitation_key && @poll.invitation_key == params[:ballot_key]
+    @poll = Poll.first(:conditions => {:invitation_key => params[:poll_id]})
+    @poll ||= Poll.find(params[:poll_id] || params[:id])
+    if @poll.present? && params[:ballot_key].blank? && @poll.invitation_key.present?
       if cookies["#{@poll.id}-ballot-key"].present?
         @ballot = @poll.ballots.where(:key => cookies["#{@poll.id}-ballot-key"]).first
       else

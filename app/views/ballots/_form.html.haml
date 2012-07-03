@@ -9,7 +9,7 @@
 
   %p
     Enter the invitation message
-    
+
     .fields
       = text_area_tag 'invitationMsg', nil, :size => "50x5"
       = hidden_field_tag 'poll_id', @poll.id
@@ -21,5 +21,9 @@
     = check_box_tag 'group_invitation', '1', @poll.invitation_key
     = label_tag 'Enable Group Invitations'
   .fields
-    = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 72
+    = label_tag "group_invitation_link", "Group link"
+    = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64
+    %br
+    = label_tag "shortened_group_invitation_link", "Shortened group link"
+    = text_field_tag 'shortened_group_invitation_link', shortened_group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64
 

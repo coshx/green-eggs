@@ -8,9 +8,7 @@ $ =>
     owner_key = window.location.search.substr(11)
     poll_data = { poll_id: poll_id, use_invitation_key : checked, owner_key : owner_key }
     $.ajax "/polls/#{poll_id}.json", type: 'PUT', data: poll_data, success: (data)->
-      if data.invitation_key
-        invitation_link = "#{window.location.protocol}//#{window.location.host}/#{poll_id}/#{data.invitation_key}"
-      else
-        invitation_link = 'disabled'
-      $("#group_invitation_link").val(invitation_link)
+      $("#group_invitation_link").val(data.group_link)
       $("#group_invitation_link").prop('disabled', !checked)
+      $("#shortened_group_invitation_link").val(data.shortened_group_link)
+      $("#shortened_group_invitation_link").prop('disabled', !checked)

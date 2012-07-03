@@ -18,10 +18,29 @@ end
 
 Then /^I should see the group invitation link$/ do
   wait_until { @poll.reload.invitation_key.present? }
-  page.find_field("group_invitation_link").value.should match(@poll.invitation_key)
+  page.find_field("group_invitation_link").value.should match(@poll.id)
 end
 
 When /^I follow the group invitation link$/ do
-  link = page.find_field("group_invitation_link").value
-  visit link
+  @link = page.find_field("group_invitation_link").value
+  visit @link
+end
+
+When /^I follow the shortened group invitation link$/ do
+  @short_link = page.find_field("shortened_group_invitation_link").value
+  visit @short_link
+end
+
+
+Then /^I should see that the invitation link is disabled$/ do
+  wait_until { @poll.reload.invitation_key.blank? }
+  page.find_field("group_invitation_link").value.should match("disabled")
+end
+
+When /^go to the old group invitation link$/ do
+  visit @link
+end
+
+When /^go to the old shortened group invitation link$/ do
+  visit @link
 end

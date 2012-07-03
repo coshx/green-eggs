@@ -67,3 +67,7 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
     field_checked.should be_false
   end
 end
+
+When /^I confirm the dialog$/ do
+  page.driver.browser.switch_to.alert.accept
+end

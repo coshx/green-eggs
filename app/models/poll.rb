@@ -7,8 +7,10 @@ class Poll
   field :owner_key, :type => String
   field :invitation_key, :type => String
   field :allow_user_choices, :type => Boolean, :default => true
+  field :group_link_on, :type => Boolean, :default => false
   field :last_reminder_sent_at, :type => DateTime
   key :name
+  index :invitation_key
 
   before_create :generate_owner_key
   after_update :destroy_blank_choices
@@ -102,7 +104,11 @@ class Poll
   end
 
   def generate_invitation_key
-    self.invitation_key = SecureRandom.urlsafe_base64(4)
+    # if a collision, try again
+    begin
+      new_key = SecureRandom.urlsafe_base64(5)
+    end while Poll.first(:conditions => {:invitation_key => new_key})
+    self.invitation_key = new_key
   end
 
   def self.generate_unique_name(name)

@@ -15,5 +15,6 @@ GreenEggs::Application.routes.draw do
   get '/:poll_id/admin/choices' => 'polls#choices', :as => :poll_choices
   get '/github' => 'polls#from_gh_issues', :as => 'new_poll_from_gh_issues'
   post '/:id/admin/remind_voters' => 'polls#remind_voters', :as => :remind_voters
+  get '/:poll_id' => 'ballots#show', :as => :group_link
 
 end

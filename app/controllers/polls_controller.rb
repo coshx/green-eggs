@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices, :remind_voters]
   before_filter :load_poll_and_ballot, :only => [:show]
+  include BallotsHelper
 
   # GET /polls
   def index
@@ -64,7 +65,7 @@ class PollsController < ApplicationController
         end
 
         @poll.save!
-        render :json => { invitation_key: @poll.invitation_key }
+        render :json => { group_link: group_invitation_url(@poll), shortened_group_link: shortened_group_invitation_url(@poll) }
       end
     end
   end

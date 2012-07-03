@@ -16,10 +16,21 @@ module BallotsHelper
 
   def group_invitation_url(poll)
     if @poll.invitation_key
-      vote_on_ballot_url(@poll.id, @poll.invitation_key)
+      group_link_url(@poll.id)
     else
       'disabled'
     end
   end
 
+  def shortened_group_invitation_url(poll)
+    if @poll.invitation_key
+      if Rails.env.production?
+        "http://grneg.gs#{group_link_path(:poll_id => @poll.invitation_key)}"
+      else
+        group_link_url(:poll_id => @poll.invitation_key)
+      end
+    else
+      'disabled'
+    end
+  end
 end
