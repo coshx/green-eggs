@@ -17,8 +17,7 @@ Feature: Group Invitation
     Then I should see "Voting on: What to order for Friday lunch?"
 
     When I am on the invite voters page
-    And I uncheck "group_invitation"
-    And I confirm the dialog
+    And I uncheck "group_invitation" and confirm the dialog
     Then I should see that the invitation link is disabled
     When go to the old group invitation link
     Then I should see "The page you were looking for doesn't exist."

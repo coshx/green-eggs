@@ -68,6 +68,18 @@ Then /^the "([^"]*)" checkbox(?: within (.*))? should not be checked$/ do |label
   end
 end
 
-When /^I confirm the dialog$/ do
-  page.driver.browser.switch_to.alert.accept
+# source: https://github.com/thoughtbot/capybara-webkit/issues/84
+def handle_js_confirm(accept=true)
+  page.execute_script "window.original_confirm_function = window.confirm"
+  page.execute_script "window.confirmMsg = null"
+  page.execute_script "window.confirm = function(msg) { window.confirmMsg = msg; return #{!!accept}; }"
+  yield
+ensure
+  page.execute_script "window.confirm = window.original_confirm_function"
+end
+
+When /^(.*) and (?:|I )(confirm|dismiss) the dialog$/ do |_step ,confirm_dismiss|
+  handle_js_confirm(confirm_dismiss == "confirm") do
+    step _step
+  end
 end

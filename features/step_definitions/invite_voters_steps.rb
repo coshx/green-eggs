@@ -42,5 +42,5 @@ When /^go to the old group invitation link$/ do
 end
 
 When /^go to the old shortened group invitation link$/ do
-  visit @link
+  visit @short_link
 end
