@@ -16,7 +16,7 @@
 
 %div#irv-results
 
-  %table
+  %table.results
     %caption
       Instant-Runoff Results
     %thead
@@ -36,7 +36,7 @@
 %div#borda-results
   - results = @poll.calculate_borda
 
-  %table#borda-results
+  %table.results#borda-results
     %caption
       Borda results
     %thead

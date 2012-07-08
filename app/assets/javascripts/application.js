@@ -11,4 +11,5 @@
 //= require firehose
 //= require ember
 //= require ember/green_eggs
+//= require ZeroClipboard
 //= require_tree .

@@ -1,5 +1,5 @@
 = form_tag create_ballot_path(:poll_id => @poll.id, :owner_key => @poll.owner_key) do
-  
+
   %p
     Enter your email address and the addresses of other people whose opinion you are interested in, comma-separated.  Each voter you invite will receive a special link to a personal ballot.
 
@@ -19,11 +19,30 @@
 
   .fields
     = check_box_tag 'group_invitation', '1', @poll.invitation_key
-    = label_tag 'Enable Group Invitations'
+    = label_tag "group_invitation", "Group Invitation"
+  %br
   .fields
-    = label_tag "group_invitation_link", "Group link"
-    = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64
-    %br
-    = label_tag "shortened_group_invitation_link", "Shortened group link"
-    = text_field_tag 'shortened_group_invitation_link', shortened_group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64
+    %table
+      %tr
+        %td
+          = label_tag "group_invitation_link", "Group link"
+        %td
+          = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64, :class => "long-link"
+        %td
+          .copy-to-clipboard.long-link.hidden{:class => (@poll.invitation_key ? nil : "hidden"), :title => "Copy to clipboard"}
+            %div
+              = image_tag('clipboard.png')
+        %td
+          %span.copied.hidden Copied!
 
+      %tr
+        %td
+          = label_tag "shortened_group_invitation_link", "Shortened group link"
+        %td
+          = text_field_tag 'shortened_group_invitation_link', shortened_group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64, :class => "short-link"
+        %td
+          .copy-to-clipboard.short-link.hidden{:class => (@poll.invitation_key ? nil : "hidden"), :title => "Copy to clipboard"}
+            %div
+              = image_tag('clipboard.png')
+        %td
+          %span.copied.hidden Copied!

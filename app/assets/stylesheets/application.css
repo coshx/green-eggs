@@ -21,3 +21,19 @@ text_area{
   z-index:1;
 }
 
+.copy-to-clipboard.hidden,
+.hidden {
+  display: none;
+}
+
+.copy-to-clipboard {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+}
+
+.copy-to-clipboard > div {
+  width: 48px;
+  height: 48px;
+}
