@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %title GreenEggs
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    %link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
+      = csrf_meta_tags
+  %body
+    #content-wrapper
+      #content
+        %p#notice= notice
+        %p#error= flash[:error]
+        = yield

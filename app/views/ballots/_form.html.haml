@@ -27,7 +27,7 @@
         %td
           = label_tag "group_invitation_link", "Group link"
         %td
-          = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64, :class => "long-link"
+          = text_field_tag 'group_invitation_link', group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 40, :class => "long-link"
         %td
           .copy-to-clipboard.long-link.hidden{:class => (@poll.invitation_key ? nil : "hidden"), :title => "Copy to clipboard"}
             %div
@@ -39,7 +39,7 @@
         %td
           = label_tag "shortened_group_invitation_link", "Shortened group link"
         %td
-          = text_field_tag 'shortened_group_invitation_link', shortened_group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 64, :class => "short-link"
+          = text_field_tag 'shortened_group_invitation_link', shortened_group_invitation_url(@poll), :disabled => @poll.invitation_key.to_s.empty?, :size => 40, :class => "short-link"
         %td
           .copy-to-clipboard.short-link.hidden{:class => (@poll.invitation_key ? nil : "hidden"), :title => "Copy to clipboard"}
             %div

@@ -6,11 +6,34 @@
  *= require_tree . 
 */
 
+@mixin rounded-corners($radius) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
 body {
   background-color: #a1c3ce;
   font-size: 12px;
   margin: 30px 30px 30px 30px;
   font-family: 'Delius Swash Caps', cursive;
+}
+
+#content-wrapper {
+  text-align: center;
+}
+
+#content {
+  @include rounded-corners(10px);
+  display: inline-block;
+  text-align: left;
+  min-width: 50%;
+  max-width: 70%;
+  padding-bottom: 3em;
+  padding-top: 3em;
+  padding-left: 5em;
+  padding-right: 5em;
+  background-color: #EBFFF8;
 }
 
 logo{
