@@ -4,6 +4,7 @@ GreenEggs.VoteButtonView = Ember.View.extend(
   attributeBindings: ['disabled']
   disabled: false
   content: "Cast your vote"
+  classNames: "vote"
 
   click: ->
     @set("disabled", true)

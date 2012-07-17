@@ -13,6 +13,9 @@ gem 'formtastic'
 gem 'ruby_flipper'
 gem 'ember-rails', '0.5.0'
 
+# sass mixin library
+gem 'bourbon'
+
 # generate polls from github issues
 gem "github_api"
 

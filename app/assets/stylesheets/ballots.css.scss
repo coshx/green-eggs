@@ -1,38 +1,110 @@
-// Place all the styles related to the ballots controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bourbon";
+@import "variables";
 
 form.formtastic.ballot li > label {
   display: none;
 }
 
-ul.choices li,
-ul#poll-choices li {
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid gray;
-  height: 50px;
-  width: 224px;
+li.slot, li.choice {
+  font-size: .7em;
+  span.text {
+    display: inline-block;
+    margin: 6px 8px;
+  }
+  border-radius: 5px;
 }
 
-div#container {
-  overflow: hidden;
+ul.choices {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+  li {
+    @include box-sizing(border-box);
+    margin: $gw-margin;
+    height: 60px;
+    width: grid-width(2);
+    float: left;
+    background-color: tint($green, 70%);
+
+    input {
+      background-color: inherit;
+      width: grid-width(2) - 16;
+      border: 0px;
+      margin: 6px 8px;
+      border-bottom: 1px dotted $gray;
+    }
+  }
+}
+
+ul#poll-choices li {
+  height: 50px;
+  width: 224px;
 }
 
 div#choices {
   float: left;
-  display: block;
+  width: grid-width(8) + $gw-gutter;
+  h3 {
+    margin: $gw-margin 0 0 $gw-margin;
+  }
 }
 
 div#ballot {
   float: right;
-  display: block;
+  width: grid-width(3) + $gw-gutter + 30;
+  margin-left: 50px;
+  h3 {
+    margin: $gw-margin 0 0 $gw-margin;
+    margin-left: 39px;
+  }
+}
+
+div#block-wrapper {
+  margin-top: 1.6em;
+  display: table;
 }
 
 li.slot {
-  width: 224px;
-  height: 50px;
-  margin: 5px;
-  padding: 5px;
-  border: 1px solid gray;
+  @include box-sizing(border-box);
+  height: 60px;
+  margin: 0 $gw-margin $gw-gutter 0;
+  cursor: move;
+  background-color: tint($yellow, 50%);
+  input {
+    background-color: inherit;
+    width: grid-width(3) - 16;
+    border: 0px;
+    margin: 6px 8px;
+    border-bottom: 1px dotted $gray;
+  }
+}
+
+li.slot:not(.empty) ~ li.slot.empty,
+li.slot.empty:nth-of-type(1) {
+  background-color: darken($yellow, 10%);
+}
+
+li.slot.empty ~ li.slot.empty {
+  background-color: tint($yellow, 50%);
+}
+
+div#actions {
+  width: grid-width(12) + $gw-gutter;
+}
+
+button.vote {
+  width: grid-width(3);
+  float: right;
+  background-color: $green;
+  color: #fff;
+
+  &:hover {
+    background-color: shade($green, 20%);
+  }
+}
+
+a#results {
+  width: grid-width(2);
+  float: left;
 }

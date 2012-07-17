@@ -1,14 +1,15 @@
-%h1 Manage your poll
+#inner-content
+  %h1 Manage your poll
 
-%p
-  %b Name:
-  = @poll.name
+  %p
+    %b Name:
+    = @poll.name
 
-%p
-  = link_to 'Invite voters', invite_voters_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
-%p
-  = link_to 'Pre-seed choices', poll_choices_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
-%p
-  = link_to 'Remind voters by email', remind_voters_path(:id => @poll.id, :owner_key => @poll.owner_key), :method => :post, :data => {:confirm => "Are you sure you want to send reminder emails to all your voters who haven't yet cast their ballots?"}
+  %p
+    = link_to 'Invite voters', invite_voters_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
+  %p
+    = link_to 'Pre-seed choices', poll_choices_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
+  %p
+    = link_to 'Remind voters by email', remind_voters_path(:id => @poll.id, :owner_key => @poll.owner_key), :method => :post, :data => {:confirm => "Are you sure you want to send reminder emails to all your voters who haven't yet cast their ballots?"}
 
-%p= ballots_cast_message(@poll)
+  %p= ballots_cast_message(@poll)

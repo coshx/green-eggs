@@ -1,36 +1,34 @@
-%p
-  %b
-    Voting on:
-    %b
-      = @poll.name
+#poll-name
+  %h1= @poll.name
 
-  #container
-    #choices{"data-allow-user-choices" => @poll.allow_user_choices.to_s}
-      %form{:action => "#"}
-        %script{:type => "text/x-handlebars"}
-          {{ view GreenEggs.ListChoicesView }}
-
-    #ballot
-      = semantic_form_for @ballot, :url => update_ballot_path do |form|
-        = hidden_field_tag 'poll_id', @poll.id
-        = hidden_field_tag 'ballot_key', @ballot.key
-        %script{:type => "text/x-handlebars"}
-          {{ view GreenEggs.ListSlotsView }}
-  %div
-    %p
-      Vote for as many choices as you want, in order of preference
-    %p
-      Hit 'Enter' in the last choice to create a new choice
-    %p
-      Tip: you can sort your choices by dragging and dropping the rectangles
-
-    .actions
+#block-wrapper
+  #choices{"data-allow-user-choices" => @poll.allow_user_choices.to_s}
+    %h3 Choices
+    %form{:action => "#"}
       %script{:type => "text/x-handlebars"}
-        {{ view GreenEggs.VoteButtonView }}
-      (you can return to this page to change your vote for as long as this poll is open)
+        {{ view GreenEggs.ListChoicesView }}
 
-%p
-  = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
+  #ballot
+    %h3 Ballot
+    = semantic_form_for @ballot, :url => update_ballot_path do |form|
+      = hidden_field_tag 'poll_id', @poll.id
+      = hidden_field_tag 'ballot_key', @ballot.key
+      %script{:type => "text/x-handlebars"}
+        {{ view GreenEggs.ListSlotsView }}
+
+#actions
+  %p.hidden
+    Vote for as many choices as you want, in order of preference
+  %p.hidden
+    Hit 'Enter' in the last choice to create a new choice
+  %p.hidden
+    Tip: you can sort your choices by dragging and dropping the rectangles
+
+  = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key), :class => "button", :id => "results"
+  %script{:type => "text/x-handlebars"}
+    {{ view GreenEggs.VoteButtonView }}
+  -#(you can return to this page to change your vote for as long as this poll is open)
+
 
 :javascript
   $(function() {

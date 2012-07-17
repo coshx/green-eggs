@@ -3,45 +3,54 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree . 
+ *= require "normalize"
+ *= require "ballots"
+ *= require "demopage"
+ *= require "polls"
+ *= require "buttons"
+ *= require "visualize.jQuery"
 */
 
-@mixin rounded-corners($radius) {
-  border-radius: $radius;
-  -moz-border-radius: $radius;
-  -webkit-border-radius: $radius;
-}
+@import "bourbon";
+@import "variables";
 
-body {
-  background-color: #a1c3ce;
-  font-size: 12px;
-  margin: 30px 30px 30px 30px;
-  font-family: 'Delius Swash Caps', cursive;
+html, body {
+  background-color: tint($blue, 0%);
 }
 
 #content-wrapper {
   text-align: center;
+  padding: 12px 0px;
 }
 
 #content {
-  @include rounded-corners(10px);
+  @include box-shadow(0 0 5px tint($gray, 65%));
   display: inline-block;
   text-align: left;
-  min-width: 50%;
-  max-width: 70%;
-  padding-bottom: 3em;
-  padding-top: 3em;
-  padding-left: 5em;
-  padding-right: 5em;
-  background-color: #EBFFF8;
+  width: grid-width(12) + $gw-gutter;
+  background-color: #ffffff;
+  border-radius: 5px;
 }
 
-logo{
-  z-index:2;
+#header {
+  #logo {
+    color: $green;
+  }
+  padding: $gw-margin;
 }
 
-text_area{
-  z-index:1;
+#poll-name {
+  @include box-sizing(border-box);
+  width: grid-width(12) + $gw-gutter;
+  padding: $gw-margin / 3;
+  padding-left: $gw-gutter;
+  background-color: $green;
+  color: white;
+
+  h1 {
+    font-size: 2em;
+    margin: 0.5em;
+  }
 }
 
 .copy-to-clipboard.hidden,
@@ -59,4 +68,13 @@ text_area{
 .copy-to-clipboard > div {
   width: 48px;
   height: 48px;
+}
+
+.ui-draggable {
+  cursor: move;
+}
+
+#inner-content {
+  width: grid-width(10);
+  margin: 0px ($gw-column+$gw-margin) ($gw-column+$gw-margin) ($gw-column+$gw-margin);
 }

@@ -2,8 +2,13 @@ GreenEggs.ShowSlotView = Ember.View.extend(
   templateName: "ember/templates/slots/show"
   classNames: ["slot"]
   tagName: "li"
+  classNameBindings: "isEmpty".w()
 
- didInsertElement: ->
+  isEmpty: (->
+    "empty" if !@slot.get("choice")
+  ).property("slot.choice")
+
+  didInsertElement: ->
     @_super()
     @get("parentView").setSortable()
     @get("parentView").calculatePriorities()

@@ -1,9 +1,11 @@
 {{#if choice.slug}}
-  {{#if choice.link}}
-    <a {{bindAttr href="choice.link"}} target="_blank">{{choice.original}}</a>
-  {{else}}
-      {{choice.original}}
-  {{/if}}
+  <span class="text">
+    {{#if choice.link}}
+      <a {{bindAttr href="choice.link"}} target="_blank">{{choice.original}}</a>
+    {{else}}
+        {{choice.original}}
+    {{/if}}
+  </span>
 {{else}}
   {{view Ember.TextField valueBinding="choice.original"}}
 {{/if}}
