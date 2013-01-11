@@ -331,7 +331,7 @@ DEPENDENCIES
   mongoid-rspec
   pry
   pry-nav
-  rails (~> 3.2.3)
+  rails (~> 3.2.11)
   rspec
   rspec-rails
   ruby_flipper
