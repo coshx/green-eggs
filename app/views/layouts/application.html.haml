@@ -6,7 +6,7 @@
     = javascript_include_tag "application"
     -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
       = csrf_meta_tags
-  %body
+  %body{'ng-app' => 'greenEggs'}
     #content-wrapper
       #content
         #header
@@ -17,4 +17,5 @@
             %p#notice= notice
           - if flash[:error]
             %p#error= flash[:error]
-        = yield
+        %div{'ng-controller' => "GECtrl"}
+          = yield
