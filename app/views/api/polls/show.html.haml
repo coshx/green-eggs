@@ -52,4 +52,4 @@
 
 
   %p
-    = link_to "Return to My Ballot", vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
+    = link_to "Return to My Ballot", api_vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)

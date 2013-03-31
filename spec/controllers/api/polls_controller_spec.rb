@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PollsController do
+describe Api::PollsController do
   let(:poll) { FactoryGirl.create(:poll) }
 
   [[:get, :edit],[:put, :update],[:delete, :destroy],[:post, :remind_voters]].each do |method, action|
@@ -34,15 +34,15 @@ describe PollsController do
       voter_email = poll.ballots.first.email
       unread_emails_for(voter_email).count.should == 1
       post "remind_voters", :id => poll.id, :owner_key => poll.owner_key
-      response.should redirect_to poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
+      response.should redirect_to api_poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
       unread_emails_for(voter_email).count.should == 2
       Timecop.travel(55.minutes)
       post "remind_voters", :id => poll.id, :owner_key => poll.owner_key
-      response.should redirect_to poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
+      response.should redirect_to api_poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
       unread_emails_for(voter_email).count.should == 2
       Timecop.travel(5.minutes)
       post "remind_voters", :id => poll.id, :owner_key => poll.owner_key
-      response.should redirect_to poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
+      response.should redirect_to api_poll_admin_path(:poll_id => poll.id, :owner_key => poll.owner_key)
       unread_emails_for(voter_email).count.should == 3
       Timecop.return
     end

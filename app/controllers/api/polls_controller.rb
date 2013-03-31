@@ -1,4 +1,4 @@
-class PollsController < ApplicationController
+class Api::PollsController < ApplicationController
   before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices, :remind_voters]
   before_filter :load_poll_and_ballot, :only => [:show]
   include BallotsHelper
@@ -40,7 +40,7 @@ class PollsController < ApplicationController
     @poll = Poll.new(params[:poll])
     seed_poll_with_issues(@poll, issues) if issues
     if @poll.save
-      redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), notice: 'Poll was successfully created.'
+      redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), notice: 'Poll was successfully created.'
     else
       render action: "new"
     end
@@ -51,7 +51,7 @@ class PollsController < ApplicationController
     respond_to do |format|
       format.html do
         if @poll.update_attributes(params[:poll])
-          redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key), notice: 'Poll was successfully updated.'
+          redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key), notice: 'Poll was successfully updated.'
         else
           render action: "edit"
         end
@@ -77,7 +77,7 @@ class PollsController < ApplicationController
   # DELETE /polls/1
   def destroy
     @poll.destroy
-    redirect_to polls_url
+    redirect_to api_polls_url
   end
 
   # GET /github
@@ -95,7 +95,7 @@ class PollsController < ApplicationController
       @poll.save
       flash[:notice] = "Successfully sent reminder email(s)"
     end
-    redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
+    redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
   end
 
   private

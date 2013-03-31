@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BallotsController do
+describe Api::BallotsController do
   let(:poll) { FactoryGirl.create(:poll_with_ballot) }
   let(:group_poll) { FactoryGirl.create(:poll_with_invitation_key) }
   let(:ballot) { poll.ballots.first }
@@ -47,7 +47,7 @@ describe BallotsController do
         get :show, :id => group_poll.id
         group_poll.reload.ballots.count.should == num_ballots + 1
         assigns(:ballot).should == group_poll.ballots.last
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => assigns(:ballot).key)
+        response.should redirect_to api_vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => assigns(:ballot).key)
       end
 
       it "should set a cookie and redirect to existing ballot later" do
@@ -56,10 +56,10 @@ describe BallotsController do
         group_poll.reload.ballots.count.should == num_ballots + 1
         new_ballot = assigns(:ballot)
         new_ballot.should == group_poll.ballots.last
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
+        response.should redirect_to api_vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
         get :show, :id => group_poll.id
         group_poll.reload.ballots.count.should == num_ballots + 1
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
+        response.should redirect_to api_vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
 
       end
     end
@@ -78,7 +78,7 @@ describe BallotsController do
         get :show, :poll_id => group_poll.invitation_key
         group_poll.reload.ballots.count.should == num_ballots + 1
         assigns(:ballot).should == group_poll.ballots.last
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => assigns(:ballot).key)
+        response.should redirect_to api_vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => assigns(:ballot).key)
       end
 
       it "should set a cookie and redirect to existing ballot later" do
@@ -87,7 +87,7 @@ describe BallotsController do
         group_poll.reload.ballots.count.should == num_ballots + 1
         new_ballot = assigns(:ballot)
         new_ballot.should == group_poll.ballots.last
-        response.should redirect_to vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
+        response.should redirect_to api_vote_on_ballot_path(:poll_id => group_poll.id, :ballot_key => new_ballot.key)
         get :show, :poll_id => group_poll.invitation_key
         group_poll.reload.ballots.count.should == num_ballots + 1
       end

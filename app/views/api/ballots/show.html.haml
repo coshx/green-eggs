@@ -24,7 +24,7 @@
   %p.hidden
     Tip: you can sort your choices by dragging and dropping the rectangles
 
-  = link_to "See poll results", poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key), :class => "button", :id => "results"
+  = link_to "See poll results", api_poll_results_path(:poll_id => @poll.id, :ballot_key => @ballot.key), :class => "button", :id => "results"
   %script{:type => "text/x-handlebars"}
     {{ view GreenEggs.VoteButtonView }}
   -#(you can return to this page to change your vote for as long as this poll is open)

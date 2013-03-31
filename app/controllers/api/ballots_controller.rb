@@ -1,4 +1,4 @@
-class BallotsController < ApplicationController
+class Api::BallotsController < ApplicationController
   include BallotsHelper
   before_filter :load_poll_and_ballot, :only => [:show, :edit, :update]
   before_filter :check_admin_key_and_load_poll, :only => [:new, :create]
@@ -28,7 +28,7 @@ class BallotsController < ApplicationController
     emails.each do |e|
       @poll.ballots.create(email: e, invitationMessage: invitationMsg)
     end
-    redirect_to poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), :notice => "Successfully invited #{emails.join(",")}"
+    redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), :notice => "Successfully invited #{emails.join(",")}"
   end
 
   # PUT /ballots/1
@@ -45,6 +45,6 @@ class BallotsController < ApplicationController
 
     @ballot.update_attributes(params[:ballot])
     flash[:notice] = 'Your vote was successfully recorded'
-    render :js => "$(function() { window.location = '#{poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id)}'});"
+    render :js => "$(function() { window.location = '#{api_poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id)}'});"
   end
 end

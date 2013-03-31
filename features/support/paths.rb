@@ -9,7 +9,7 @@ module NavigationHelpers
     when /^my ballot page$/
       vote_on_ballot_path(:poll_id => @ballot.poll.id, :ballot_key => @ballot.key)
     when /^the poll results$/
-      poll_results_path(:poll_id => @ballot.poll.id, :ballot_key => @ballot.key)
+      api_poll_results_path(:poll_id => @ballot.poll.id, :ballot_key => @ballot.key)
     when /^the invite voters page$/
       invite_voters_path(:poll_id => @poll.id, :owner_key => @poll.owner_key)
 

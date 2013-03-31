@@ -10,7 +10,7 @@ Description of the poll:
 
 In case you lost track of your unique voting link, here it is:
 
-<%= vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key, :only_path => false) %>
+<%= api_vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key, :only_path => false) %>
 
 
 Cheers,
