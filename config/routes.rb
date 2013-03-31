@@ -2,8 +2,8 @@ GreenEggs::Application.routes.draw do
   root :to => 'home#index'
 
   namespace :api do
-    resources :ballots
-    resources :polls
+    resources :ballots, :except => [:new, :edit]
+    resources :polls, :except => [:new, :edit]
 
     get '/:poll_id/invite_voters' => 'ballots#new', :as => :invite_voters
     post 'ballots/update' => 'ballots#update', :as => :update_ballot

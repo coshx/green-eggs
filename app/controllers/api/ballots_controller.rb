@@ -1,7 +1,7 @@
 class Api::BallotsController < ApplicationController
   include BallotsHelper
-  before_filter :load_poll_and_ballot, :only => [:show, :edit, :update]
-  before_filter :check_admin_key_and_load_poll, :only => [:new, :create]
+  before_filter :load_poll_and_ballot, :only => [:show, :update]
+  before_filter :check_admin_key_and_load_poll, :only => [:create]
 
   # GET /ballots
   def index
@@ -12,15 +12,6 @@ class Api::BallotsController < ApplicationController
   def show
     @choices = existing_choices_not_on_ballot(@poll, @ballot)
     render @choices.as_json
-  end
-
-  # GET /ballots/new
-  def new
-  end
-
-  # GET /ballots/1/edit
-  def edit
-    render :json => @ballot.as_json
   end
 
   # POST /ballots

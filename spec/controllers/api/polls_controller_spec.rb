@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Api::PollsController do
   let(:poll) { FactoryGirl.create(:poll) }
 
-  [[:get, :edit],[:put, :update],[:delete, :destroy],[:post, :remind_voters]].each do |method, action|
+  [[:put, :update],[:delete, :destroy],[:post, :remind_voters]].each do |method, action|
     describe "#{method.upcase} #{action}" do
       context "using correct owner key" do
         it "succeeds" do

@@ -1,5 +1,5 @@
 class Api::PollsController < ApplicationController
-  before_filter :check_admin_key_and_load_poll, :only => [:edit, :update, :destroy, :choices, :remind_voters]
+  before_filter :check_admin_key_and_load_poll, :only => [:update, :destroy, :choices, :remind_voters]
   before_filter :load_poll_and_ballot, :only => [:show]
   include BallotsHelper
 
@@ -10,16 +10,6 @@ class Api::PollsController < ApplicationController
 
   # GET /polls/1
   def show
-  end
-
-  # GET /polls/new
-  def new
-    @poll = Poll.new
-  end
-
-  # GET /polls/1/edit
-  def edit
-    render :json => @poll.as_json
   end
 
   # POST /polls
@@ -79,11 +69,6 @@ class Api::PollsController < ApplicationController
   def destroy
     @poll.destroy
     redirect_to api_polls_url
-  end
-
-  # GET /github
-  def from_gh_issues
-    redirect_to new_poll_url(:from_github_issues => true)
   end
 
   # POST /:poll_id/admin/remind_voters

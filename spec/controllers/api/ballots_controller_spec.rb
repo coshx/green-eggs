@@ -5,7 +5,7 @@ describe Api::BallotsController do
   let(:group_poll) { FactoryGirl.create(:poll_with_invitation_key) }
   let(:ballot) { poll.ballots.first }
 
-  [[:get, :edit],[:put, :update],[:get, :show]].each do |method, action|
+  [[:put, :update],[:get, :show]].each do |method, action|
     describe "#{method.upcase} #{action}" do
       context "using correct ballot key" do
         it "succeeds" do
