@@ -19,6 +19,7 @@ class Api::PollsController < ApplicationController
 
   # GET /polls/1/edit
   def edit
+    render :json => @poll.as_json
   end
 
   # POST /polls

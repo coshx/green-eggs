@@ -11,6 +11,7 @@ class Api::BallotsController < ApplicationController
   # GET /ballots/1
   def show
     @choices = existing_choices_not_on_ballot(@poll, @ballot)
+    render @choices.as_json
   end
 
   # GET /ballots/new
@@ -19,6 +20,7 @@ class Api::BallotsController < ApplicationController
 
   # GET /ballots/1/edit
   def edit
+    render :json => @ballot.as_json
   end
 
   # POST /ballots
