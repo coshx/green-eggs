@@ -12,6 +12,8 @@ gem 'therubyracer'
 gem 'formtastic'
 gem 'ruby_flipper'
 
+gem 'angular-rails'
+
 # sass mixin library
 gem 'bourbon'
 

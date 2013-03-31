@@ -29,6 +29,9 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.8)
+    angular-rails (0.0.12)
+      coffee-script (~> 2.2.0)
+      rails
     arel (3.0.2)
     bourbon (2.1.1)
       sass (>= 3.1)
@@ -291,6 +294,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angular-rails
   bourbon
   bson_ext
   capybara
