@@ -49,7 +49,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'capybara-webkit'
+  #gem 'capybara-webkit'
   gem 'guard'
   gem 'guard-spork'
   gem 'guard-rspec'
