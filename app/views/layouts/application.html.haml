@@ -2,20 +2,19 @@
 %html
   %head
     %title GreenEggs
+    = stylesheet_link_tag    'http://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700'
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
-      = csrf_meta_tags
+    = csrf_meta_tags
   %body{'ng-app' => 'greenEggs'}
-    #content-wrapper
-      #content
-        #header
-          #logo
-            %h2 GreenEggs Polls
-        #flash
-          - if notice
-            %p#notice= notice
-          - if flash[:error]
-            %p#error= flash[:error]
-        %div{'ng-controller' => "GECtrl"}
-          = yield
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        %h2 GreenEggs Polls
+    #flash
+      - if notice
+        %p#notice= notice
+      - if flash[:error]
+        %p#error= flash[:error]
+    %div.container{'ng-controller' => "GECtrl"}
+      = yield

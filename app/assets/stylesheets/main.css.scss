@@ -1,0 +1,18 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+$main-green: #1a631c;
+$link-color: #e74c3c;
+
+body {
+  background: $main-green;
+  font-family: 'PT Sans Caption', Helvetica, sans-serif;
+}
+a {
+  color: $link-color;
+}
+
+.navbar-inner {
+  background: #212a23;
+  color: #fff;
+}

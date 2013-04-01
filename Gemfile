@@ -17,6 +17,9 @@ gem 'angular-rails'
 # sass mixin library
 gem 'bourbon'
 
+# bootstrap style library
+gem 'bootstrap-sass'
+
 # generate polls from github issues
 gem "github_api"
 
