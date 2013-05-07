@@ -1,9 +1,10 @@
 development:
-  host: localhost
+  host: 127.0.0.1
+  port: 27017
   database: green_eggs_development
 
 test:
-  host: localhost
+  host: localhost:27017
   database: green_eggs_test
 
 # set these environment variables on your prod server

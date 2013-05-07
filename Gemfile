@@ -11,11 +11,8 @@ gem 'bson_ext'
 gem 'therubyracer'
 gem 'formtastic'
 gem 'ruby_flipper'
+gem "angular-rails"
 
-gem 'angular-rails'
-
-# sass mixin library
-gem 'bourbon'
 
 # bootstrap style library
 gem 'bootstrap-sass'
@@ -28,10 +25,18 @@ gem 'firehose'
 
 # Gems used only for assets and not required
 # in production environments by default.
+
 group :assets do
   gem 'sass-rails'
+  gem 'bootstrap-sass'
   gem 'coffee-rails'
   gem 'uglifier'
+  gem 'underscore-rails'
+  gem "angularjs-rails"
+  gem "angularjs-rails-resource"
+  gem 'angular-ui-rails'
+  gem 'angular-ui-bootstrap-rails'
+  gem "therubyracer"
 end
 
 gem 'jquery-rails'
