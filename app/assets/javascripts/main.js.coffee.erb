@@ -1,0 +1,28 @@
+GreenEggs = angular.module('GreenEggs', ['ngResource', 'rails', 'ui', 'ui.bootstrap'])
+
+filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
+
+GreenEggs.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/users"
+    name: "user"
+]
+
+GreenEggs.controller "MainCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "$dialog", ($scope, $http, User, $routeParams, $location, $dialog) ->
+
+]
+#****************************************
+#* Router
+#****************************************
+
+# Page title manipulations
+
+GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
+  console.log "fuck"
+  $locationProvider.html5Mode(true).hashPrefix('!')
+  $routeProvider.when("/",
+    templateUrl: "<%= asset_path 'views/main.html' %>"
+  ).when("/create",
+    templateUrl: "<%= asset_path 'views/create.html' %>"
+  )
+]

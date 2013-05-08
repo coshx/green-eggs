@@ -1,8 +1,9 @@
 !!!
-%html
+%html{'ng-app' => 'GreenEggs'}
   %head
     %title GreenEggs
     %meta(content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" name="viewport")/
+    = filepicker_js_include_tag
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
@@ -15,7 +16,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"} Project name
+          %a.brand{:href => "#"} Green Eggs
           .nav-collapse.collapse
             %ul.nav
               %li.active
@@ -46,25 +47,9 @@
               %input.span2{:placeholder => "Password", :type => "password"}/
               %button.btn{:type => "submit"} Sign in
           / /.nav-collapse
-    .container
+    .container.main
+      %div{'ng-view' => 'ng-view'}
       / Main hero unit for a primary marketing message or call to action
-      .hero-unit
-        %h1 Hello, world!
-        %p This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.
-        %p
-          %a.btn.btn-primary.btn-large{:href => "#"} Learn more »
-      / Example row of columns
-      .row
-        .span6
-          %h2 Create a Poll
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a.btn{:href => "#"} Create a poll »
-        .span6
-          %h2 Your Polls
-          %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-          %p
-            %a.btn{:href => "#"} Your polls »
       %hr/
       %footer
         %p © Company 2013

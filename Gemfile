@@ -37,6 +37,7 @@ group :assets do
   gem 'angular-ui-rails'
   gem 'angular-ui-bootstrap-rails'
   gem "therubyracer"
+  gem 'filepicker-rails'
 end
 
 gem 'jquery-rails'

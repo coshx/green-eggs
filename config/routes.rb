@@ -1,6 +1,8 @@
 GreenEggs::Application.routes.draw do
   root :to => 'home#index'
 
+  get '*path' => "home#index"
+
   namespace :api do
     resources :ballots, :except => [:new, :edit]
     resources :polls, :except => [:new, :edit]

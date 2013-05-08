@@ -6,4 +6,9 @@ greenEggs.controller('GECtrl', function LJCtrl($scope, Data, $resource, $routePa
     return route === $location.path()
   }
 
+
+
 })
+
+
+

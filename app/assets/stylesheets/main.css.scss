@@ -16,3 +16,33 @@ a {
   background: #212a23;
   color: #fff;
 }
+
+html body { background-color: #f7f7f7; }
+
+.main {
+  margin-top:40px;
+  .centered {
+    display:block;
+    margin: auto;
+    padding:20px 0px;
+  }
+  .mobile-block {
+    .header {
+      min-height: 25px;
+      padding-top:2px;
+      padding-left:10px;
+      content: ' ';
+      background: #f7f7f7;
+      border-bottom: 1px solid #ededed;
+    }
+    .content {
+      padding:20px;
+    }
+    background-color: white;
+    border: 1px solid #ededed;
+    color: #878787;
+    border-radius: 5px;
+    #border-bottom-left-radius: 5px;
+    #border-bottom-right-radius: 5px;
+  }
+}
