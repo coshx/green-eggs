@@ -6,6 +6,7 @@ class Api::PollsController < ApplicationController
   # GET /polls
   def index
     @polls = Poll.all
+    render json:@polls.to_json
   end
 
   # GET /polls/1
@@ -31,9 +32,11 @@ class Api::PollsController < ApplicationController
     @poll = Poll.new(params[:poll])
     seed_poll_with_issues(@poll, issues) if issues
     if @poll.save
-      redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), notice: 'Poll was successfully created.'
+      render json:@poll.to_json
+      #redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key, :only_path => false), notice: 'Poll was successfully created.'
     else
-      render action: "new"
+      render text:"fucked up"
+      #render action: "new"
     end
   end
 
@@ -42,7 +45,8 @@ class Api::PollsController < ApplicationController
     respond_to do |format|
       format.html do
         if @poll.update_attributes(params[:poll])
-          redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key), notice: 'Poll was successfully updated.'
+          render json:@poll.to_json
+          #redirect_to api_poll_admin_path(:poll_id => @poll.id, :owner_key => @poll.owner_key), notice: 'Poll was successfully updated.'
         else
           render action: "edit"
         end

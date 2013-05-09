@@ -2,14 +2,22 @@ GreenEggs = angular.module('GreenEggs', ['ngResource', 'rails', 'ui', 'ui.bootst
 
 filepicker.setKey('AffEtHmTETGO3pTJxeyo7z')
 
-GreenEggs.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
+GreenEggs.factory "Poll", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
-    url: "/api/users"
-    name: "user"
+    url: "/api/polls"
+    name: "poll"
 ]
 
-GreenEggs.controller "MainCtrl", ["$scope", "$http", "User", "$routeParams", "$location", "$dialog", ($scope, $http, User, $routeParams, $location, $dialog) ->
+GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
 
+]
+
+GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
+  $scope.savePoll = (poll) ->
+    new Poll(poll).create().then (result) ->
+      $scope.poll = result
+
+  #$scope.saveImage()
 ]
 #****************************************
 #* Router
@@ -18,7 +26,6 @@ GreenEggs.controller "MainCtrl", ["$scope", "$http", "User", "$routeParams", "$l
 # Page title manipulations
 
 GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
-  console.log "fuck"
   $locationProvider.html5Mode(true).hashPrefix('!')
   $routeProvider.when("/",
     templateUrl: "<%= asset_path 'views/main.html' %>"

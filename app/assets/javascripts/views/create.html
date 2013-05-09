@@ -1,12 +1,14 @@
+<div ng-controller="CreateCtrl">
 Creating New Poll
 
 <label>Ask your question:</label>
-<input type="text" placeholder="Question" ng-model='user.question'>
+<input type="text" placeholder="Question" ng-model='poll.name'>
 <label>Your email address:</label>
-<input type="text" placeholder="Email" ng-model='user.email'>
+<input type="text" placeholder="Email" ng-model='poll.ownerEmail'>
 
 
 Allow people
 to add custom options?
-<button>Save your poll</button>
+<button ng-click="savePoll(poll)">Save your poll</button>
 
+</div>
