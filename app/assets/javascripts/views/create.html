@@ -1,14 +1,30 @@
 <div ng-controller="CreateCtrl">
 Creating New Poll
 
-<label>Ask your question:</label>
-<input type="text" placeholder="Question" ng-model='poll.name'>
-<label>Your email address:</label>
-<input type="text" placeholder="Email" ng-model='poll.ownerEmail'>
+  <div ng-hide="createAnswers">
+    <label>Ask your question:</label>
+    <input id="question" type="text" placeholder="Question" ng-model='poll.name'>
+    <label>Your email address:</label>
+    <input id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
 
 
-Allow people
-to add custom options?
-<button ng-click="savePoll(poll)">Save your poll</button>
+    Allow people
+    to add custom options?
+    <button id="go_to_preseed" ng-click="createAnswers=true">Save your poll</button>
+  </div>
+
+  <div ng-show="createAnswers">
+    <h1>{{poll.name}}</h1>
+    <h4>Pre-seed answers</h4>
+    <input type="text" id="answer" placeholder="Answer" ng-model='newChoice.original'>
+    <button id="add-choice" ng-click="addChoice(newChoice)">Add</button>
+
+    <p ng-repeat="choice in poll.choices">
+      {{choice.original}}
+    </p>
+
+    <button id="save-poll" ng-click="savePoll(poll)">Save your poll</button>
+  </div>
+
 
 </div>

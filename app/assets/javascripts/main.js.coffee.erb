@@ -13,6 +13,13 @@ GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
 ]
 
 GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
+  $scope.poll = {}
+  $scope.poll.choices = []
+
+  $scope.addChoice = (choice) ->
+    $scope.poll.choices.push($.extend({}, choice))
+    $scope.newChoice = ""
+
   $scope.savePoll = (poll) ->
     new Poll(poll).create().then (result) ->
       $scope.poll = result
