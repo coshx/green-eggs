@@ -1,6 +1,6 @@
 class Api::PollsController < ApplicationController
   before_filter :check_admin_key_and_load_poll, :only => [:update, :destroy, :choices, :remind_voters]
-  before_filter :load_poll_and_ballot, :only => [:show]
+  #before_filter :load_poll_and_ballot, :only => [:show]
   include BallotsHelper
 
   # GET /polls
@@ -11,6 +11,21 @@ class Api::PollsController < ApplicationController
 
   # GET /polls/1
   def show
+    @poll ||= Poll.find(params[:poll_id] || params[:id])
+    if @poll.present? && params[:ballot_key].blank? && @poll.invitation_key.present?
+      if cookies["#{@poll.id}-ballot-key"].present?
+        @ballot = @poll.ballots.where(:key => cookies["#{@poll.id}-ballot-key"]).first
+      else
+        @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
+        cookies["#{@poll.id}-ballot-key"] = {:value => @ballot.key, :expires => 10.years.from_now}
+      end
+      render json:@poll.to_json
+    else
+      @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
+      render json:@poll.to_json
+    end
+
+
   end
 
   # POST /polls
@@ -30,6 +45,7 @@ class Api::PollsController < ApplicationController
       params["poll"]["allow_user_choices"] = false
     end
     @poll = Poll.new(params[:poll])
+    binding.pry
     seed_poll_with_issues(@poll, issues) if issues
     if @poll.save
       render json:@poll.to_json

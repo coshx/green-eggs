@@ -12,6 +12,15 @@ GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
 
 ]
 
+GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
+  $scope.id = $routeParams.id
+  console.log "fuck"
+  Poll.get(id:  $scope.id).then((poll) =>
+    $scope.poll = poll
+  )
+]
+
+
 GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
   $scope.poll = {}
   $scope.poll.choices = []
@@ -23,6 +32,7 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
   $scope.savePoll = (poll) ->
     new Poll(poll).create().then (result) ->
       $scope.poll = result
+      $location.path("/polls/#{result._id}")
 
   #$scope.saveImage()
 ]
@@ -38,5 +48,7 @@ GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $ro
     templateUrl: "<%= asset_path 'views/main.html' %>"
   ).when("/create",
     templateUrl: "<%= asset_path 'views/create.html' %>"
+  ).when("/polls/:id",
+    templateUrl: "<%= asset_path 'views/poll.html' %>"
   )
 ]

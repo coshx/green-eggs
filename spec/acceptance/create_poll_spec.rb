@@ -21,7 +21,6 @@ feature %{
     fill_in "answer", :with => "show a gun"
     click_button "add-choice"
     click_button "save-poll"
-
   end
 
 
