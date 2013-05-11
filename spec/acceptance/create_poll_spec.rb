@@ -21,6 +21,8 @@ feature %{
     fill_in "answer", :with => "show a gun"
     click_button "add-choice"
     click_button "save-poll"
+    page.should have_content('Poll details')
+    page.should have_content('The best way to seduce a rabbit?')
   end
 
 

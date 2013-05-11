@@ -14,10 +14,26 @@ GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
 
 GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
   $scope.id = $routeParams.id
-  console.log "fuck"
+  $scope.ballot = {}
+  $scope.ballot.choices = []
   Poll.get(id:  $scope.id).then((poll) =>
     $scope.poll = poll
   )
+  $scope.votedChoice = (choice) ->
+    result = false
+    angular.forEach($scope.ballot.choices, (c) ->
+      result = true if c == choice
+    )
+    result
+
+  $scope.addChoice = (choice) ->
+    if not $scope.votedChoice(choice)
+      $scope.ballot.choices.push(choice)
+    else
+      console.log "pushed already", choice
+  $scope.removeChoice = (index) ->
+    $scope.ballot.choices.splice(index, 1)
+
 ]
 
 

@@ -1,5 +1,7 @@
-<div ng-controller="PollCtrl">
+<div class="poll-details" ng-controller="PollCtrl">
+  <p>Poll details</p>
   <h1>{{poll.name}}</h1>
-  <div ng-repeat="choice in poll.choices">{{choice.original}}</div>
+  <div ng-repeat="choice in ballot.choices">{{choice.original}} <a ng-click="removeChoice($index)" href="#">Remove</a></div>
+  <div ng-repeat="choice in poll.choices"><a ng-click="addChoice(choice)" href="#">{{choice.original}}</a></div>
 
 </div>
