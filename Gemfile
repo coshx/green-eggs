@@ -53,7 +53,6 @@ group :test do
   gem 'rspec'
   gem 'factory_girl'
   gem 'mongoid-rspec', :require => false
-  gem 'cucumber-rails'
   gem 'vcr'
   gem 'fakeweb'
   gem 'capybara'
