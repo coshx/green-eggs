@@ -1,7 +1,6 @@
 GreenEggs::Application.routes.draw do
   root :to => 'home#index'
 
-  get '*path' => "home#index"
 
   namespace :api do
     resources :ballots, :except => [:new, :edit]
@@ -18,4 +17,5 @@ GreenEggs::Application.routes.draw do
     post '/:id/admin/remind_voters' => 'polls#remind_voters', :as => :remind_voters
     get '/:poll_id' => 'ballots#show', :as => :group_link
   end
+  get '*path' => "home#index"
 end
