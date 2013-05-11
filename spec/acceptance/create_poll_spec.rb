@@ -7,7 +7,7 @@ feature %{
   background do
   end
 
-  scenario "Create a new poll", :js => true do
+  scenario "Create a new poll and vote for it", :js => true do
     visit "/create"
     fill_in "question", :with => 'The best way to seduce a rabbit?'
     fill_in "email", :with => "rabbit@stewieland.com"
@@ -23,6 +23,11 @@ feature %{
     click_button "save-poll"
     page.should have_content('Poll details')
     page.should have_content('The best way to seduce a rabbit?')
+    page.should have_no_content('1) show a huge carrot')
+    click_link "show a huge carrot"
+    page.should have_content('1) show a huge carrot')
+    click_link "Remove"
+    page.should have_no_content('1) show a huge carrot')
   end
 
 
