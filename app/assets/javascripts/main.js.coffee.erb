@@ -30,10 +30,11 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
     if not $scope.votedChoice(choice)
       $scope.ballot.choices.push(choice)
     else
-      console.log "pushed already", choice
+      console.log "pushed already"
   $scope.removeChoice = (index) ->
     $scope.ballot.choices.splice(index, 1)
-
+  $scope.saveBallot = (choices) ->
+    console.log "Choices are already saved in javascript variable inside your browser."
 ]
 
 
