@@ -8,11 +8,17 @@ GreenEggs.factory "Poll", ["railsResourceFactory", (railsResourceFactory) ->
     name: "poll"
 ]
 
+GreenEggs.factory "Ballot", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/ballots"
+    name: "ballot"
+]
+
 GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
 
 ]
 
-GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
+GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
   $scope.id = $routeParams.id
   $scope.ballot = {}
   $scope.ballot.choices = []
@@ -33,10 +39,33 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
       console.log "pushed already"
   $scope.removeChoice = (index) ->
     $scope.ballot.choices.splice(index, 1)
+
   $scope.saveBallot = (choices) ->
+    new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->
+      $scope.poll = result
+      $location.path("/stats/#{result._id}")
+
     console.log "Choices are already saved in javascript variable inside your browser."
 ]
 
+GreenEggs.controller "StatsCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
+  $scope.id = $routeParams.id
+  $scope.ballot = {}
+  $scope.ballot.choices = []
+  Poll.get(id:  $scope.id).then((poll) =>
+    $scope.poll = poll
+    console.log poll
+    $scope.data = []
+    angular.forEach(poll.calculateBorda, (p) ->
+      $scope.data.push
+        value:p.tally*100
+        color:"rgb(#{Math.floor(Math.random()*255)},#{Math.floor(Math.random()*255)},#{Math.floor(Math.random()*255)})"
+        label:p.original
+    )
+    myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Pie($scope.data)
+  )
+
+]
 
 GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
   $scope.poll = {}
@@ -45,6 +74,9 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
   $scope.addChoice = (choice) ->
     $scope.poll.choices.push($.extend({}, choice))
     $scope.newChoice = ""
+  $scope.removeChoice = (index) ->
+    $scope.poll.choices.splice(index, 1)
+
 
   $scope.savePoll = (poll) ->
     new Poll(poll).create().then (result) ->
@@ -67,5 +99,7 @@ GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $ro
     templateUrl: "<%= asset_path 'views/create.html' %>"
   ).when("/polls/:id",
     templateUrl: "<%= asset_path 'views/poll.html' %>"
+  ).when("/stats/:id",
+    templateUrl: "<%= asset_path 'views/stats.html' %>"
   )
 ]

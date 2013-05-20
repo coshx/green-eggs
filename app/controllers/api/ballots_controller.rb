@@ -26,18 +26,21 @@ class Api::BallotsController < ApplicationController
 
   # PUT /ballots/1
   def update
+
     if params[:voting] == "true"
       @ballot.choices.delete_all
     end
 
-    if params[:choices]
-      params[:choices].each_with_index do |original, index|
-        @ballot.choices.create(:original => original, :priority => index)
+
+    if params[:ballot][:choices]
+      params[:ballot][:choices].each_with_index do |original, index|
+        @ballot.choices.create(:original => original[:original], :priority => index)
       end
     end
 
     @ballot.update_attributes(params[:ballot])
     flash[:notice] = 'Your vote was successfully recorded'
-    render :js => "$(function() { window.location = '#{api_poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id)}'});"
+    render json:@poll
+    #render :js => "$(function() { window.location = '#{api_poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id)}'});"
   end
 end

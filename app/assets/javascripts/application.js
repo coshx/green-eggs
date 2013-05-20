@@ -10,4 +10,5 @@
 //= require angular-ui
 //= require angular-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require chart
 //= require_tree .

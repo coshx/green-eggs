@@ -1,0 +1,20 @@
+<div class="poll-details" ng-controller="StatsCtrl">
+  <p>Poll stats</p>
+  <h1>{{poll.name}}</h1>
+  <table border="1">
+    <tr ng-repeat="record in data|orderBy:value">
+      <td>{{$index + 1}}</td>
+      <td>{{record.label}}</td>
+    </tr>
+  </table>
+  <table>
+    <tr ng-repeat="record in data|orderBy:value">
+      <td><div class="color" style="background:{{record.color}}"></div></td>
+      <td>{{record.label}}</td>
+      <td>{{record.value}}%</td>
+    </tr>
+  </table>
+  <canvas id="canvas" height="450" width="600"></canvas>
+
+
+</div>

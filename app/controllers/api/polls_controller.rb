@@ -19,10 +19,10 @@ class Api::PollsController < ApplicationController
         @ballot = @poll.ballots.create(:email => "anonymous@greeneg.gs")
         cookies["#{@poll.id}-ballot-key"] = {:value => @ballot.key, :expires => 10.years.from_now}
       end
-      render json:@poll.to_json
+      render json:@poll.to_json(:include => [:calculate_borda, :calculate_irv])
     else
       @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
-      render json:@poll.to_json
+      render json:@poll.to_json(:methods => [:calculate_borda, :calculate_irv])
     end
 
 

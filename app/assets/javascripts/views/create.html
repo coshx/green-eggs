@@ -20,7 +20,7 @@ Creating New Poll
     <button id="add-choice" ng-click="addChoice(newChoice)">Add</button>
 
     <p ng-repeat="choice in poll.choices">
-      {{choice.original}}
+      {{choice.original}} <a href="#" id="remove-choice" ng-click="removeChoice($index)">Remove</a>
     </p>
 
     <button id="save-poll" ng-click="savePoll(poll)">Save your poll</button>
