@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  #protect_from_forgery
 
   rescue_from Mongoid::Errors::DocumentNotFound, BSON::InvalidObjectId do |exception|
     render :file => File.join(Rails.root, "public", "404"), :status => 404
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       #redirect_to api_vote_on_ballot_path(:poll_id => @poll.id, :ballot_key => @ballot.key)
     else
       @ballot = @poll.ballots.where(:key => params[:ballot_key]).first
-      render :file => File.join(Rails.root, "public", "404"), :status => 404 if !@ballot.present?
+      #render :file => File.join(Rails.root, "public", "404"), :status => 404 if !@ballot.present?
     end
   end
 end

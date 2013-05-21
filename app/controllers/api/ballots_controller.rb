@@ -31,16 +31,14 @@ class Api::BallotsController < ApplicationController
       @ballot.choices.delete_all
     end
 
-
     if params[:ballot][:choices]
       params[:ballot][:choices].each_with_index do |original, index|
         @ballot.choices.create(:original => original[:original], :priority => index)
+        @ballot.inspect
       end
     end
-
-    @ballot.update_attributes(params[:ballot])
-    flash[:notice] = 'Your vote was successfully recorded'
-    render json:@poll
-    #render :js => "$(function() { window.location = '#{api_poll_results_path(:ballot_key => @ballot.key, :poll_id => @poll.id)}'});"
+    #params[:ballot].delete :id
+    #@ballot.update_attributes(params[:ballot])
+    render json:@poll.to_json
   end
 end

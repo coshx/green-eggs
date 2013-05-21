@@ -43,7 +43,7 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   $scope.saveBallot = (choices) ->
     new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->
       $scope.poll = result
-      $location.path("/stats/#{result._id}")
+      $location.path("/stats/#{result.pollId}")
 
     console.log "Choices are already saved in javascript variable inside your browser."
 ]

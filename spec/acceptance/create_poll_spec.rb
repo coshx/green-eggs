@@ -28,6 +28,11 @@ feature %{
     page.should have_content('1) show a huge carrot')
     click_link "Remove"
     page.should have_no_content('1) show a huge carrot')
+    click_link "show a huge carrot"
+    click_button "Make a Vote!"
+    page.should have_content('show a huge carrot 100%')
+    page.should have_content('1 show a huge carrot')
+
   end
 
 
