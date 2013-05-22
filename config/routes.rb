@@ -1,7 +1,9 @@
 GreenEggs::Application.routes.draw do
+  devise_for :users
+
   root :to => 'home#index'
 
-
+  match '/auth/:provider/callback' => 'authentications#create'
   namespace :api do
     resources :ballots, :except => [:new, :edit]
     resources :polls, :except => [:new, :edit]

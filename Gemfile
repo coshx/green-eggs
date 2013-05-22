@@ -12,6 +12,11 @@ gem 'therubyracer'
 gem 'formtastic'
 gem 'ruby_flipper'
 gem "angular-rails"
+gem 'omniauth'
+gem 'devise'
+gem "omniauth-facebook"
+gem "omniauth-twitter"
+gem 'omniauth-linkedin'
 
 
 # bootstrap style library

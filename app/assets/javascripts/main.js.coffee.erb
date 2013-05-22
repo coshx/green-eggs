@@ -14,6 +14,11 @@ GreenEggs.factory "Ballot", ["railsResourceFactory", (railsResourceFactory) ->
     name: "ballot"
 ]
 
+GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$location", "$dialog", ($scope, $http, $routeParams, $location, $dialog) ->
+  $scope.currentUser = window.current_user
+]
+
+
 GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
 
 ]

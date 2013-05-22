@@ -8,8 +8,9 @@
     = javascript_include_tag "application"
     -#%link{:href => "http://fonts.googleapis.com/css?family=Delius+Swash+Caps", :rel => "stylesheet", :type => "text/css"}
       = csrf_meta_tags
+    = render "shared/preload_data"
   %body
-    .navbar.navbar-inverse.navbar-fixed-top
+    .navbar.navbar-inverse.navbar-fixed-top{'ng-controller' => 'HeaderCtrl'}
       .navbar-inner
         .container
           %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -43,9 +44,12 @@
                   %li
                     %a{:href => "#"} One more separated link
             %form.navbar-form.pull-right
-              %input.span2{:placeholder => "Email", :type => "text"}/
-              %input.span2{:placeholder => "Password", :type => "password"}/
-              %button.btn{:type => "submit"} Sign in
+              .login-section{'ng-hide' => 'currentUser'}
+                %input.span2{:placeholder => "Email", :type => "text"}/
+                %input.span2{:placeholder => "Password", :type => "password"}/
+                %button.btn{:type => "submit"} Sign in
+              .login-section{'ng-show' => 'currentUser'}
+                {{currentUser.name}}
           / /.nav-collapse
     .container.main
       %div{'ng-view' => 'ng-view'}
