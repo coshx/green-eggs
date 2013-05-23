@@ -1,0 +1,10 @@
+<div ng-controller="PollsCtrl">
+  <div ng-repeat="poll in polls">
+    <h1>{{poll.name}}</h1>
+    <a href="/polls/{{poll._id}}">Vote link</a>
+    <a href="/stats/{{poll._id}}">Stats link</a>
+      <div ng-repeat="data in poll.calculateBorda">
+        {{data.original}} - {{data.tally * 100}}%
+      </div>
+  </div>
+</div>

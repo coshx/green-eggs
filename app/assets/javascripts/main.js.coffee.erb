@@ -22,6 +22,11 @@ GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$locati
 GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
 
 ]
+GreenEggs.controller "PollsCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
+  users = Poll.query(query: $scope.search).then((polls) ->
+    $scope.polls = polls
+  )
+]
 
 GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
   $scope.id = $routeParams.id
@@ -106,5 +111,7 @@ GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $ro
     templateUrl: "<%= asset_path 'views/poll.html' %>"
   ).when("/stats/:id",
     templateUrl: "<%= asset_path 'views/stats.html' %>"
+  ).when("/polls",
+    templateUrl: "<%= asset_path 'views/polls.html' %>"
   )
 ]

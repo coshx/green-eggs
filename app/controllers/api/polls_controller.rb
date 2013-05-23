@@ -5,8 +5,12 @@ class Api::PollsController < ApplicationController
 
   # GET /polls
   def index
-    @polls = Poll.all
-    render json:@polls.to_json
+    if user_signed_in?
+      @polls = Poll.where(:user_id => current_user._id)
+    else
+      @polls = Poll.all
+    end
+    render json:@polls.to_json(:methods => [:calculate_borda, :calculate_irv])
   end
 
   # GET /polls/1
