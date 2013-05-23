@@ -3,6 +3,7 @@
 
 $main-green: #1a631c;
 $link-color: #e74c3c;
+$text-color: #666666;
 
 body {
   background: $main-green;
@@ -127,5 +128,24 @@ html body { background-color: #f7f7f7; }
     -ms-transform: rotate(45deg);  /* IE 9 */
     -o-transform: rotate(45deg);  /* Opera 10.50-12.00 */
     transform: rotate(45deg);
+  }
+}
+
+.green-btn {
+  display:block;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left:20px;
+  color:$text-color;
+  position:relative;
+  .right-arrow {
+    position:absolute;
+    right:20px;
+    top:35px;
+  }
+  &:hover {
+    background: #a5c675;
+    color:white;
+    text-decoration: none;
   }
 }
