@@ -64,10 +64,28 @@ html body { background-color: #f7f7f7; }
 }
 
 .navbar-inverse {
+  .btn-navbar {
+    background: url('/assets/expand.png');
+    width:30px;
+    height:30px;
+    margin-top:13px;
+    margin-right:15px;
+    border:none;
+    box-shadow:none;
+    content: ' ';
+    &:hover {
+      border:none;
+    }
+  }
   .navbar-inner {
     background: #8ba862;
     border:none;
     box-shadow:none;
+    padding:0px;
+    .title {
+      margin-top: 20px;
+      margin-left:100px;
+    }
     .nav li a, a {
       color:white;
     }
