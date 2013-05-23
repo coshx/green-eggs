@@ -53,3 +53,55 @@ html body { background-color: #f7f7f7; }
   height:30px;
   content: ' ';
 }
+
+.poll-details {
+  .option {
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding: 10px;
+    background:rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+}
+
+.navbar-inverse {
+  .navbar-inner {
+    background: #8ba862;
+    border:none;
+    box-shadow:none;
+    .nav li a, a {
+      color:white;
+    }
+  }
+}
+
+.navbar {
+
+  .logo {
+    content: ' ';
+    width: 70px;
+    height:37px;
+    padding:0px;
+    background: url('/assets/logo-small.png');
+    z-index:1;
+  }
+  .brand {
+    background: #a5c675;
+    position:relative;
+  }
+  .green-triangle {
+    z-index:-1;
+    position:absolute;
+    bottom:-10px;
+    background: #a5c675;
+    content: ' ';
+    width:20px;
+    height:20px;
+    left:50%;
+    margin-left:-5px;
+    -webkit-transform: rotate(45deg);  /* Chrome, Safari 3.1+ */
+    -moz-transform: rotate(45deg);  /* Firefox 3.5-15 */
+    -ms-transform: rotate(45deg);  /* IE 9 */
+    -o-transform: rotate(45deg);  /* Opera 10.50-12.00 */
+    transform: rotate(45deg);
+  }
+}

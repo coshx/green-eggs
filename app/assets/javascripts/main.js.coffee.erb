@@ -8,10 +8,32 @@ GreenEggs.factory "Poll", ["railsResourceFactory", (railsResourceFactory) ->
     name: "poll"
 ]
 
+GreenEggs.factory "User", ["railsResourceFactory", (railsResourceFactory) ->
+  railsResourceFactory
+    url: "/api/users"
+    name: "user"
+]
+
+
 GreenEggs.factory "Ballot", ["railsResourceFactory", (railsResourceFactory) ->
   railsResourceFactory
     url: "/api/ballots"
     name: "ballot"
+]
+
+GreenEggs.directive "selectPeople", ->
+  {
+  restrict: 'E'
+  scope:
+    currentPerson: "=currentPerson"
+    choose: "&"
+  templateUrl:"<%= asset_path 'views/directives/select_people.html' %>"
+  }
+
+GreenEggs.controller "SelectUserCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
+  users = Poll.query(query: $scope.search).then((polls) ->
+    $scope.polls = polls
+  )
 ]
 
 GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$location", "$dialog", ($scope, $http, $routeParams, $location, $dialog) ->
