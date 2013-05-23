@@ -13,7 +13,7 @@ class AuthenticationsController < ApplicationController
       authentication = Authentication.where(:uid => uid).first
       if authentication
         #user exists
-        user = authentication.user
+        user = User.where(:_id => "#{authentication.user_id}").first
         sign_in(user)
       else
         #new user

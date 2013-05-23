@@ -6,6 +6,7 @@ class Ballot
   field :invitationMessage, :type => String
   field :cast, :type => Boolean, :default => false
   field :key, :type => String
+  field :user_id, :type => Integer
   index :key
 
   embeds_many :choices

@@ -1,6 +1,7 @@
 class Poll
   include Mongoid::Document
   include Mongoid::Timestamps
+  field :user_id, :type => Integer
   field :name, :type => String
   field :description, :type => String
   field :owner_email, :type => String

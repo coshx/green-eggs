@@ -50,6 +50,7 @@
                 %button.btn{:type => "submit"} Sign in
               .login-section{'ng-show' => 'currentUser'}
                 {{currentUser.name}}
+                %a.pull-right{"data-method" => "delete", :href => "/users/sign_out"} Log out
           / /.nav-collapse
     .container.main
       %div{'ng-view' => 'ng-view'}
