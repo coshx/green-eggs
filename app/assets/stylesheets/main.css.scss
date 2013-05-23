@@ -78,6 +78,10 @@ html body { background-color: #f7f7f7; }
     }
   }
   .navbar-inner {
+    .nav {
+      margin-top:8px;
+    }
+
     background: #8ba862;
     border:none;
     box-shadow:none;
@@ -93,7 +97,9 @@ html body { background-color: #f7f7f7; }
 }
 
 .navbar {
-
+  .login-section {
+    margin-top:18px;
+  }
   .logo {
     content: ' ';
     width: 70px;
