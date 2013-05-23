@@ -37,8 +37,10 @@ class Api::BallotsController < ApplicationController
         @ballot.inspect
       end
     end
-    #params[:ballot].delete :id
-    #@ballot.update_attributes(params[:ballot])
+    if user_signed_in?
+      @ballot.user_id = current_user._id
+      @ballot.save!
+    end
     render json:@poll.to_json
   end
 end

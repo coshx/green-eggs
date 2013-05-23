@@ -4,7 +4,6 @@ gem 'rails', '~> 3.2.11'
 
 gem 'haml'
 gem 'haml-rails'
-gem 'heroku'
 gem 'json'
 gem 'mongoid', '~> 2.4.11'
 gem 'bson_ext'

@@ -45,6 +45,12 @@ class Api::PollsController < ApplicationController
       params["poll"]["allow_user_choices"] = false
     end
     @poll = Poll.new(params[:poll])
+
+    if user_signed_in?
+      @poll.user_id = current_user._id
+      @poll.save!
+    end
+
     seed_poll_with_issues(@poll, issues) if issues
     if @poll.save
       render json:@poll.to_json
