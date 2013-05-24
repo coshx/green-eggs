@@ -21,7 +21,6 @@ a {
 html body { background-color: #f7f7f7; }
 
 .main {
-  margin-top:40px;
   .centered {
     display:block;
     margin: auto;
@@ -153,6 +152,10 @@ html body { background-color: #f7f7f7; }
 
 .green-view {
   .green-controls {
+    hr {
+      margin-bottom:0px;
+      padding-bottom:0px;
+    }
     position:absolute;
     bottom:0;
     width: 100%;
