@@ -1,5 +1,6 @@
 <div ng-controller="CreateCtrl" class="green-view">
-
+  <div class="green-space">
+  </div>
   <div ng-hide="createAnswers">
     <div>
       <label>Ask your question:</label>
@@ -8,9 +9,12 @@
       <input class="span6" id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
     </div>
 
-    <p>Allow people
-    to add custom options?
-    </p>
+    <div>
+      <br>
+    Allow people to add
+    <br>custom options?
+    <switch></switch>
+    </div>
 
     <div class="green-controls">
     </div>

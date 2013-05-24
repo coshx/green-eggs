@@ -30,11 +30,29 @@ GreenEggs.directive "selectPeople", ->
   templateUrl:"<%= asset_path 'views/directives/select_people.html' %>"
   }
 
+GreenEggs.directive "switch", ->
+  {
+  restrict: 'E'
+  scope:
+    choose: "&"
+  templateUrl:"<%= asset_path 'views/directives/switch.html' %>"
+  }
+
 GreenEggs.controller "SelectUserCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
   users = Poll.query(query: $scope.search).then((polls) ->
     $scope.polls = polls
   )
 ]
+GreenEggs.controller "SwitchCtrl", ["$scope", ($scope) ->
+  $scope.greenSwitchStatus = true
+  $scope.switch = ->
+    if $scope.greenSwitchStatus == true
+      greenSwitchStatus = false
+    else
+      greenSwitchStatus = true
+    $scope.greenSwitchStatus = greenSwitchStatus
+]
+
 
 GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$location", "$dialog", ($scope, $http, $routeParams, $location, $dialog) ->
   $scope.currentUser = window.current_user

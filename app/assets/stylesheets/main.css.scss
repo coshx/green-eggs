@@ -21,6 +21,14 @@ a {
 html body { background-color: #f7f7f7; }
 
 .main {
+  font-size:16px;
+  label {
+    font-size:16px;
+  }
+  input {
+    font-size:16px;
+    height: 40px;
+  }
   .centered {
     display:block;
     margin: auto;
@@ -161,4 +169,68 @@ html body { background-color: #f7f7f7; }
     width: 100%;
     left:0;
   }
+}
+
+switch {
+  float: right;
+  display:block;
+  width:100px;
+  margin-top:-20px;
+}
+
+.green-switch {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  padding-top:1px;
+  position:relative;
+  width:100px;
+  height:40px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.2) inset;
+  background: rgba(0,0,0,0.1);
+  .green-yes {
+    position:absolute;
+    left:0;
+    z-index:-1;
+    padding-top:10px;
+    padding-left:10px;
+
+  }
+  .green-no {
+    position:absolute;
+    right:0;
+    z-index:-1;
+    padding-top:10px;
+    padding-right:15px;
+  }
+  .green-switch-box {
+    content:' ';
+    width:50px;
+    height:38px;
+    background:rgb(240,240,240);
+    -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+    -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+    -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
+    transition: all 0.3s ease-out;
+    &.yes-true {
+      margin-left:1px;
+    }
+    &.yes-false {
+      margin-left:49px;
+    }
+    &.yes-undefined {
+      margin-left:49px;
+    }
+  }
+
+}
+
+.green-space {
+  height:30px;
+  content:' ';
 }
