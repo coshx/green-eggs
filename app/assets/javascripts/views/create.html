@@ -1,19 +1,35 @@
-<div ng-controller="CreateCtrl">
-Creating New Poll
+<div ng-controller="CreateCtrl" class="green-view">
 
   <div ng-hide="createAnswers">
-    <label>Ask your question:</label>
-    <input id="question" type="text" placeholder="Question" ng-model='poll.name'>
-    <label>Your email address:</label>
-    <input id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
+    <div>
+      <label>Ask your question:</label>
+      <input class="span6" id="question" type="text" placeholder="Question" ng-model='poll.name'>
+      <label>Your email address:</label>
+      <input class="span6" id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
+    </div>
 
-
-    Allow people
+    <p>Allow people
     to add custom options?
-    <button id="go_to_preseed" ng-click="createAnswers=true">Save your poll</button>
+    </p>
+
+    <div class="green-controls">
+    </div>
+
   </div>
 
-  <div ng-show="createAnswers" class="">
+  <div class="row green-controls">
+    <div class="span6">
+      <hr/>
+      <a id="go_to_preseed" class="green-btn" ng-click="createAnswers=true">
+        <div>
+          <img src="/assets/stats.png"> Preseed answers
+        </div>
+        <img src="/assets/right-arrow.png" class="right-arrow">
+      </a>
+    </div>
+  </div>
+
+  <div ng-show="createAnswers" class="green-view">
     <h1>{{poll.name}}</h1>
     <h4>Pre-seed answers</h4>
     <input type="text" id="answer" placeholder="Answer" ng-model='newChoice.original'>
@@ -30,3 +46,4 @@ Creating New Poll
 
 
 </div>
+
