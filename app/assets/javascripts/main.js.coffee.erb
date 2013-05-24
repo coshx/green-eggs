@@ -38,6 +38,11 @@ GreenEggs.controller "SelectUserCtrl", ["$scope", "$http", "Poll", "Ballot", "$r
 
 GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$location", "$dialog", ($scope, $http, $routeParams, $location, $dialog) ->
   $scope.currentUser = window.current_user
+  $location.hideHeader = true if $location.url() == "/"
+  $scope.$on "$routeChangeSuccess", (next, current) ->
+    $scope.hideHeader = true if $location.url() == "/"
+    $scope.hideHeader = false if $location.url() != "/"
+
 ]
 
 

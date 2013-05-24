@@ -11,7 +11,7 @@
     = render "shared/preload_data"
   %body
     .navbar.navbar-inverse.navbar-fixed-top{'ng-controller' => 'HeaderCtrl'}
-      .navbar-inner
+      .navbar-inner{'ng-show' => '!hideHeader'}
         .container
           %button.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
           %a.brand{:href => "/"}
