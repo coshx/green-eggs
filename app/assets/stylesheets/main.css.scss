@@ -22,6 +22,15 @@ html body { background-color: #f7f7f7; }
 
 .main {
   font-size:16px;
+  .input-append {
+      input {
+        width:80%;
+      }
+      button {
+        height:40px;
+        width:20%;
+      }
+    }
   label {
     font-size:16px;
   }
@@ -64,10 +73,27 @@ html body { background-color: #f7f7f7; }
 
 .poll-details {
   .option {
+    position:relative;
     border-bottom: 1px solid rgba(0,0,0,0.2);
-    padding: 10px;
+    padding-top:20px;
+    padding-bottom:20px;
+    width:100%;
+    margin-left:-20px;
+    padding-right:40px;
     background:rgba(0,0,0,0.1);
     cursor: pointer;
+    span {
+      padding-left:20px;
+      padding-right:20px;
+      display:block;
+      width:80%;
+      min-width:250px;
+    }
+    a {
+      position:absolute;
+      right:20px;
+      top:20px;
+    }
   }
 }
 

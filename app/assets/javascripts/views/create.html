@@ -21,7 +21,7 @@
 
   </div>
 
-  <div class="row green-controls">
+  <div class="row green-controls" ng-hide="createAnswers">
     <div class="span6">
       <hr/>
       <a id="go_to_preseed" class="green-btn" ng-click="createAnswers=true">
@@ -33,20 +33,37 @@
     </div>
   </div>
 
-  <div ng-show="createAnswers" class="green-view">
+  <div ng-show="createAnswers" class="green-view poll-details">
     <h1>{{poll.name}}</h1>
     <h4>Pre-seed answers</h4>
-    <input type="text" id="answer" placeholder="Answer" ng-model='newChoice.original'>
-    <button id="add-choice" ng-click="addChoice(newChoice)">Add</button>
 
-    <div ng-repeat="choice in poll.choices" class="option">
-      {{choice.original}} <a href="#" id="remove-choice" ng-click="removeChoice($index)">Remove</a>
+
+    <div class="input-append">
+      <input type="text" class="span6" id="answer" placeholder="Answer" ng-model='newChoice.original'>
+      <button class="btn" type="button" id="add-choice" ng-click="addChoice(newChoice)">Add</button>
+    </div>
+    <div class="green-space">
     </div>
 
-    <button id="save-poll" ng-click="savePoll(poll)">Save your poll</button>
+    <div ng-repeat="choice in poll.choices" class="option">
+      <span>{{choice.original}}</span><a href="#" id="remove-choice" ng-click="removeChoice($index)">Remove</a>
+    </div>
+
   </div>
 
   <select-people current-person="" choose=""></select-people>
+
+  <div class="row green-controls" ng-show="createAnswers">
+    <div class="span6">
+      <hr/>
+      <a id="save-pol" class="green-btn" ng-click="savePoll(poll)">
+        <div>
+          <img src="/assets/stats.png"> Save your poll
+        </div>
+        <img src="/assets/right-arrow.png" class="right-arrow">
+      </a>
+    </div>
+  </div>
 
 
 </div>
