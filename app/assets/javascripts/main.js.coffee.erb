@@ -87,6 +87,17 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   $scope.removeChoice = (choice, index) ->
     $scope.poll.choices.push(choice)
     $scope.ballot.choices.splice(index, 1)
+  $scope.up = (index) ->
+    if index > 0
+      c = $scope.ballot.choices[index]
+      $scope.ballot.choices[index] =  $scope.ballot.choices[index - 1]
+      $scope.ballot.choices[index - 1] = c
+
+  $scope.down = (index) ->
+    if index + 2 < $scope.ballot.choices.length
+      c = $scope.ballot.choices[index]
+      $scope.ballot.choices[index] =  $scope.ballot.choices[index + 1]
+      $scope.ballot.choices[index + 1] = c
 
   $scope.saveBallot = (choices) ->
     new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->
