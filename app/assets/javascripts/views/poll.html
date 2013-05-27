@@ -1,9 +1,9 @@
 <div class="poll-details" ng-controller="PollCtrl">
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
-  <div ng-repeat="choice in ballot.choices">{{$index+1}}) {{choice.original}} <a ng-click="removeChoice($index)" href="#">Remove</a></div>
+  <div ng-repeat="choice in ballot.choices">{{$index+1}}) {{choice.original}} <a ng-click="removeChoice(choice, $index)" href="#">Remove</a></div>
 
-  <div ng-repeat="choice in poll.choices" ng-click="addChoice(choice)" class="option"><a href="#">{{choice.original}}</a></div>
+  <div ng-repeat="choice in poll.choices" ng-click="addChoice(choice, $index)" class="option"><a href="#">{{choice.original}}</a></div>
 
 
 
