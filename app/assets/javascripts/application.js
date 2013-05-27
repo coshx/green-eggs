@@ -2,6 +2,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.touchSwipe
 //= require firehose
 //= require bootstrap
 //= require angular

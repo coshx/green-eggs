@@ -4,3 +4,4 @@ $ ->
       $(".green-controls").css("position", "static")
     else
       $(".green-controls").css("position", "absolute")
+
