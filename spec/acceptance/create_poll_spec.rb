@@ -11,7 +11,7 @@ feature %{
     visit "/create"
     fill_in "question", :with => 'The best way to seduce a rabbit?'
     fill_in "email", :with => "rabbit@stewieland.com"
-    click_button "go_to_preseed"
+    page.execute_script("$('#go_to_preseed').click()")
     page.should have_content('The best way to seduce a rabbit?')
     page.should have_content('Pre-seed answers')
     fill_in "answer", :with => "show a huge carrot"
@@ -20,7 +20,7 @@ feature %{
     click_button "add-choice"
     fill_in "answer", :with => "show a gun"
     click_button "add-choice"
-    click_button "save-poll"
+    page.execute_script("$('#save-poll').click()")
     page.should have_content('Poll details')
     page.should have_content('The best way to seduce a rabbit?')
     page.should have_no_content('1) show a huge carrot')
