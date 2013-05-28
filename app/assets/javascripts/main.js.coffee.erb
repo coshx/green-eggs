@@ -85,10 +85,14 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
     $scope.ballot.choices.push(choice)
     $scope.poll.choices.splice(index, 1)
     $(".swipe").swipe
-    swipeUp: (event, direction, distance, duration, fingerCount) ->
-      alert "haha"
-    swipeDown: (event, direction, distance, duration, fingerCount) ->
-      alert "yahoo"
+      swipeUp: (event, direction, distance, duration, fingerCount) ->
+        alert "up"
+      swipeDown: (event, direction, distance, duration, fingerCount) ->
+        alert "down"
+      swipeLeft: (event, direction, distance, duration, fingerCount) ->
+        alert "left"
+      swipeRigt: (event, direction, distance, duration, fingerCount) ->
+        alert "right"
   $scope.removeChoice = (choice, index) ->
     $scope.poll.choices.push(choice)
     $scope.ballot.choices.splice(index, 1)
