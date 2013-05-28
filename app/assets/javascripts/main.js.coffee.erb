@@ -82,15 +82,38 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   )
 
   $scope.setSwipe = (n) ->
-    $(".option#{n}").swipe
-      swipeUp: (event, direction, distance, duration, fingerCount) ->
-        alert event.target
-      swipeDown: (event, direction, distance, duration, fingerCount) ->
-        alert "down"
-      swipeLeft: (event, direction, distance, duration, fingerCount) ->
-        alert "left"
-      swipeRight: (event, direction, distance, duration, fingerCount) ->
-        alert "right"
+    console.log "setting swiping for option#{n}"
+    setTimeout ( =>
+      #$(".option#{n}").css("background", "red")
+      $(".option#{n}").swipe
+        swipeUp: (event, direction, distance, duration, fingerCount) ->
+          $scope.up($(event.target).data("index"))
+        swipeDown: (event, direction, distance, duration, fingerCount) ->
+          $scope.down($(event.target).data("index"))
+        swipeLeft: (event, direction, distance, duration, fingerCount) ->
+          element = $(event.target)
+          index = element.data("index")
+          element.parent().css("margin-left", "-110%")
+          setTimeout ( =>
+            element.parent().hide()
+            setTimeout ( =>
+              $scope.removeChoice($scope.ballot.choices[index], index)
+              $scope.$apply()
+            ), 300
+          ), 300
+        swipeRight: (event, direction, distance, duration, fingerCount) ->
+          element = $(event.target)
+          index = element.data("index")
+          element.parent().css("margin-left", "110%")
+          setTimeout ( =>
+            element.parent().hide()
+            setTimeout ( =>
+              $scope.removeChoice($scope.ballot.choices[index], index)
+              $scope.$apply()
+            ), 300
+          ), 300
+    ), 100
+
 
   $scope.addChoice = (choice, index) ->
     $scope.ballot.choices.push(choice)
@@ -104,14 +127,12 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
       c = $scope.ballot.choices[index]
       $scope.ballot.choices[index] =  $scope.ballot.choices[index - 1]
       $scope.ballot.choices[index - 1] = c
-      $scope.setSwipe()
 
   $scope.down = (index) ->
     if index + 2 < $scope.ballot.choices.length
       c = $scope.ballot.choices[index]
       $scope.ballot.choices[index] =  $scope.ballot.choices[index + 1]
       $scope.ballot.choices[index + 1] = c
-      $scope.setSwipe()
 
   $scope.saveBallot = (choices) ->
     new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->

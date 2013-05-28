@@ -7,12 +7,12 @@
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
   <div class="swipe option option{{$index}}" ng-repeat="choice in ballot.choices">
-    <div class="content">
+    <div class="content" data-index="{{$index}}">
       <img src='/assets/head.png' class="header-image">
         {{choice.original}}<a href="#" ng-click="up($index)">/\</a>
         <a href="#" ng-click="down($index)">\/</a><a ng-click="removeChoice(choice, $index)" href="#">Remove</a>
       <div class="checkbox-filled">
-        {{$index}}
+        {{$index + 1}}
       </div>
     </div>
   </div>
