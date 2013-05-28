@@ -88,10 +88,11 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
       if n != ""
         $(".option#{n}").swipe
           swipeUp: (event, direction, distance, duration, fingerCount) ->
-            alert "haha"
             $scope.up($(event.target).data("index"))
+            $scope.$apply()
           swipeDown: (event, direction, distance, duration, fingerCount) ->
             $scope.down($(event.target).data("index"))
+            $scope.$apply()
           swipeLeft: (event, direction, distance, duration, fingerCount) ->
             element = $(event.target)
             index = element.data("index")
