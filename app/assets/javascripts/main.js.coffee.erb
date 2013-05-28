@@ -80,6 +80,9 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   Poll.get(id:  $scope.id).then((poll) =>
     $scope.poll = poll
   )
+  $ ->
+    $(".sortable").sortable()
+    $(".sortable").disableSelection()
 
   $scope.setSwipe = (n) ->
     console.log "setting swiping for option#{n}"

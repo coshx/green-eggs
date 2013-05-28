@@ -79,12 +79,10 @@ html body { background-color: #f7f7f7; }
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  ul {
+    list-style-type: none;
+  }
   .option {
-    -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-    -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
-    -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
-    transition: all 0.3s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
-
     position:relative;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     padding-top:20px;

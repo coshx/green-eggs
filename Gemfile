@@ -16,6 +16,7 @@ gem 'devise'
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 gem 'omniauth-linkedin'
+gem 'touchpunch-rails'
 
 
 # bootstrap style library
@@ -31,6 +32,7 @@ gem 'firehose'
 # in production environments by default.
 
 group :assets do
+  gem 'jquery-ui-rails'
   gem 'sass-rails'
   gem 'bootstrap-sass'
   gem 'coffee-rails'
