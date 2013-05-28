@@ -134,7 +134,8 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
       $scope.ballot.choices[index - 1] = c
 
   $scope.down = (index) ->
-    if index + 2 < $scope.ballot.choices.length
+    console.log "down"
+    if index + 2 <= $scope.ballot.choices.length
       c = $scope.ballot.choices[index]
       $scope.ballot.choices[index] =  $scope.ballot.choices[index + 1]
       $scope.ballot.choices[index + 1] = c
