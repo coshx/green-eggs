@@ -1,9 +1,29 @@
+<style>
+  html body {
+    background:white;
+  }
+</style>
 <div class="poll-details" ng-controller="PollCtrl">
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
-  <div class="swipe" ng-repeat="choice in ballot.choices">{{$index+1}}) {{choice.original}}<a href="#" ng-click="up($index)">/\</a> <a href="#" ng-click="down($index)">\/</a><a ng-click="removeChoice(choice, $index)" href="#">Remove</a></div>
+  <div class="swipe option" ng-repeat="choice in ballot.choices">
+    <div class="content">
+      <img src='/assets/head.png' class="header-image">
+        {{choice.original}}<a href="#" ng-click="up($index)">/\</a>
+        <a href="#" ng-click="down($index)">\/</a><a ng-click="removeChoice(choice, $index)" href="#">Remove</a>
+      <div class="checkbox-filled">
+        {{$index}}
+      </div>
+    </div>
+  </div>
 
-  <div ng-repeat="choice in poll.choices" ng-click="addChoice(choice, $index)" class="option"><a href="#">{{choice.original}}</a></div>
+  <div ng-repeat="choice in poll.choices" ng-click="addChoice(choice, $index)" class="option">
+    <div class="content">
+      {{choice.original}}
+      <div class="checkbox-empty">
+      </div>
+    </div>
+  </div>
 
 
 
