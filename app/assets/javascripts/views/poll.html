@@ -27,8 +27,16 @@
   </div>
 
 
-
-
-  <button ng-click="saveBallot(ballot.choices)">Make a Vote!</button>
+  <div class="row green-controls" ng-show="createAnswers">
+    <div class="span6">
+      <hr/>
+      <a id="save-poll" class="green-btn" ng-click="saveBallot(ballot.choices)">
+        <div>
+          <img src="/assets/stats.png"> Save answer and view stats
+        </div>
+        <img src="/assets/right-arrow.png" class="right-arrow">
+      </a>
+    </div>
+  </div>
 
 </div>
