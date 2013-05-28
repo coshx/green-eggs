@@ -81,9 +81,7 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
     $scope.poll = poll
   )
 
-  $scope.addChoice = (choice, index) ->
-    $scope.ballot.choices.push(choice)
-    $scope.poll.choices.splice(index, 1)
+  $scope.setSwipe = ->
     $(".swipe").swipe
       swipeUp: (event, direction, distance, duration, fingerCount) ->
         alert event.target
@@ -93,6 +91,11 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
         alert "left"
       swipeRight: (event, direction, distance, duration, fingerCount) ->
         alert "right"
+
+  $scope.addChoice = (choice, index) ->
+    $scope.ballot.choices.push(choice)
+    $scope.poll.choices.splice(index, 1)
+    $scope.setSwipe()
   $scope.removeChoice = (choice, index) ->
     $scope.poll.choices.push(choice)
     $scope.ballot.choices.splice(index, 1)
@@ -101,12 +104,14 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
       c = $scope.ballot.choices[index]
       $scope.ballot.choices[index] =  $scope.ballot.choices[index - 1]
       $scope.ballot.choices[index - 1] = c
+      $scope.setSwipe()
 
   $scope.down = (index) ->
     if index + 2 < $scope.ballot.choices.length
       c = $scope.ballot.choices[index]
       $scope.ballot.choices[index] =  $scope.ballot.choices[index + 1]
       $scope.ballot.choices[index + 1] = c
+      $scope.setSwipe()
 
   $scope.saveBallot = (choices) ->
     new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->
