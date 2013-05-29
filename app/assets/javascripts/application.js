@@ -1,10 +1,10 @@
 
-//= require jquery
-//= require jquery_ujs
-//= require jquery.ui.widget
-//= require jquery-ui
-//= require jquery.ui.mouse
-//= require jquery.ui.touch-punch
+//= require jquery-1.7.2.min
+//- require jquery_ujs
+//= require jquery-ui.min
+//- require jquery.ui.widget
+//- require jquery.ui.mouse
+//= require jquery.ui.touch-punch.min
 
 //= require firehose
 //= require bootstrap
