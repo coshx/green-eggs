@@ -99,46 +99,6 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
     $(".sortable").disableSelection()
 
 
-
-  $scope.setSwipe = (n) ->
-    console.log "setting swiping for option#{n}"
-    setTimeout ( =>
-      #$(".option#{n}").css("background", "red")
-      if n != ""
-        $(".option#{n}").swipe
-          swipeUp: (event, direction, distance, duration, fingerCount) ->
-            $scope.up($(event.target).data("index"))
-            $scope.$apply()
-          swipeDown: (event, direction, distance, duration, fingerCount) ->
-            $scope.down($(event.target).data("index"))
-            $scope.$apply()
-          swipeLeft: (event, direction, distance, duration, fingerCount) ->
-            element = $(event.target)
-            index = element.data("index")
-            if index >= 0
-              element.parent().css("margin-left", "-110%")
-              setTimeout ( =>
-                element.parent().hide()
-                setTimeout ( =>
-                  $scope.removeChoice($scope.ballot.choices[index], index)
-                  $scope.$apply()
-                ), 300
-              ), 300
-          swipeRight: (event, direction, distance, duration, fingerCount) ->
-            element = $(event.target)
-            index = element.data("index")
-            if index >= 0
-              element.parent().css("margin-left", "110%")
-              setTimeout ( =>
-                element.parent().hide()
-                setTimeout ( =>
-                  $scope.removeChoice($scope.ballot.choices[index], index)
-                  $scope.$apply()
-                ), 300
-              ), 300
-    ), 100
-
-
   $scope.addChoice = (choice, index) ->
     $scope.ballot.choices.push(choice)
     $scope.poll.choices.splice(index, 1)
@@ -160,6 +120,10 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
       $scope.ballot.choices[index + 1] = c
 
   $scope.saveBallot = (choices) ->
+    ballot = []
+    angular.forEach $(".sortable li"), (el) ->
+      ballot[$(el).find(".checkbox-filled").text() - 1] = $scope.ballot.choices[$(el).data("index")]
+    $scope.ballot.choices = ballot
     new Ballot(poll_id:$scope.poll._id, id:$scope.poll._id, choices: $scope.ballot.choices).update().then (result) ->
       $scope.poll = result
       $location.path("/stats/#{result.pollId}")

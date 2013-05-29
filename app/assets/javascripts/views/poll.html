@@ -7,7 +7,7 @@
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
   <ul class="sortable">
-    <li class="swipe option" ng-repeat="choice in ballot.choices">
+    <li class="swipe option" ng-repeat="choice in ballot.choices" data-index="{{$index}}">
       <div class="content" data-index="{{$index}}">
         <img src='/assets/head.png' class="header-image">
           {{choice.original}}
