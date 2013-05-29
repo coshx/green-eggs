@@ -23,15 +23,12 @@ feature %{
     page.execute_script("$('#save-poll').click()")
     page.should have_content('Poll details')
     page.should have_content('The best way to seduce a rabbit?')
-    page.should have_no_content('1) show a huge carrot')
-    click_link "show a huge carrot"
-    page.should have_content('1) show a huge carrot')
+    binding.pry
+    page.execute_script("$('.option').click()")
     click_link "Remove"
-    page.should have_no_content('1) show a huge carrot')
-    click_link "show a huge carrot"
-    click_button "Make a Vote!"
-    page.should have_content('show a huge carrot 100%')
-    page.should have_content('1 show a huge carrot')
+    click_link "Remove"
+    page.execute_script("$('#save-poll').click()")
+    page.should have_content('show a gun 100%')
 
   end
 
