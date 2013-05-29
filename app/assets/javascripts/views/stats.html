@@ -1,19 +1,13 @@
 <div class="poll-details" ng-controller="StatsCtrl">
-  <p>Poll stats</p>
   <h1>{{poll.name}}</h1>
   <div class="row">
     <div class="span6">
-      <canvas id="canvas" height="450"></canvas>
+      <canvas id="canvas" height="400"></canvas>
     </div>
     <div class="span6">
-      <table border="1">
-        <tr ng-repeat="record in data|orderBy:value">
-          <td>{{$index + 1}}</td>
-          <td>{{record.label}}</td>
-        </tr>
-      </table>
       <table>
         <tr ng-repeat="record in data|orderBy:value">
+          <td>{{$index + 1}}</td>
           <td><div class="color" style="background:{{record.color}}"></div></td>
           <td>{{record.label}}</td>
           <td>{{record.value}}%</td>
