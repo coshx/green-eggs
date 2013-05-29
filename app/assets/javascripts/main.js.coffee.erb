@@ -80,9 +80,25 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   Poll.get(id:  $scope.id).then((poll) =>
     $scope.poll = poll
   )
+
+  $scope.recalculate = =>
+    setTimeout ( =>
+      i = 0
+      n = $(".sortable li").length
+      console.log n
+      while i < n
+        $(".sortable li:nth-child(" + (i + 1) + ")").find(".checkbox-filled").html (i + 1)
+        i++
+      0
+    ), 100
+
   $ ->
-    $(".sortable").sortable()
+    $(".sortable").sortable
+      update: (e, ui) ->
+        $scope.recalculate()
     $(".sortable").disableSelection()
+
+
 
   $scope.setSwipe = (n) ->
     console.log "setting swiping for option#{n}"

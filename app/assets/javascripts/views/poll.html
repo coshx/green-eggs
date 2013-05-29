@@ -3,7 +3,7 @@
     background:white;
   }
 </style>
-<div class="poll-details" ng-controller="PollCtrl">
+<div class="poll-details green-view" ng-controller="PollCtrl">
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
   <ul class="sortable">
@@ -17,7 +17,7 @@
           <a ng-click="removeChoice(choice, $index)" href="#">Remove</a>
         </div>
         <div class="checkbox-filled">
-          {{$index + 1}}
+            {{$index + 1}}
         </div>
       </div>
     </li>
@@ -29,15 +29,6 @@
       </div>
     </div>
   </div>
-
-  <ul class="sortable">
-    <li>
-      Hello
-    </li>
-    <li>
-      World
-    </li>
-  </ul>
 
   <div class="row green-controls">
     <div class="span6">
