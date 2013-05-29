@@ -173,18 +173,35 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
 #****************************************
 
 # Page title manipulations
+GreenEggs.run ["$location", "$rootScope", ($location, $rootScope) ->
+  $rootScope.location = $location
+  $rootScope.$on "$routeChangeSuccess", (event, current, previous) ->
+    if typeof current isnt "undefined"
+      if typeof current.$$route isnt "undefined"
+        console.log typeof current.$$route.title
+        if typeof current.$$route.title isnt "undefined"
+          $rootScope.title = current.$$route.title
+        else
+          $rootScope.title = ''
+]
+
 
 GreenEggs.config ["$locationProvider", "$routeProvider", ($locationProvider, $routeProvider) ->
   $locationProvider.html5Mode(true).hashPrefix('!')
   $routeProvider.when("/",
     templateUrl: "<%= asset_path 'views/main.html' %>"
+    title: 'Green Eggs'
   ).when("/create",
     templateUrl: "<%= asset_path 'views/create.html' %>"
+    title: 'Create a New Poll'
   ).when("/polls/:id",
     templateUrl: "<%= asset_path 'views/poll.html' %>"
+    title: 'Vote for the Poll'
   ).when("/stats/:id",
     templateUrl: "<%= asset_path 'views/stats.html' %>"
+    title: 'Statistics of the Poll'
   ).when("/polls",
     templateUrl: "<%= asset_path 'views/polls.html' %>"
+    title: 'List of Polls'
   )
 ]
