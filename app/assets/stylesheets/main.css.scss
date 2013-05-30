@@ -201,13 +201,22 @@ html body { background-color: #f7f7f7; }
 }
 
 .green-btn {
+  cursor: pointer;
   display:block;
   padding-top: 30px;
   padding-bottom: 30px;
   padding-left:20px;
   color:$text-color;
   position:relative;
-  background:rgb(247, 247, 247);
+  //background:rgba(247, 247, 247,0.8);
+  background-image: -webkit-gradient(
+    linear, left top, left bottom, from(rgba(247, 247, 247,0.7)),
+    to(rgba(247, 247, 247,1))
+  );
+  background-image: -moz-linear-gradient(
+    rgba(247, 247, 247,0.7) 0%, rgba(247, 247, 247,1) 95%
+  );
+
   .right-arrow {
     position:absolute;
     right:20px;
