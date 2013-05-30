@@ -35,6 +35,7 @@ GreenEggs.directive "switch", ->
   restrict: 'E'
   scope:
     choose: "&"
+    data: "=data"
   templateUrl:"<%= asset_path 'views/directives/switch.html' %>"
   }
 
@@ -44,12 +45,14 @@ GreenEggs.controller "SelectUserCtrl", ["$scope", "$http", "Poll", "Ballot", "$r
   )
 ]
 GreenEggs.controller "SwitchCtrl", ["$scope", ($scope) ->
+  window.greenSwitchStatus = false
   $scope.greenSwitchStatus = true
   $scope.switch = ->
     if $scope.greenSwitchStatus == true
       greenSwitchStatus = false
     else
       greenSwitchStatus = true
+    window.greenSwitchStatus = !greenSwitchStatus
     $scope.greenSwitchStatus = greenSwitchStatus
 ]
 
@@ -79,6 +82,11 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   Poll.get(id:  $scope.id).then((poll) =>
     $scope.poll = poll
   )
+  $scope.addOption = (choice) ->
+    choice.new = true
+    $scope.ballot.choices.push($.extend({},choice))
+    $scope.newChoice.original = ""
+    $scope.addOptionStatus = false
 
   $scope.recalculate = =>
     setTimeout ( =>
@@ -162,6 +170,7 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
 
   $scope.savePoll = (poll) ->
     $scope.poll.ownerEmail = $scope.currentUser.email if $scope.currentUser
+    $scope.poll.allow_user_choices = window.greenSwitchStatus
     new Poll(poll).create().then (result) ->
       $scope.poll = result
       address = "greeneg.gs/polls/#{result._id}"

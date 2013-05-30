@@ -34,7 +34,9 @@ class Api::BallotsController < ApplicationController
     if params[:ballot][:choices]
       params[:ballot][:choices].each_with_index do |original, index|
         @ballot.choices.create(:original => original[:original], :priority => index)
-        @ballot.inspect
+        if original[:new]
+          @poll.choices.create(:original => original[:original])
+        end
       end
     end
     if user_signed_in?

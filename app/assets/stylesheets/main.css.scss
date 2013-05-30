@@ -209,13 +209,6 @@ html body { background-color: #f7f7f7; }
   color:$text-color;
   position:relative;
   //background:rgba(247, 247, 247,0.8);
-  background-image: -webkit-gradient(
-    linear, left top, left bottom, from(rgba(247, 247, 247,0.7)),
-    to(rgba(247, 247, 247,1))
-  );
-  background-image: -moz-linear-gradient(
-    rgba(247, 247, 247,0.7) 0%, rgba(247, 247, 247,1) 95%
-  );
 
   .right-arrow {
     position:absolute;
@@ -240,6 +233,14 @@ html body { background-color: #f7f7f7; }
     bottom:0;
     width: 100%;
     left:0;
+    background-image: -webkit-gradient(
+      linear, left top, left bottom, from(rgba(247, 247, 247,0.7)),
+      to(rgba(247, 247, 247,1))
+    );
+    background-image: -moz-linear-gradient(
+      rgba(247, 247, 247,0.7) 0%, rgba(247, 247, 247,1) 95%
+    );
+
   }
 }
 

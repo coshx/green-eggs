@@ -6,6 +6,13 @@
 <div class="poll-details green-view" ng-controller="PollCtrl">
   <p class="visible-desktop">Poll details</p>
   <p>{{poll.name}}</p>
+  <a id="addOption" href="#" ng-show="poll.allowUserChoices" class="btn" ng-click="addOptionStatus=true">Add</a>
+  <div ng-show="addOptionStatus">
+    <div class="input-append">
+      <input type="text" ui-keypress="{enter: 'addOption(newChoice)'}" class="span6" id="answer" placeholder="Your option" ng-model='newChoice.original'>
+      <button class="btn"  type="button" id="add-choice" ng-click="addOption(newChoice)">Add</button>
+    </div>
+  </div>
   <ul class="sortable">
     <li class="swipe option" ng-repeat="choice in ballot.choices" data-index="{{$index}}">
       <div class="content" data-index="{{$index}}">
