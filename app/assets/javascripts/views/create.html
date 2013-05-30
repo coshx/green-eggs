@@ -5,8 +5,10 @@
     <div>
       <label>Ask your question:</label>
       <input class="span6" id="question" type="text" placeholder="Question" ng-model='poll.name'>
-      <label>Your email address:</label>
-      <input class="span6" id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
+      <div ng-hide='currentUser'>
+        <label>Your email address:</label>
+        <input class="span6" id="email" type="text" placeholder="Email" ng-model='poll.ownerEmail'>
+      </div>
     </div>
 
     <div>
@@ -37,8 +39,8 @@
 
 
     <div class="input-append">
-      <input type="text" class="span6" id="answer" placeholder="Answer" ng-model='newChoice.original'>
-      <button class="btn" type="button" id="add-choice" ng-click="addChoice(newChoice)">Add</button>
+      <input type="text" ui-keypress="{enter: 'addChoice(newChoice)'}" class="span6" id="answer" placeholder="Answer" ng-model='newChoice.original'>
+      <button class="btn"  type="button" id="add-choice" ng-click="addChoice(newChoice)">Add</button>
     </div>
     <div class="green-space">
     </div>

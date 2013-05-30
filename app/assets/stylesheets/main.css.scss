@@ -207,6 +207,7 @@ html body { background-color: #f7f7f7; }
   padding-left:20px;
   color:$text-color;
   position:relative;
+  background:rgb(247, 247, 247);
   .right-arrow {
     position:absolute;
     right:20px;
@@ -299,4 +300,8 @@ switch {
 
 #canvas {
   width: 100%;
+}
+
+.whitespace {
+  height:100px;
 }
