@@ -164,8 +164,8 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
     $scope.poll.ownerEmail = $scope.currentUser.email if $scope.currentUser
     new Poll(poll).create().then (result) ->
       $scope.poll = result
-      window.prompt "Share the poll, copy to clipboard: Ctrl+C, Enter", "/polls/#{result._id}"
-}
+      address = "greeneg.gs/polls/#{result._id}"
+      window.prompt("Share the poll, copy to clipboard: Ctrl+C, Enter", address)
       $location.path("/polls/#{result._id}")
 
   #$scope.saveImage()
