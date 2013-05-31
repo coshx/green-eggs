@@ -5,8 +5,10 @@
 </style>
 <div class="poll-details green-view" ng-controller="PollCtrl">
   <p class="visible-desktop">Poll details</p>
-  <p>{{poll.name}}</p>
-  <a id="addOption" href="#" ng-show="poll.allowUserChoices" class="btn" ng-click="addOptionStatus=true">Add</a>
+  <p>
+    <a id="addOption" href="#" ng-show="poll.allowUserChoices" class="btn" ng-click="addOptionStatus=true">+</a>
+    {{poll.name}}
+  </p>
   <div ng-show="addOptionStatus">
     <div class="input-append">
       <input type="text" ui-keypress="{enter: 'addOption(newChoice)'}" class="span6" id="answer" placeholder="Your option" ng-model='newChoice.original'>

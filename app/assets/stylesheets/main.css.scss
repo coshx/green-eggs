@@ -226,6 +226,7 @@ html body { background-color: #f7f7f7; }
 .green-view {
   .green-controls {
     hr {
+      margin-top:0px;
       margin-bottom:0px;
       padding-bottom:0px;
     }
@@ -314,4 +315,14 @@ switch {
 
 .whitespace {
   height:100px;
+}
+
+#sub-logo {
+  float: left;
+}
+
+#addOption {
+  float:right;
+  dispay:block;
+  margin-left:5px;
 }

@@ -67,7 +67,11 @@ GreenEggs.controller "HeaderCtrl", ["$scope", "$http",  "$routeParams", "$locati
 
 
 GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, $routeParams, $location, $dialog) ->
-
+  $ ->
+    if $(window).height() < 435
+      setTimeout ( ->
+        $("#main-logo").css("height", "40px")
+      ), 100
 ]
 GreenEggs.controller "PollsCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
   users = Poll.query(query: $scope.search).then((polls) ->
