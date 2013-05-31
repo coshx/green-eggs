@@ -117,6 +117,7 @@ GreenEggs.controller "PollCtrl", ["$scope", "$http", "Poll", "Ballot", "$routePa
   $scope.addChoice = (choice, index) ->
     $scope.ballot.choices.push(choice)
     $scope.poll.choices.splice(index, 1)
+    $scope.recalculate()
     #$scope.setSwipe($scope.ballot.choices.length - 1)
   $scope.removeChoice = (choice, index) ->
     $scope.poll.choices.push(choice)

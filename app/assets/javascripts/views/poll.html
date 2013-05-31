@@ -31,7 +31,7 @@
       </div>
     </li>
    </ul>
-  <div ng-repeat="choice in poll.choices" ng-click="addChoice(choice, $index)" class="option">
+  <div ng-repeat="choice in poll.choices" ng-mousedown="addChoice(choice, $index)" ng-click="addChoice(choice, $index)" class="option">
     <div class="content">
       {{choice.original}}
       <div class="checkbox-empty">
