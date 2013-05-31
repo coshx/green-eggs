@@ -25,8 +25,8 @@ feature %{
     page.should have_content('Poll details')
     page.should have_content('The best way to seduce a rabbit?')
     page.execute_script("$('.option').click()")
-    click_link "Remove"
-    click_link "Remove"
+    click_link "Unchoose"
+    click_link "Unchoose"
     page.execute_script("$('#save-poll').click()")
     page.should have_content('show a gun 100%')
   end
