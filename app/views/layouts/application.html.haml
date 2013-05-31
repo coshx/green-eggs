@@ -53,8 +53,9 @@
               %span {{currentUser.name}}
               %a{"data-method" => "delete", :href => "/users/sign_out"} Log out
           / /.nav-collapse
-    .container.main
-      %div{'ng-view' => 'ng-view'}
+    .container-fluid.main
+      .whitespace.visible-desktop
+      %div.container-fluid{'ng-view' => 'ng-view'}
       / Main hero unit for a primary marketing message or call to action
 
       %div.whitespace
