@@ -70,7 +70,11 @@ GreenEggs.controller "MainCtrl", ["$scope", "$http", "Poll", "$routeParams", "$l
   $ ->
     if $(window).height() < 435
       setTimeout ( ->
-        $("#main-logo").css("height", "40px")
+        $("#main-logo").css("height", "50px")
+        $("#main-logo").css("padding-top", "0px")
+        $("#main-logo").css("padding-bottom", "20px")
+        $(".mobile-block .header").hide()
+        $(".mobile-block .content").css("padding", "3px")
       ), 100
 ]
 GreenEggs.controller "PollsCtrl", ["$scope", "$http", "Poll", "Ballot", "$routeParams", "$location", "$dialog", ($scope, $http, Poll, Ballot, $routeParams, $location, $dialog) ->
