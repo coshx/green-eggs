@@ -270,7 +270,7 @@ switch {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
+  cursor: pointer;
   padding-top:1px;
   position:relative;
   width:100px;
@@ -278,12 +278,21 @@ switch {
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.2) inset;
   background: rgba(0,0,0,0.1);
+  -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+  -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
+  transition: all 0.3s ease-out;
+  &.yes-false {
+    background: rgba(165, 198, 117,0.9);
+  }
   .green-yes {
     position:absolute;
+    color:white;
     left:0;
     z-index:-1;
     padding-top:10px;
     padding-left:10px;
+    z-index:1;
 
   }
   .green-no {
@@ -292,9 +301,12 @@ switch {
     z-index:-1;
     padding-top:10px;
     padding-right:15px;
+    z-index:1;
   }
   .green-switch-box {
+    z-index:121;
     content:' ';
+    position:absolute;
     width:50px;
     height:38px;
     background:rgb(240,240,240);
