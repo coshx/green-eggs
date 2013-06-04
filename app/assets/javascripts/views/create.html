@@ -23,7 +23,7 @@
 
   <div class="row-fluid green-controls" ng-hide="createAnswers">
     <div class="span12">
-      <a id="go_to_preseed" class="green-btn" ng-click="createAnswers=true">
+      <a id="go_to_preseed" class="green-btn" ng-mousedown="createAnswers=true">
         <div>
           <img src="/assets/stats.png"> Preseed answers
         </div>
@@ -54,7 +54,7 @@
 
   <div class="row-fluid green-controls" ng-show="createAnswers">
     <div class="span12">
-      <a id="save-poll" class="green-btn" ng-click="savePoll(poll)">
+      <a id="save-poll" class="green-btn" ng-mousedown="savePoll(poll)">
         <div>
           <img src="/assets/stats.png"> Save your poll
         </div>
