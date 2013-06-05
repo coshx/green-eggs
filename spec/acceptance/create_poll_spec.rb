@@ -11,7 +11,7 @@ feature %{
     visit "/create"
     fill_in "question", :with => 'The best way to seduce a rabbit?'
     fill_in "email", :with => "rabbit@stewieland.com"
-    page.execute_script("$('#go_to_preseed').click()")
+    page.execute_script("$('#go_to_preseed').mousedown()")
     page.should have_content('The best way to seduce a rabbit?')
     page.should have_content('Pre-seed answers')
     fill_in "answer", :with => "show a huge carrot"
@@ -20,14 +20,14 @@ feature %{
     click_button "add-choice"
     fill_in "answer", :with => "show a gun"
     click_button "add-choice"
-    page.execute_script("$('#save-poll').click()")
+    page.execute_script("$('#save-poll').mousedown()")
     page.driver.browser.switch_to.alert.accept
     page.should have_content('Poll details')
     page.should have_content('The best way to seduce a rabbit?')
-    page.execute_script("$('.option').click()")
+    page.execute_script("$('.option').mousedown()")
     click_link "Unchoose"
     click_link "Unchoose"
-    page.execute_script("$('#save-poll').click()")
+    page.execute_script("$('#save-poll').mousedown()")
     page.should have_content('show a gun 100%')
   end
   scenario "Should not be able to add choices if switch allow_choices is off", :js => true do
@@ -35,10 +35,10 @@ feature %{
     fill_in "question", :with => 'The best way to seduce a rabbit?'
     fill_in "email", :with => "rabbit@stewieland.com"
     #page.execute_script("$('.green-switch').click()")
-    page.execute_script("$('#go_to_preseed').click()")
+    page.execute_script("$('#go_to_preseed').mousedown()")
     fill_in "answer", :with => "show a huge carrot"
     click_button "add-choice"
-    page.execute_script("$('#save-poll').click()")
+    page.execute_script("$('#save-poll').mousedown()")
     page.driver.browser.switch_to.alert.accept
     #binding.pry
     find('#addOption').should_not be_visible
@@ -47,11 +47,11 @@ feature %{
     visit "/create"
     fill_in "question", :with => 'The best way to seduce a rabbit?'
     fill_in "email", :with => "rabbit@stewieland.com"
-    page.execute_script("$('.green-switch').click()")
-    page.execute_script("$('#go_to_preseed').click()")
+    page.execute_script("$('.green-switch').mousedown()")
+    page.execute_script("$('#go_to_preseed').mousedown()")
     fill_in "answer", :with => "show a huge carrot"
     click_button "add-choice"
-    page.execute_script("$('#save-poll').click()")
+    page.execute_script("$('#save-poll').mousedown()")
     page.driver.browser.switch_to.alert.accept
     find('#addOption').should be_visible
   end
