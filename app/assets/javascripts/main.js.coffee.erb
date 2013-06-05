@@ -171,8 +171,10 @@ GreenEggs.controller "CreateCtrl", ["$scope", "$http", "Poll", "$routeParams", "
   $scope.poll.choices = []
 
   setTimeout ( ->
-    $("#question").focus().select()
+    $(".exp").click()
   ), 200
+  $(".exp").click ->
+    $("#question").focus().select()
 
 
   $scope.addChoice = (choice) ->
